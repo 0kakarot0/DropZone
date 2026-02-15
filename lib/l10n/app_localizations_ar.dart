@@ -193,5 +193,11 @@ class AppLocalizationsAr extends AppLocalizations {
   String get cancelBooking => 'إلغاء الحجز';
 
   @override
+  String get bookingCreated => 'تم إرسال طلب الحجز';
+
+  @override
+  String get surchargeNote => 'قد تُطبق رسوم المطار والرسوم الليلية';
+
+  @override
   String get errorLabel => 'خطأ';
 }

@@ -16,3 +16,8 @@ final pastBookingsProvider = FutureProvider<List<Booking>>((ref) async {
   final repo = ref.read(bookingRepositoryProvider);
   return repo.getPastBookings();
 });
+
+final priceEstimateProvider = FutureProvider.family<double, VehicleClass>((ref, vehicleClass) async {
+  final repo = ref.read(bookingRepositoryProvider);
+  return repo.estimatePrice(tripType: TripType.airportPickup, vehicleClass: vehicleClass);
+});

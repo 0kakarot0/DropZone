@@ -467,6 +467,18 @@ abstract class AppLocalizations {
   /// **'Cancel booking'**
   String get cancelBooking;
 
+  /// No description provided for @bookingCreated.
+  ///
+  /// In en, this message translates to:
+  /// **'Booking request submitted'**
+  String get bookingCreated;
+
+  /// No description provided for @surchargeNote.
+  ///
+  /// In en, this message translates to:
+  /// **'Airport fees and night surcharges may apply'**
+  String get surchargeNote;
+
   /// No description provided for @errorLabel.
   ///
   /// In en, this message translates to:
