@@ -73,5 +73,13 @@
   "payNow": "ادفع الآن",
   "paymentSuccess": "تم الدفع بنجاح: {id}",
   "receiptTitle": "الإيصال",
-  "receiptId": "رقم الإيصال: {id}"
+  "receiptId": "رقم الإيصال: {id}",
+  "tripTrackingTitle": "تتبع الرحلة",
+  "mapPlaceholder": "معاينة الخريطة",
+  "driverAssignedTitle": "تم تعيين السائق",
+  "driverAssignedSubtitle": "أحمد • لكزس ES • DXB 1234",
+  "etaLabel": "الوقت المتوقع",
+  "etaValue": "{minutes}",
+  "contactDriver": "تواصل مع السائق",
+  "contactDriverHint": "الاتصال برقم مخفي"
 }

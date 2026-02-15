@@ -238,4 +238,30 @@ class AppLocalizationsAr extends AppLocalizations {
   String receiptId(Object id) {
     return 'رقم الإيصال: $id';
   }
+
+  @override
+  String get tripTrackingTitle => 'تتبع الرحلة';
+
+  @override
+  String get mapPlaceholder => 'معاينة الخريطة';
+
+  @override
+  String get driverAssignedTitle => 'تم تعيين السائق';
+
+  @override
+  String get driverAssignedSubtitle => 'أحمد • لكزس ES • DXB 1234';
+
+  @override
+  String get etaLabel => 'الوقت المتوقع';
+
+  @override
+  String etaValue(Object minutes) {
+    return '$minutes';
+  }
+
+  @override
+  String get contactDriver => 'تواصل مع السائق';
+
+  @override
+  String get contactDriverHint => 'الاتصال برقم مخفي';
 }
