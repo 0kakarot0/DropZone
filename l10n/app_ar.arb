@@ -65,5 +65,13 @@
   "surchargeNote": "قد تُطبق رسوم المطار والرسوم الليلية",
   "errorLabel": "خطأ",
   "rescheduleConfirmed": "تم إرسال طلب إعادة الجدولة",
-  "cancelConfirmed": "تم إلغاء الحجز"
+  "cancelConfirmed": "تم إلغاء الحجز",
+  "paymentTitle": "الدفع",
+  "chooseCard": "اختر بطاقة",
+  "expires": "ينتهي {expiry}",
+  "amountDue": "المبلغ المستحق: {amount} درهم",
+  "payNow": "ادفع الآن",
+  "paymentSuccess": "تم الدفع بنجاح: {id}",
+  "receiptTitle": "الإيصال",
+  "receiptId": "رقم الإيصال: {id}"
 }

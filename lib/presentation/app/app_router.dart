@@ -7,6 +7,7 @@ import 'package:dropzone_app/presentation/profile/profile_screen.dart';
 import 'package:dropzone_app/presentation/auth/auth_screen.dart';
 import 'package:dropzone_app/presentation/auth/otp_screen.dart';
 import 'package:dropzone_app/presentation/bookings/bookings_screen.dart';
+import 'package:dropzone_app/presentation/payments/payment_screen.dart';
 
 final GlobalKey<NavigatorState> _rootNavigatorKey = GlobalKey<NavigatorState>();
 
@@ -24,6 +25,11 @@ final GoRouter appRouter = GoRouter(
           builder: (context, state) => const OtpScreen(),
         ),
       ],
+    ),
+    GoRoute(
+      path: '/payment',
+      name: 'payment',
+      builder: (context, state) => const PaymentScreen(),
     ),
     ShellRoute(
       builder: (context, state, child) => MainShell(child: child),

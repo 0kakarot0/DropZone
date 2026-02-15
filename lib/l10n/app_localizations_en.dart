@@ -206,4 +206,36 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get cancelConfirmed => 'Booking cancelled';
+
+  @override
+  String get paymentTitle => 'Payment';
+
+  @override
+  String get chooseCard => 'Choose a card';
+
+  @override
+  String expires(Object expiry) {
+    return 'Expires $expiry';
+  }
+
+  @override
+  String amountDue(Object amount) {
+    return 'Amount due: AED $amount';
+  }
+
+  @override
+  String get payNow => 'Pay now';
+
+  @override
+  String paymentSuccess(Object id) {
+    return 'Payment successful: $id';
+  }
+
+  @override
+  String get receiptTitle => 'Receipt';
+
+  @override
+  String receiptId(Object id) {
+    return 'Receipt ID: $id';
+  }
 }
