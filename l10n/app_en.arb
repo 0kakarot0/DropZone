@@ -81,5 +81,12 @@
   "etaLabel": "ETA",
   "etaValue": "{minutes}",
   "contactDriver": "Contact driver",
-  "contactDriverHint": "Calling masked number"
+  "contactDriverHint": "Calling masked number",
+  "notificationsTitle": "Notifications",
+  "notificationConfirmed": "Booking confirmed",
+  "notificationConfirmedBody": "Your driver is being assigned",
+  "notificationDriverAssigned": "Driver assigned",
+  "notificationDriverAssignedBody": "Ahmed will arrive soon",
+  "notificationArriving": "Driver arriving",
+  "notificationArrivingBody": "ETA 8 minutes"
 }

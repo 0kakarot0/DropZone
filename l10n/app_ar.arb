@@ -81,5 +81,12 @@
   "etaLabel": "الوقت المتوقع",
   "etaValue": "{minutes}",
   "contactDriver": "تواصل مع السائق",
-  "contactDriverHint": "الاتصال برقم مخفي"
+  "contactDriverHint": "الاتصال برقم مخفي",
+  "notificationsTitle": "الإشعارات",
+  "notificationConfirmed": "تم تأكيد الحجز",
+  "notificationConfirmedBody": "جارٍ تعيين السائق",
+  "notificationDriverAssigned": "تم تعيين السائق",
+  "notificationDriverAssignedBody": "أحمد سيصل قريباً",
+  "notificationArriving": "السائق في الطريق",
+  "notificationArrivingBody": "الوقت المتوقع 8 دقائق"
 }

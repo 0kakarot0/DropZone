@@ -264,4 +264,25 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get contactDriverHint => 'Calling masked number';
+
+  @override
+  String get notificationsTitle => 'Notifications';
+
+  @override
+  String get notificationConfirmed => 'Booking confirmed';
+
+  @override
+  String get notificationConfirmedBody => 'Your driver is being assigned';
+
+  @override
+  String get notificationDriverAssigned => 'Driver assigned';
+
+  @override
+  String get notificationDriverAssignedBody => 'Ahmed will arrive soon';
+
+  @override
+  String get notificationArriving => 'Driver arriving';
+
+  @override
+  String get notificationArrivingBody => 'ETA 8 minutes';
 }
