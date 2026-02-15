@@ -6,6 +6,7 @@ import 'package:dropzone_app/presentation/app/main_shell.dart';
 import 'package:dropzone_app/presentation/profile/profile_screen.dart';
 import 'package:dropzone_app/presentation/auth/auth_screen.dart';
 import 'package:dropzone_app/presentation/auth/otp_screen.dart';
+import 'package:dropzone_app/presentation/bookings/bookings_screen.dart';
 
 final GlobalKey<NavigatorState> _rootNavigatorKey = GlobalKey<NavigatorState>();
 
@@ -40,7 +41,7 @@ final GoRouter appRouter = GoRouter(
         GoRoute(
           path: '/bookings',
           name: 'bookings',
-          builder: (context, state) => const PlaceholderScreen(title: 'Bookings'),
+          builder: (context, state) => const BookingsScreen(),
         ),
         GoRoute(
           path: '/support',

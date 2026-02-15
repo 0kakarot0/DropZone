@@ -149,4 +149,49 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get saveProfile => 'حفظ الملف';
+
+  @override
+  String get upcoming => 'القادمة';
+
+  @override
+  String get past => 'السابقة';
+
+  @override
+  String get bookingDetails => 'تفاصيل الحجز';
+
+  @override
+  String get statusTimeline => 'حالة الرحلة';
+
+  @override
+  String get statusRequested => 'تم الطلب';
+
+  @override
+  String get statusConfirmed => 'تم التأكيد';
+
+  @override
+  String get statusDriverAssigned => 'تم تعيين السائق';
+
+  @override
+  String get statusEnRoute => 'في الطريق';
+
+  @override
+  String get statusCompleted => 'مكتمل';
+
+  @override
+  String get statusCancelled => 'ملغي';
+
+  @override
+  String get policyTitle => 'سياسة الإلغاء';
+
+  @override
+  String get policyBody => 'إلغاء مجاني حتى ساعتين قبل الموعد. قد تُطبّق رسوم بعد ذلك.';
+
+  @override
+  String get reschedule => 'إعادة جدولة';
+
+  @override
+  String get cancelBooking => 'إلغاء الحجز';
+
+  @override
+  String get errorLabel => 'خطأ';
 }

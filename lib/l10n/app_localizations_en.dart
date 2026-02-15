@@ -149,4 +149,49 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get saveProfile => 'Save profile';
+
+  @override
+  String get upcoming => 'Upcoming';
+
+  @override
+  String get past => 'Past';
+
+  @override
+  String get bookingDetails => 'Booking details';
+
+  @override
+  String get statusTimeline => 'Status timeline';
+
+  @override
+  String get statusRequested => 'Requested';
+
+  @override
+  String get statusConfirmed => 'Confirmed';
+
+  @override
+  String get statusDriverAssigned => 'Driver assigned';
+
+  @override
+  String get statusEnRoute => 'En route';
+
+  @override
+  String get statusCompleted => 'Completed';
+
+  @override
+  String get statusCancelled => 'Cancelled';
+
+  @override
+  String get policyTitle => 'Cancellation policy';
+
+  @override
+  String get policyBody => 'Free cancellation up to 2 hours before pickup. Fees may apply afterwards.';
+
+  @override
+  String get reschedule => 'Reschedule';
+
+  @override
+  String get cancelBooking => 'Cancel booking';
+
+  @override
+  String get errorLabel => 'Error';
 }
