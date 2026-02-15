@@ -65,5 +65,13 @@
   "surchargeNote": "Airport fees and night surcharges may apply",
   "errorLabel": "Error",
   "rescheduleConfirmed": "Reschedule request sent",
-  "cancelConfirmed": "Booking cancelled"
+  "cancelConfirmed": "Booking cancelled",
+  "paymentTitle": "Payment",
+  "chooseCard": "Choose a card",
+  "expires": "Expires {expiry}",
+  "amountDue": "Amount due: AED {amount}",
+  "payNow": "Pay now",
+  "paymentSuccess": "Payment successful: {id}",
+  "receiptTitle": "Receipt",
+  "receiptId": "Receipt ID: {id}"
 }

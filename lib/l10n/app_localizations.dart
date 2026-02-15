@@ -496,6 +496,54 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Booking cancelled'**
   String get cancelConfirmed;
+
+  /// No description provided for @paymentTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Payment'**
+  String get paymentTitle;
+
+  /// No description provided for @chooseCard.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose a card'**
+  String get chooseCard;
+
+  /// No description provided for @expires.
+  ///
+  /// In en, this message translates to:
+  /// **'Expires {expiry}'**
+  String expires(Object expiry);
+
+  /// No description provided for @amountDue.
+  ///
+  /// In en, this message translates to:
+  /// **'Amount due: AED {amount}'**
+  String amountDue(Object amount);
+
+  /// No description provided for @payNow.
+  ///
+  /// In en, this message translates to:
+  /// **'Pay now'**
+  String get payNow;
+
+  /// No description provided for @paymentSuccess.
+  ///
+  /// In en, this message translates to:
+  /// **'Payment successful: {id}'**
+  String paymentSuccess(Object id);
+
+  /// No description provided for @receiptTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Receipt'**
+  String get receiptTitle;
+
+  /// No description provided for @receiptId.
+  ///
+  /// In en, this message translates to:
+  /// **'Receipt ID: {id}'**
+  String receiptId(Object id);
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

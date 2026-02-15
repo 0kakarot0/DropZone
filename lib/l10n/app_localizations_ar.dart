@@ -206,4 +206,36 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get cancelConfirmed => 'تم إلغاء الحجز';
+
+  @override
+  String get paymentTitle => 'الدفع';
+
+  @override
+  String get chooseCard => 'اختر بطاقة';
+
+  @override
+  String expires(Object expiry) {
+    return 'ينتهي $expiry';
+  }
+
+  @override
+  String amountDue(Object amount) {
+    return 'المبلغ المستحق: $amount درهم';
+  }
+
+  @override
+  String get payNow => 'ادفع الآن';
+
+  @override
+  String paymentSuccess(Object id) {
+    return 'تم الدفع بنجاح: $id';
+  }
+
+  @override
+  String get receiptTitle => 'الإيصال';
+
+  @override
+  String receiptId(Object id) {
+    return 'رقم الإيصال: $id';
+  }
 }
