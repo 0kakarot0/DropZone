@@ -9,6 +9,7 @@ import 'package:dropzone_app/presentation/auth/otp_screen.dart';
 import 'package:dropzone_app/presentation/bookings/bookings_screen.dart';
 import 'package:dropzone_app/presentation/payments/payment_screen.dart';
 import 'package:dropzone_app/presentation/tracking/trip_tracking_screen.dart';
+import 'package:dropzone_app/presentation/support/support_screen.dart';
 
 final GlobalKey<NavigatorState> _rootNavigatorKey = GlobalKey<NavigatorState>();
 
@@ -58,7 +59,7 @@ final GoRouter appRouter = GoRouter(
         GoRoute(
           path: '/support',
           name: 'support',
-          builder: (context, state) => const PlaceholderScreen(title: 'Support'),
+          builder: (context, state) => const SupportScreen(),
         ),
         GoRoute(
           path: '/profile',

@@ -88,5 +88,15 @@
   "notificationDriverAssigned": "Driver assigned",
   "notificationDriverAssignedBody": "Ahmed will arrive soon",
   "notificationArriving": "Driver arriving",
-  "notificationArrivingBody": "ETA 8 minutes"
+  "notificationArrivingBody": "ETA 8 minutes",
+  "helpCenterTitle": "Help center",
+  "helpTopicPayment": "Payment issues",
+  "helpTopicDriver": "Driver support",
+  "helpTopicLostItem": "Lost items",
+  "reportIssueTitle": "Report an issue",
+  "issueCategoryPayment": "Payment",
+  "issueCategoryDriver": "Driver",
+  "issueCategoryOther": "Other",
+  "selectCategory": "Select category",
+  "submitIssue": "Submit issue"
 }
