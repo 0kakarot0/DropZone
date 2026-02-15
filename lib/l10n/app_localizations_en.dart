@@ -1,0 +1,110 @@
+import 'app_localizations.dart';
+
+// ignore_for_file: type=lint
+
+/// The translations for English (`en`).
+class AppLocalizationsEn extends AppLocalizations {
+  AppLocalizationsEn([String locale = 'en']) : super(locale);
+
+  @override
+  String get appTitle => 'DropZone Chauffeur';
+
+  @override
+  String get navHome => 'Home';
+
+  @override
+  String get navBookings => 'Bookings';
+
+  @override
+  String get navSupport => 'Support';
+
+  @override
+  String get navProfile => 'Profile';
+
+  @override
+  String get homeHeroTitle => 'Private Chauffeur, pre‑booked.';
+
+  @override
+  String get homeHeroSubtitle => 'Airport & business rides across the UAE';
+
+  @override
+  String get bookNow => 'Book now';
+
+  @override
+  String get bookingTitle => 'Book a ride';
+
+  @override
+  String get tripType => 'Trip type';
+
+  @override
+  String get tripAirportPickup => 'Airport pickup';
+
+  @override
+  String get tripAirportDrop => 'Airport drop';
+
+  @override
+  String get tripBusiness => 'Business ride';
+
+  @override
+  String get pickup => 'Pickup';
+
+  @override
+  String get dropoff => 'Drop‑off';
+
+  @override
+  String get date => 'Date';
+
+  @override
+  String get time => 'Time';
+
+  @override
+  String get passengers => 'Passengers';
+
+  @override
+  String get luggage => 'Luggage';
+
+  @override
+  String get vehicleClass => 'Vehicle class';
+
+  @override
+  String get vehicleSedan => 'Sedan';
+
+  @override
+  String get vehicleSUV => 'SUV';
+
+  @override
+  String get vehicleLuxury => 'Luxury';
+
+  @override
+  String get vehicleVan => 'Van';
+
+  @override
+  String get continueLabel => 'Continue';
+
+  @override
+  String get summary => 'Summary';
+
+  @override
+  String get estimatedPrice => 'Estimated price';
+
+  @override
+  String get pricePlaceholder => 'AED —';
+
+  @override
+  String get confirmRequest => 'Confirm request';
+
+  @override
+  String get supportTitle => 'Support';
+
+  @override
+  String get profileTitle => 'Profile';
+
+  @override
+  String get bookingsTitle => 'My bookings';
+
+  @override
+  String get emptyBookings => 'No bookings yet';
+
+  @override
+  String get comingSoon => 'Coming soon';
+}
