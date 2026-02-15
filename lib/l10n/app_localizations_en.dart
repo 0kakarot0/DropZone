@@ -107,4 +107,46 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get comingSoon => 'Coming soon';
+
+  @override
+  String get authTitle => 'Sign in';
+
+  @override
+  String get sendOtp => 'Send OTP';
+
+  @override
+  String get verifyPhone => 'Verify phone';
+
+  @override
+  String get otpPrompt => 'Enter the 4-digit code sent to you';
+
+  @override
+  String get verifyAndContinue => 'Verify & continue';
+
+  @override
+  String get profileDetails => 'Profile details';
+
+  @override
+  String get savedPassengers => 'Saved passengers';
+
+  @override
+  String get passengerSelf => 'Self';
+
+  @override
+  String get passengerAssistant => 'Assistant';
+
+  @override
+  String get passengerExecutive => 'Executive';
+
+  @override
+  String get corporateMode => 'Corporate mode';
+
+  @override
+  String get businessAccountToggle => 'Business account';
+
+  @override
+  String get corporateSubtitle => 'Enable to add company details';
+
+  @override
+  String get saveProfile => 'Save profile';
 }

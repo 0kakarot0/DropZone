@@ -32,5 +32,19 @@
   "profileTitle": "الملف الشخصي",
   "bookingsTitle": "حجوزاتي",
   "emptyBookings": "لا توجد حجوزات",
-  "comingSoon": "قريباً"
+  "comingSoon": "قريباً",
+  "authTitle": "تسجيل الدخول",
+  "sendOtp": "إرسال رمز التحقق",
+  "verifyPhone": "تأكيد الهاتف",
+  "otpPrompt": "أدخل الرمز المكون من 4 أرقام المرسل إليك",
+  "verifyAndContinue": "تأكيد والمتابعة",
+  "profileDetails": "بيانات الملف الشخصي",
+  "savedPassengers": "الركاب المحفوظون",
+  "passengerSelf": "أنا",
+  "passengerAssistant": "المساعد",
+  "passengerExecutive": "التنفيذي",
+  "corporateMode": "وضع الشركات",
+  "businessAccountToggle": "حساب أعمال",
+  "corporateSubtitle": "فعّل لإضافة بيانات الشركة",
+  "saveProfile": "حفظ الملف"
 }

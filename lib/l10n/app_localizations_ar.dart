@@ -107,4 +107,46 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get comingSoon => 'قريباً';
+
+  @override
+  String get authTitle => 'تسجيل الدخول';
+
+  @override
+  String get sendOtp => 'إرسال رمز التحقق';
+
+  @override
+  String get verifyPhone => 'تأكيد الهاتف';
+
+  @override
+  String get otpPrompt => 'أدخل الرمز المكون من 4 أرقام المرسل إليك';
+
+  @override
+  String get verifyAndContinue => 'تأكيد والمتابعة';
+
+  @override
+  String get profileDetails => 'بيانات الملف الشخصي';
+
+  @override
+  String get savedPassengers => 'الركاب المحفوظون';
+
+  @override
+  String get passengerSelf => 'أنا';
+
+  @override
+  String get passengerAssistant => 'المساعد';
+
+  @override
+  String get passengerExecutive => 'التنفيذي';
+
+  @override
+  String get corporateMode => 'وضع الشركات';
+
+  @override
+  String get businessAccountToggle => 'حساب أعمال';
+
+  @override
+  String get corporateSubtitle => 'فعّل لإضافة بيانات الشركة';
+
+  @override
+  String get saveProfile => 'حفظ الملف';
 }

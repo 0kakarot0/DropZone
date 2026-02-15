@@ -298,6 +298,90 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Coming soon'**
   String get comingSoon;
+
+  /// No description provided for @authTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Sign in'**
+  String get authTitle;
+
+  /// No description provided for @sendOtp.
+  ///
+  /// In en, this message translates to:
+  /// **'Send OTP'**
+  String get sendOtp;
+
+  /// No description provided for @verifyPhone.
+  ///
+  /// In en, this message translates to:
+  /// **'Verify phone'**
+  String get verifyPhone;
+
+  /// No description provided for @otpPrompt.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter the 4-digit code sent to you'**
+  String get otpPrompt;
+
+  /// No description provided for @verifyAndContinue.
+  ///
+  /// In en, this message translates to:
+  /// **'Verify & continue'**
+  String get verifyAndContinue;
+
+  /// No description provided for @profileDetails.
+  ///
+  /// In en, this message translates to:
+  /// **'Profile details'**
+  String get profileDetails;
+
+  /// No description provided for @savedPassengers.
+  ///
+  /// In en, this message translates to:
+  /// **'Saved passengers'**
+  String get savedPassengers;
+
+  /// No description provided for @passengerSelf.
+  ///
+  /// In en, this message translates to:
+  /// **'Self'**
+  String get passengerSelf;
+
+  /// No description provided for @passengerAssistant.
+  ///
+  /// In en, this message translates to:
+  /// **'Assistant'**
+  String get passengerAssistant;
+
+  /// No description provided for @passengerExecutive.
+  ///
+  /// In en, this message translates to:
+  /// **'Executive'**
+  String get passengerExecutive;
+
+  /// No description provided for @corporateMode.
+  ///
+  /// In en, this message translates to:
+  /// **'Corporate mode'**
+  String get corporateMode;
+
+  /// No description provided for @businessAccountToggle.
+  ///
+  /// In en, this message translates to:
+  /// **'Business account'**
+  String get businessAccountToggle;
+
+  /// No description provided for @corporateSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Enable to add company details'**
+  String get corporateSubtitle;
+
+  /// No description provided for @saveProfile.
+  ///
+  /// In en, this message translates to:
+  /// **'Save profile'**
+  String get saveProfile;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {
