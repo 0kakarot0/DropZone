@@ -193,5 +193,11 @@ class AppLocalizationsEn extends AppLocalizations {
   String get cancelBooking => 'Cancel booking';
 
   @override
+  String get bookingCreated => 'Booking request submitted';
+
+  @override
+  String get surchargeNote => 'Airport fees and night surcharges may apply';
+
+  @override
   String get errorLabel => 'Error';
 }
