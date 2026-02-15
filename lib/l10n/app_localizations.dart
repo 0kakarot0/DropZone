@@ -592,6 +592,48 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Calling masked number'**
   String get contactDriverHint;
+
+  /// No description provided for @notificationsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Notifications'**
+  String get notificationsTitle;
+
+  /// No description provided for @notificationConfirmed.
+  ///
+  /// In en, this message translates to:
+  /// **'Booking confirmed'**
+  String get notificationConfirmed;
+
+  /// No description provided for @notificationConfirmedBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Your driver is being assigned'**
+  String get notificationConfirmedBody;
+
+  /// No description provided for @notificationDriverAssigned.
+  ///
+  /// In en, this message translates to:
+  /// **'Driver assigned'**
+  String get notificationDriverAssigned;
+
+  /// No description provided for @notificationDriverAssignedBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Ahmed will arrive soon'**
+  String get notificationDriverAssignedBody;
+
+  /// No description provided for @notificationArriving.
+  ///
+  /// In en, this message translates to:
+  /// **'Driver arriving'**
+  String get notificationArriving;
+
+  /// No description provided for @notificationArrivingBody.
+  ///
+  /// In en, this message translates to:
+  /// **'ETA 8 minutes'**
+  String get notificationArrivingBody;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

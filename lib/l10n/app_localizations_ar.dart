@@ -264,4 +264,25 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get contactDriverHint => 'الاتصال برقم مخفي';
+
+  @override
+  String get notificationsTitle => 'الإشعارات';
+
+  @override
+  String get notificationConfirmed => 'تم تأكيد الحجز';
+
+  @override
+  String get notificationConfirmedBody => 'جارٍ تعيين السائق';
+
+  @override
+  String get notificationDriverAssigned => 'تم تعيين السائق';
+
+  @override
+  String get notificationDriverAssignedBody => 'أحمد سيصل قريباً';
+
+  @override
+  String get notificationArriving => 'السائق في الطريق';
+
+  @override
+  String get notificationArrivingBody => 'الوقت المتوقع 8 دقائق';
 }
