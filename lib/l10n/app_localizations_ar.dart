@@ -200,4 +200,10 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get errorLabel => 'خطأ';
+
+  @override
+  String get rescheduleConfirmed => 'تم إرسال طلب إعادة الجدولة';
+
+  @override
+  String get cancelConfirmed => 'تم إلغاء الحجز';
 }
