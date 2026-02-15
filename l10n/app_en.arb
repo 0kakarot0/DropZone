@@ -47,4 +47,19 @@
   "businessAccountToggle": "Business account",
   "corporateSubtitle": "Enable to add company details",
   "saveProfile": "Save profile"
+  ,"upcoming": "Upcoming"
+  ,"past": "Past"
+  ,"bookingDetails": "Booking details"
+  ,"statusTimeline": "Status timeline"
+  ,"statusRequested": "Requested"
+  ,"statusConfirmed": "Confirmed"
+  ,"statusDriverAssigned": "Driver assigned"
+  ,"statusEnRoute": "En route"
+  ,"statusCompleted": "Completed"
+  ,"statusCancelled": "Cancelled"
+  ,"policyTitle": "Cancellation policy"
+  ,"policyBody": "Free cancellation up to 2 hours before pickup. Fees may apply afterwards."
+  ,"reschedule": "Reschedule"
+  ,"cancelBooking": "Cancel booking"
+  ,"errorLabel": "Error"
 }

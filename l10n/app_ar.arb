@@ -47,4 +47,19 @@
   "businessAccountToggle": "حساب أعمال",
   "corporateSubtitle": "فعّل لإضافة بيانات الشركة",
   "saveProfile": "حفظ الملف"
+  ,"upcoming": "القادمة"
+  ,"past": "السابقة"
+  ,"bookingDetails": "تفاصيل الحجز"
+  ,"statusTimeline": "حالة الرحلة"
+  ,"statusRequested": "تم الطلب"
+  ,"statusConfirmed": "تم التأكيد"
+  ,"statusDriverAssigned": "تم تعيين السائق"
+  ,"statusEnRoute": "في الطريق"
+  ,"statusCompleted": "مكتمل"
+  ,"statusCancelled": "ملغي"
+  ,"policyTitle": "سياسة الإلغاء"
+  ,"policyBody": "إلغاء مجاني حتى ساعتين قبل الموعد. قد تُطبّق رسوم بعد ذلك."
+  ,"reschedule": "إعادة جدولة"
+  ,"cancelBooking": "إلغاء الحجز"
+  ,"errorLabel": "خطأ"
 }

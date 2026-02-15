@@ -382,6 +382,96 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Save profile'**
   String get saveProfile;
+
+  /// No description provided for @upcoming.
+  ///
+  /// In en, this message translates to:
+  /// **'Upcoming'**
+  String get upcoming;
+
+  /// No description provided for @past.
+  ///
+  /// In en, this message translates to:
+  /// **'Past'**
+  String get past;
+
+  /// No description provided for @bookingDetails.
+  ///
+  /// In en, this message translates to:
+  /// **'Booking details'**
+  String get bookingDetails;
+
+  /// No description provided for @statusTimeline.
+  ///
+  /// In en, this message translates to:
+  /// **'Status timeline'**
+  String get statusTimeline;
+
+  /// No description provided for @statusRequested.
+  ///
+  /// In en, this message translates to:
+  /// **'Requested'**
+  String get statusRequested;
+
+  /// No description provided for @statusConfirmed.
+  ///
+  /// In en, this message translates to:
+  /// **'Confirmed'**
+  String get statusConfirmed;
+
+  /// No description provided for @statusDriverAssigned.
+  ///
+  /// In en, this message translates to:
+  /// **'Driver assigned'**
+  String get statusDriverAssigned;
+
+  /// No description provided for @statusEnRoute.
+  ///
+  /// In en, this message translates to:
+  /// **'En route'**
+  String get statusEnRoute;
+
+  /// No description provided for @statusCompleted.
+  ///
+  /// In en, this message translates to:
+  /// **'Completed'**
+  String get statusCompleted;
+
+  /// No description provided for @statusCancelled.
+  ///
+  /// In en, this message translates to:
+  /// **'Cancelled'**
+  String get statusCancelled;
+
+  /// No description provided for @policyTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Cancellation policy'**
+  String get policyTitle;
+
+  /// No description provided for @policyBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Free cancellation up to 2 hours before pickup. Fees may apply afterwards.'**
+  String get policyBody;
+
+  /// No description provided for @reschedule.
+  ///
+  /// In en, this message translates to:
+  /// **'Reschedule'**
+  String get reschedule;
+
+  /// No description provided for @cancelBooking.
+  ///
+  /// In en, this message translates to:
+  /// **'Cancel booking'**
+  String get cancelBooking;
+
+  /// No description provided for @errorLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Error'**
+  String get errorLabel;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {
