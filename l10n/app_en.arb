@@ -63,5 +63,7 @@
   "cancelBooking": "Cancel booking",
   "bookingCreated": "Booking request submitted",
   "surchargeNote": "Airport fees and night surcharges may apply",
-  "errorLabel": "Error"
+  "errorLabel": "Error",
+  "rescheduleConfirmed": "Reschedule request sent",
+  "cancelConfirmed": "Booking cancelled"
 }

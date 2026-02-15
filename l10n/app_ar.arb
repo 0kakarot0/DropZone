@@ -63,5 +63,7 @@
   "cancelBooking": "إلغاء الحجز",
   "bookingCreated": "تم إرسال طلب الحجز",
   "surchargeNote": "قد تُطبق رسوم المطار والرسوم الليلية",
-  "errorLabel": "خطأ"
+  "errorLabel": "خطأ",
+  "rescheduleConfirmed": "تم إرسال طلب إعادة الجدولة",
+  "cancelConfirmed": "تم إلغاء الحجز"
 }

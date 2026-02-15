@@ -58,7 +58,11 @@ class BookingDetailScreen extends StatelessWidget {
             children: [
               Expanded(
                 child: OutlinedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(content: Text(localizations.rescheduleConfirmed)),
+                    );
+                  },
                   child: Text(localizations.reschedule),
                 ),
               ),
@@ -66,7 +70,11 @@ class BookingDetailScreen extends StatelessWidget {
               Expanded(
                 child: PrimaryButton(
                   label: localizations.cancelBooking,
-                  onPressed: () {},
+                  onPressed: () {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(content: Text(localizations.cancelConfirmed)),
+                    );
+                  },
                 ),
               ),
             ],

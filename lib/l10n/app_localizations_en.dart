@@ -200,4 +200,10 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get errorLabel => 'Error';
+
+  @override
+  String get rescheduleConfirmed => 'Reschedule request sent';
+
+  @override
+  String get cancelConfirmed => 'Booking cancelled';
 }

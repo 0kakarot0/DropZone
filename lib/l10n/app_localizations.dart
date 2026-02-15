@@ -484,6 +484,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Error'**
   String get errorLabel;
+
+  /// No description provided for @rescheduleConfirmed.
+  ///
+  /// In en, this message translates to:
+  /// **'Reschedule request sent'**
+  String get rescheduleConfirmed;
+
+  /// No description provided for @cancelConfirmed.
+  ///
+  /// In en, this message translates to:
+  /// **'Booking cancelled'**
+  String get cancelConfirmed;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {
