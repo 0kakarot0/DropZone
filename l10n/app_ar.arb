@@ -88,5 +88,15 @@
   "notificationDriverAssigned": "تم تعيين السائق",
   "notificationDriverAssignedBody": "أحمد سيصل قريباً",
   "notificationArriving": "السائق في الطريق",
-  "notificationArrivingBody": "الوقت المتوقع 8 دقائق"
+  "notificationArrivingBody": "الوقت المتوقع 8 دقائق",
+  "helpCenterTitle": "مركز المساعدة",
+  "helpTopicPayment": "مشاكل الدفع",
+  "helpTopicDriver": "الدعم مع السائق",
+  "helpTopicLostItem": "المفقودات",
+  "reportIssueTitle": "الإبلاغ عن مشكلة",
+  "issueCategoryPayment": "الدفع",
+  "issueCategoryDriver": "السائق",
+  "issueCategoryOther": "أخرى",
+  "selectCategory": "اختر الفئة",
+  "submitIssue": "إرسال المشكلة"
 }

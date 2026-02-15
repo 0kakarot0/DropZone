@@ -634,6 +634,66 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'ETA 8 minutes'**
   String get notificationArrivingBody;
+
+  /// No description provided for @helpCenterTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Help center'**
+  String get helpCenterTitle;
+
+  /// No description provided for @helpTopicPayment.
+  ///
+  /// In en, this message translates to:
+  /// **'Payment issues'**
+  String get helpTopicPayment;
+
+  /// No description provided for @helpTopicDriver.
+  ///
+  /// In en, this message translates to:
+  /// **'Driver support'**
+  String get helpTopicDriver;
+
+  /// No description provided for @helpTopicLostItem.
+  ///
+  /// In en, this message translates to:
+  /// **'Lost items'**
+  String get helpTopicLostItem;
+
+  /// No description provided for @reportIssueTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Report an issue'**
+  String get reportIssueTitle;
+
+  /// No description provided for @issueCategoryPayment.
+  ///
+  /// In en, this message translates to:
+  /// **'Payment'**
+  String get issueCategoryPayment;
+
+  /// No description provided for @issueCategoryDriver.
+  ///
+  /// In en, this message translates to:
+  /// **'Driver'**
+  String get issueCategoryDriver;
+
+  /// No description provided for @issueCategoryOther.
+  ///
+  /// In en, this message translates to:
+  /// **'Other'**
+  String get issueCategoryOther;
+
+  /// No description provided for @selectCategory.
+  ///
+  /// In en, this message translates to:
+  /// **'Select category'**
+  String get selectCategory;
+
+  /// No description provided for @submitIssue.
+  ///
+  /// In en, this message translates to:
+  /// **'Submit issue'**
+  String get submitIssue;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

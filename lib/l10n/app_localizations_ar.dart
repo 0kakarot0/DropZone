@@ -285,4 +285,34 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get notificationArrivingBody => 'الوقت المتوقع 8 دقائق';
+
+  @override
+  String get helpCenterTitle => 'مركز المساعدة';
+
+  @override
+  String get helpTopicPayment => 'مشاكل الدفع';
+
+  @override
+  String get helpTopicDriver => 'الدعم مع السائق';
+
+  @override
+  String get helpTopicLostItem => 'المفقودات';
+
+  @override
+  String get reportIssueTitle => 'الإبلاغ عن مشكلة';
+
+  @override
+  String get issueCategoryPayment => 'الدفع';
+
+  @override
+  String get issueCategoryDriver => 'السائق';
+
+  @override
+  String get issueCategoryOther => 'أخرى';
+
+  @override
+  String get selectCategory => 'اختر الفئة';
+
+  @override
+  String get submitIssue => 'إرسال المشكلة';
 }

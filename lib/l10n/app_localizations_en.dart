@@ -285,4 +285,34 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get notificationArrivingBody => 'ETA 8 minutes';
+
+  @override
+  String get helpCenterTitle => 'Help center';
+
+  @override
+  String get helpTopicPayment => 'Payment issues';
+
+  @override
+  String get helpTopicDriver => 'Driver support';
+
+  @override
+  String get helpTopicLostItem => 'Lost items';
+
+  @override
+  String get reportIssueTitle => 'Report an issue';
+
+  @override
+  String get issueCategoryPayment => 'Payment';
+
+  @override
+  String get issueCategoryDriver => 'Driver';
+
+  @override
+  String get issueCategoryOther => 'Other';
+
+  @override
+  String get selectCategory => 'Select category';
+
+  @override
+  String get submitIssue => 'Submit issue';
 }
