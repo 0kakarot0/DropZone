@@ -73,5 +73,13 @@
   "payNow": "Pay now",
   "paymentSuccess": "Payment successful: {id}",
   "receiptTitle": "Receipt",
-  "receiptId": "Receipt ID: {id}"
+  "receiptId": "Receipt ID: {id}",
+  "tripTrackingTitle": "Trip tracking",
+  "mapPlaceholder": "Live map preview",
+  "driverAssignedTitle": "Driver assigned",
+  "driverAssignedSubtitle": "Ahmed • Lexus ES • DXB 1234",
+  "etaLabel": "ETA",
+  "etaValue": "{minutes}",
+  "contactDriver": "Contact driver",
+  "contactDriverHint": "Calling masked number"
 }

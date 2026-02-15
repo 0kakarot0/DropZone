@@ -238,4 +238,30 @@ class AppLocalizationsEn extends AppLocalizations {
   String receiptId(Object id) {
     return 'Receipt ID: $id';
   }
+
+  @override
+  String get tripTrackingTitle => 'Trip tracking';
+
+  @override
+  String get mapPlaceholder => 'Live map preview';
+
+  @override
+  String get driverAssignedTitle => 'Driver assigned';
+
+  @override
+  String get driverAssignedSubtitle => 'Ahmed • Lexus ES • DXB 1234';
+
+  @override
+  String get etaLabel => 'ETA';
+
+  @override
+  String etaValue(Object minutes) {
+    return '$minutes';
+  }
+
+  @override
+  String get contactDriver => 'Contact driver';
+
+  @override
+  String get contactDriverHint => 'Calling masked number';
 }

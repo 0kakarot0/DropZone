@@ -544,6 +544,54 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Receipt ID: {id}'**
   String receiptId(Object id);
+
+  /// No description provided for @tripTrackingTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Trip tracking'**
+  String get tripTrackingTitle;
+
+  /// No description provided for @mapPlaceholder.
+  ///
+  /// In en, this message translates to:
+  /// **'Live map preview'**
+  String get mapPlaceholder;
+
+  /// No description provided for @driverAssignedTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Driver assigned'**
+  String get driverAssignedTitle;
+
+  /// No description provided for @driverAssignedSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Ahmed • Lexus ES • DXB 1234'**
+  String get driverAssignedSubtitle;
+
+  /// No description provided for @etaLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'ETA'**
+  String get etaLabel;
+
+  /// No description provided for @etaValue.
+  ///
+  /// In en, this message translates to:
+  /// **'{minutes}'**
+  String etaValue(Object minutes);
+
+  /// No description provided for @contactDriver.
+  ///
+  /// In en, this message translates to:
+  /// **'Contact driver'**
+  String get contactDriver;
+
+  /// No description provided for @contactDriverHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Calling masked number'**
+  String get contactDriverHint;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {
