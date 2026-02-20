@@ -694,6 +694,48 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Submit issue'**
   String get submitIssue;
+
+  /// No description provided for @airportEnhancementsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Airport enhancements'**
+  String get airportEnhancementsTitle;
+
+  /// No description provided for @flightTrackingTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Flight tracking'**
+  String get flightTrackingTitle;
+
+  /// No description provided for @flightStatusLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Flight status'**
+  String get flightStatusLabel;
+
+  /// No description provided for @flightStatusValue.
+  ///
+  /// In en, this message translates to:
+  /// **'On time · Terminal 3'**
+  String get flightStatusValue;
+
+  /// No description provided for @meetGreetTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Meet & greet'**
+  String get meetGreetTitle;
+
+  /// No description provided for @meetGreetBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Your driver will wait at arrivals with your name sign.'**
+  String get meetGreetBody;
+
+  /// No description provided for @saveFlightInfo.
+  ///
+  /// In en, this message translates to:
+  /// **'Save flight details'**
+  String get saveFlightInfo;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

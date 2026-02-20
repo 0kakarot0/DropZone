@@ -98,5 +98,12 @@
   "issueCategoryDriver": "Driver",
   "issueCategoryOther": "Other",
   "selectCategory": "Select category",
-  "submitIssue": "Submit issue"
+  "submitIssue": "Submit issue",
+  "airportEnhancementsTitle": "Airport enhancements",
+  "flightTrackingTitle": "Flight tracking",
+  "flightStatusLabel": "Flight status",
+  "flightStatusValue": "On time · Terminal 3",
+  "meetGreetTitle": "Meet & greet",
+  "meetGreetBody": "Your driver will wait at arrivals with your name sign.",
+  "saveFlightInfo": "Save flight details"
 }
