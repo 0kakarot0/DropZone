@@ -743,6 +743,12 @@ abstract class AppLocalizations {
   /// **'Submit issue'**
   String get submitIssue;
 
+  /// No description provided for @issueDescriptionHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Describe your issue'**
+  String get issueDescriptionHint;
+
   /// No description provided for @airportEnhancementsTitle.
   ///
   /// In en, this message translates to:

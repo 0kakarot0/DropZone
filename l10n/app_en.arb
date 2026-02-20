@@ -107,6 +107,7 @@
   "issueCategoryOther": "Other",
   "selectCategory": "Select category",
   "submitIssue": "Submit issue",
+  "issueDescriptionHint": "Describe your issue",
   "airportEnhancementsTitle": "Airport enhancements",
   "flightTrackingTitle": "Flight tracking",
   "flightStatusLabel": "Flight status",

@@ -88,6 +88,7 @@
   "notificationDriverAssigned": "تم تعيين السائق",
   "notificationDriverAssignedBody": "أحمد سيصل قريباً",
   "submitIssue": "إرسال المشكلة",
+  "issueDescriptionHint": "صف مشكلتك",
   "airportEnhancementsTitle": "خدمات المطار",
   "flightTrackingTitle": "تتبع الرحلة",
   "flightStatusLabel": "حالة الرحلة",

@@ -14,14 +14,17 @@ class TripTrackingScreen extends StatelessWidget {
       body: ListView(
         padding: const EdgeInsets.all(20),
         children: [
-          Container(
-            height: 200,
-            decoration: BoxDecoration(
-              color: Colors.blueGrey.shade100,
-              borderRadius: BorderRadius.circular(20),
-            ),
-            child: Center(
-              child: Text(localizations.mapPlaceholder),
+          Semantics(
+            label: localizations.mapPlaceholder,
+            child: Container(
+              height: 200,
+              decoration: BoxDecoration(
+                color: Colors.blueGrey.shade100,
+                borderRadius: BorderRadius.circular(20),
+              ),
+              child: Center(
+                child: Text(localizations.mapPlaceholder),
+              ),
             ),
           ),
           const SizedBox(height: 20),

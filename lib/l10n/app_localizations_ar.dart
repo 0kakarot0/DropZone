@@ -341,6 +341,9 @@ class AppLocalizationsAr extends AppLocalizations {
   String get submitIssue => 'إرسال المشكلة';
 
   @override
+  String get issueDescriptionHint => 'صف مشكلتك';
+
+  @override
   String get airportEnhancementsTitle => 'خدمات المطار';
 
   @override
