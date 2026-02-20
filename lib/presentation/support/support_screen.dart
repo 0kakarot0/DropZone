@@ -36,9 +36,9 @@ class SupportScreen extends StatelessWidget {
             decoration: InputDecoration(hintText: localizations.selectCategory),
           ),
           const SizedBox(height: 12),
-          const TextField(
+          TextField(
             maxLines: 4,
-            decoration: InputDecoration(hintText: 'Describe your issue'),
+            decoration: InputDecoration(hintText: localizations.issueDescriptionHint),
           ),
           const SizedBox(height: 16),
           PrimaryButton(label: localizations.submitIssue, onPressed: () {}),

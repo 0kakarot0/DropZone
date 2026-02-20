@@ -341,6 +341,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get submitIssue => 'Submit issue';
 
   @override
+  String get issueDescriptionHint => 'Describe your issue';
+
+  @override
   String get airportEnhancementsTitle => 'Airport enhancements';
 
   @override

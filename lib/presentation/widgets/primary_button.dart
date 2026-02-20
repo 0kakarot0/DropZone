@@ -18,16 +18,20 @@ class PrimaryButton extends StatelessWidget {
     return SizedBox(
       width: isFullWidth ? double.infinity : null,
       height: 52,
-      child: FilledButton(
-        style: FilledButton.styleFrom(
-          backgroundColor: AppColors.primary,
-          foregroundColor: Colors.white,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(16),
+      child: Semantics(
+        label: label,
+        button: true,
+        child: FilledButton(
+          style: FilledButton.styleFrom(
+            backgroundColor: AppColors.primary,
+            foregroundColor: Colors.white,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(16),
+            ),
           ),
+          onPressed: onPressed,
+          child: Text(label),
         ),
-        onPressed: onPressed,
-        child: Text(label),
       ),
     );
   }

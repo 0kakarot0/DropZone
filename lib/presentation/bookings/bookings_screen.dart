@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:dropzone_app/presentation/bookings/booking_providers.dart';
 import 'package:dropzone_app/presentation/bookings/booking_detail_screen.dart';
 import 'package:dropzone_app/domain/entities/booking.dart';
+import 'package:dropzone_app/presentation/widgets/skeleton_card.dart';
 import 'package:dropzone_app/l10n/app_localizations.dart';
 
 class BookingsScreen extends ConsumerWidget {
@@ -48,7 +49,12 @@ class _BookingList extends ConsumerWidget {
     return bookingsAsync.when(
       data: (bookings) {
         if (bookings.isEmpty) {
-          return Center(child: Text(localizations.emptyBookings));
+          return Center(
+            child: Text(
+              localizations.emptyBookings,
+              style: Theme.of(context).textTheme.bodyLarge,
+            ),
+          );
         }
         return ListView.builder(
           padding: const EdgeInsets.all(20),
@@ -70,7 +76,14 @@ class _BookingList extends ConsumerWidget {
           },
         );
       },
-      loading: () => const Center(child: CircularProgressIndicator()),
+      loading: () => ListView(
+        padding: const EdgeInsets.all(20),
+        children: const [
+          SkeletonCard(),
+          SkeletonCard(),
+          SkeletonCard(),
+        ],
+      ),
       error: (error, _) => Center(child: Text('${localizations.errorLabel}: $error')),
     );
   }

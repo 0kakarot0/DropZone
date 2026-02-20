@@ -169,7 +169,7 @@ class _BookingFlowScreenState extends ConsumerState<BookingFlowScreen> {
                     'AED ${price.toStringAsFixed(0)}',
                     style: Theme.of(context).textTheme.titleLarge,
                   ),
-                  loading: () => const Text('—'),
+                  loading: () => const Text('—', semanticsLabel: 'Loading'),
                   error: (error, _) => Text('${localizations.errorLabel}: $error'),
                 ),
                 const SizedBox(height: 8),
