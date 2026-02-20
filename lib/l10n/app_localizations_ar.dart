@@ -281,6 +281,30 @@ class AppLocalizationsAr extends AppLocalizations {
   String get notificationDriverAssignedBody => 'أحمد سيصل قريباً';
 
   @override
+  String get saveFlightInfo => 'حفظ تفاصيل الرحلة';
+
+  @override
+  String get contactDriverTitle => 'التواصل مع السائق';
+
+  @override
+  String get maskedCallTitle => 'مكالمة مخفية';
+
+  @override
+  String get maskedCallBody => 'استخدم رقمًا مخفيًا للخصوصية';
+
+  @override
+  String get inAppChatTitle => 'دردشة داخل التطبيق';
+
+  @override
+  String get inAppChatBody => 'مراسلة آمنة مع السائق';
+
+  @override
+  String get startMaskedCall => 'بدء مكالمة مخفية';
+
+  @override
+  String get maskedCallHint => 'الاتصال عبر رقم مخفي';
+
+  @override
   String get notificationArriving => 'السائق في الطريق';
 
   @override
@@ -333,7 +357,4 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get meetGreetBody => 'سيكون السائق بانتظارك عند الوصول مع لوحة باسمك.';
-
-  @override
-  String get saveFlightInfo => 'حفظ تفاصيل الرحلة';
 }

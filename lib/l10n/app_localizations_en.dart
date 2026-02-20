@@ -281,6 +281,30 @@ class AppLocalizationsEn extends AppLocalizations {
   String get notificationDriverAssignedBody => 'Ahmed will arrive soon';
 
   @override
+  String get saveFlightInfo => 'Save flight details';
+
+  @override
+  String get contactDriverTitle => 'Contact driver';
+
+  @override
+  String get maskedCallTitle => 'Masked call';
+
+  @override
+  String get maskedCallBody => 'Use a masked number for privacy';
+
+  @override
+  String get inAppChatTitle => 'In-app chat';
+
+  @override
+  String get inAppChatBody => 'Secure messaging with driver';
+
+  @override
+  String get startMaskedCall => 'Start masked call';
+
+  @override
+  String get maskedCallHint => 'Calling via masked number';
+
+  @override
   String get notificationArriving => 'Driver arriving';
 
   @override
@@ -333,7 +357,4 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get meetGreetBody => 'Your driver will wait at arrivals with your name sign.';
-
-  @override
-  String get saveFlightInfo => 'Save flight details';
 }

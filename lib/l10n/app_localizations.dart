@@ -623,6 +623,54 @@ abstract class AppLocalizations {
   /// **'Ahmed will arrive soon'**
   String get notificationDriverAssignedBody;
 
+  /// No description provided for @saveFlightInfo.
+  ///
+  /// In en, this message translates to:
+  /// **'Save flight details'**
+  String get saveFlightInfo;
+
+  /// No description provided for @contactDriverTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Contact driver'**
+  String get contactDriverTitle;
+
+  /// No description provided for @maskedCallTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Masked call'**
+  String get maskedCallTitle;
+
+  /// No description provided for @maskedCallBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Use a masked number for privacy'**
+  String get maskedCallBody;
+
+  /// No description provided for @inAppChatTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'In-app chat'**
+  String get inAppChatTitle;
+
+  /// No description provided for @inAppChatBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Secure messaging with driver'**
+  String get inAppChatBody;
+
+  /// No description provided for @startMaskedCall.
+  ///
+  /// In en, this message translates to:
+  /// **'Start masked call'**
+  String get startMaskedCall;
+
+  /// No description provided for @maskedCallHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Calling via masked number'**
+  String get maskedCallHint;
+
   /// No description provided for @notificationArriving.
   ///
   /// In en, this message translates to:
@@ -730,12 +778,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Your driver will wait at arrivals with your name sign.'**
   String get meetGreetBody;
-
-  /// No description provided for @saveFlightInfo.
-  ///
-  /// In en, this message translates to:
-  /// **'Save flight details'**
-  String get saveFlightInfo;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {
