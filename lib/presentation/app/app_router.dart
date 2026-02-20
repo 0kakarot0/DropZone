@@ -11,6 +11,7 @@ import 'package:dropzone_app/presentation/payments/payment_screen.dart';
 import 'package:dropzone_app/presentation/tracking/trip_tracking_screen.dart';
 import 'package:dropzone_app/presentation/support/support_screen.dart';
 import 'package:dropzone_app/presentation/airport/airport_enhancements_screen.dart';
+import 'package:dropzone_app/presentation/contact/contact_screen.dart';
 
 final GlobalKey<NavigatorState> _rootNavigatorKey = GlobalKey<NavigatorState>();
 
@@ -43,6 +44,11 @@ final GoRouter appRouter = GoRouter(
       path: '/airport',
       name: 'airport',
       builder: (context, state) => const AirportEnhancementsScreen(),
+    ),
+    GoRoute(
+      path: '/contact',
+      name: 'contact',
+      builder: (context, state) => const ContactScreen(),
     ),
     ShellRoute(
       builder: (context, state, child) => MainShell(child: child),
