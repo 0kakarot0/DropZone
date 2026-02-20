@@ -533,6 +533,30 @@ abstract class AppLocalizations {
   /// **'Payment successful: {id}'**
   String paymentSuccess(Object id);
 
+  /// No description provided for @paymentSuccessTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Payment successful'**
+  String get paymentSuccessTitle;
+
+  /// No description provided for @paymentFailedTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Payment failed'**
+  String get paymentFailedTitle;
+
+  /// No description provided for @paymentFailedMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'We couldn’t process the payment. Please try again later.'**
+  String get paymentFailedMessage;
+
+  /// No description provided for @goHome.
+  ///
+  /// In en, this message translates to:
+  /// **'Go to Home'**
+  String get goHome;
+
   /// No description provided for @receiptTitle.
   ///
   /// In en, this message translates to:
