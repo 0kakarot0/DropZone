@@ -315,4 +315,25 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get submitIssue => 'إرسال المشكلة';
+
+  @override
+  String get airportEnhancementsTitle => 'خدمات المطار';
+
+  @override
+  String get flightTrackingTitle => 'تتبع الرحلة';
+
+  @override
+  String get flightStatusLabel => 'حالة الرحلة';
+
+  @override
+  String get flightStatusValue => 'في الوقت المحدد · المبنى 3';
+
+  @override
+  String get meetGreetTitle => 'الاستقبال والترحيب';
+
+  @override
+  String get meetGreetBody => 'سيكون السائق بانتظارك عند الوصول مع لوحة باسمك.';
+
+  @override
+  String get saveFlightInfo => 'حفظ تفاصيل الرحلة';
 }

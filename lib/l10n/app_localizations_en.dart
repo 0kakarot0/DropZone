@@ -315,4 +315,25 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get submitIssue => 'Submit issue';
+
+  @override
+  String get airportEnhancementsTitle => 'Airport enhancements';
+
+  @override
+  String get flightTrackingTitle => 'Flight tracking';
+
+  @override
+  String get flightStatusLabel => 'Flight status';
+
+  @override
+  String get flightStatusValue => 'On time · Terminal 3';
+
+  @override
+  String get meetGreetTitle => 'Meet & greet';
+
+  @override
+  String get meetGreetBody => 'Your driver will wait at arrivals with your name sign.';
+
+  @override
+  String get saveFlightInfo => 'Save flight details';
 }
