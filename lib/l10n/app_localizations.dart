@@ -298,6 +298,492 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Coming soon'**
   String get comingSoon;
+
+  /// No description provided for @authTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Sign in'**
+  String get authTitle;
+
+  /// No description provided for @sendOtp.
+  ///
+  /// In en, this message translates to:
+  /// **'Send OTP'**
+  String get sendOtp;
+
+  /// No description provided for @verifyPhone.
+  ///
+  /// In en, this message translates to:
+  /// **'Verify phone'**
+  String get verifyPhone;
+
+  /// No description provided for @otpPrompt.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter the 4-digit code sent to you'**
+  String get otpPrompt;
+
+  /// No description provided for @verifyAndContinue.
+  ///
+  /// In en, this message translates to:
+  /// **'Verify & continue'**
+  String get verifyAndContinue;
+
+  /// No description provided for @profileDetails.
+  ///
+  /// In en, this message translates to:
+  /// **'Profile details'**
+  String get profileDetails;
+
+  /// No description provided for @savedPassengers.
+  ///
+  /// In en, this message translates to:
+  /// **'Saved passengers'**
+  String get savedPassengers;
+
+  /// No description provided for @passengerSelf.
+  ///
+  /// In en, this message translates to:
+  /// **'Self'**
+  String get passengerSelf;
+
+  /// No description provided for @passengerAssistant.
+  ///
+  /// In en, this message translates to:
+  /// **'Assistant'**
+  String get passengerAssistant;
+
+  /// No description provided for @passengerExecutive.
+  ///
+  /// In en, this message translates to:
+  /// **'Executive'**
+  String get passengerExecutive;
+
+  /// No description provided for @corporateMode.
+  ///
+  /// In en, this message translates to:
+  /// **'Corporate mode'**
+  String get corporateMode;
+
+  /// No description provided for @businessAccountToggle.
+  ///
+  /// In en, this message translates to:
+  /// **'Business account'**
+  String get businessAccountToggle;
+
+  /// No description provided for @corporateSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Enable to add company details'**
+  String get corporateSubtitle;
+
+  /// No description provided for @saveProfile.
+  ///
+  /// In en, this message translates to:
+  /// **'Save profile'**
+  String get saveProfile;
+
+  /// No description provided for @upcoming.
+  ///
+  /// In en, this message translates to:
+  /// **'Upcoming'**
+  String get upcoming;
+
+  /// No description provided for @past.
+  ///
+  /// In en, this message translates to:
+  /// **'Past'**
+  String get past;
+
+  /// No description provided for @bookingDetails.
+  ///
+  /// In en, this message translates to:
+  /// **'Booking details'**
+  String get bookingDetails;
+
+  /// No description provided for @statusTimeline.
+  ///
+  /// In en, this message translates to:
+  /// **'Status timeline'**
+  String get statusTimeline;
+
+  /// No description provided for @statusRequested.
+  ///
+  /// In en, this message translates to:
+  /// **'Requested'**
+  String get statusRequested;
+
+  /// No description provided for @statusConfirmed.
+  ///
+  /// In en, this message translates to:
+  /// **'Confirmed'**
+  String get statusConfirmed;
+
+  /// No description provided for @statusDriverAssigned.
+  ///
+  /// In en, this message translates to:
+  /// **'Driver assigned'**
+  String get statusDriverAssigned;
+
+  /// No description provided for @statusEnRoute.
+  ///
+  /// In en, this message translates to:
+  /// **'En route'**
+  String get statusEnRoute;
+
+  /// No description provided for @statusCompleted.
+  ///
+  /// In en, this message translates to:
+  /// **'Completed'**
+  String get statusCompleted;
+
+  /// No description provided for @statusCancelled.
+  ///
+  /// In en, this message translates to:
+  /// **'Cancelled'**
+  String get statusCancelled;
+
+  /// No description provided for @policyTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Cancellation policy'**
+  String get policyTitle;
+
+  /// No description provided for @policyBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Free cancellation up to 2 hours before pickup. Fees may apply afterwards.'**
+  String get policyBody;
+
+  /// No description provided for @reschedule.
+  ///
+  /// In en, this message translates to:
+  /// **'Reschedule'**
+  String get reschedule;
+
+  /// No description provided for @cancelBooking.
+  ///
+  /// In en, this message translates to:
+  /// **'Cancel booking'**
+  String get cancelBooking;
+
+  /// No description provided for @bookingCreated.
+  ///
+  /// In en, this message translates to:
+  /// **'Booking request submitted'**
+  String get bookingCreated;
+
+  /// No description provided for @surchargeNote.
+  ///
+  /// In en, this message translates to:
+  /// **'Airport fees and night surcharges may apply'**
+  String get surchargeNote;
+
+  /// No description provided for @errorLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Error'**
+  String get errorLabel;
+
+  /// No description provided for @rescheduleConfirmed.
+  ///
+  /// In en, this message translates to:
+  /// **'Reschedule request sent'**
+  String get rescheduleConfirmed;
+
+  /// No description provided for @cancelConfirmed.
+  ///
+  /// In en, this message translates to:
+  /// **'Booking cancelled'**
+  String get cancelConfirmed;
+
+  /// No description provided for @paymentTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Payment'**
+  String get paymentTitle;
+
+  /// No description provided for @chooseCard.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose a card'**
+  String get chooseCard;
+
+  /// No description provided for @expires.
+  ///
+  /// In en, this message translates to:
+  /// **'Expires {expiry}'**
+  String expires(Object expiry);
+
+  /// No description provided for @amountDue.
+  ///
+  /// In en, this message translates to:
+  /// **'Amount due: AED {amount}'**
+  String amountDue(Object amount);
+
+  /// No description provided for @payNow.
+  ///
+  /// In en, this message translates to:
+  /// **'Pay now'**
+  String get payNow;
+
+  /// No description provided for @paymentSuccess.
+  ///
+  /// In en, this message translates to:
+  /// **'Payment successful: {id}'**
+  String paymentSuccess(Object id);
+
+  /// No description provided for @receiptTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Receipt'**
+  String get receiptTitle;
+
+  /// No description provided for @receiptId.
+  ///
+  /// In en, this message translates to:
+  /// **'Receipt ID: {id}'**
+  String receiptId(Object id);
+
+  /// No description provided for @tripTrackingTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Trip tracking'**
+  String get tripTrackingTitle;
+
+  /// No description provided for @mapPlaceholder.
+  ///
+  /// In en, this message translates to:
+  /// **'Live map preview'**
+  String get mapPlaceholder;
+
+  /// No description provided for @driverAssignedTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Driver assigned'**
+  String get driverAssignedTitle;
+
+  /// No description provided for @driverAssignedSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Ahmed • Lexus ES • DXB 1234'**
+  String get driverAssignedSubtitle;
+
+  /// No description provided for @etaLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'ETA'**
+  String get etaLabel;
+
+  /// No description provided for @etaValue.
+  ///
+  /// In en, this message translates to:
+  /// **'{minutes}'**
+  String etaValue(Object minutes);
+
+  /// No description provided for @contactDriver.
+  ///
+  /// In en, this message translates to:
+  /// **'Contact driver'**
+  String get contactDriver;
+
+  /// No description provided for @contactDriverHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Calling masked number'**
+  String get contactDriverHint;
+
+  /// No description provided for @notificationsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Notifications'**
+  String get notificationsTitle;
+
+  /// No description provided for @notificationConfirmed.
+  ///
+  /// In en, this message translates to:
+  /// **'Booking confirmed'**
+  String get notificationConfirmed;
+
+  /// No description provided for @notificationConfirmedBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Your driver is being assigned'**
+  String get notificationConfirmedBody;
+
+  /// No description provided for @notificationDriverAssigned.
+  ///
+  /// In en, this message translates to:
+  /// **'Driver assigned'**
+  String get notificationDriverAssigned;
+
+  /// No description provided for @notificationDriverAssignedBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Ahmed will arrive soon'**
+  String get notificationDriverAssignedBody;
+
+  /// No description provided for @saveFlightInfo.
+  ///
+  /// In en, this message translates to:
+  /// **'Save flight details'**
+  String get saveFlightInfo;
+
+  /// No description provided for @contactDriverTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Contact driver'**
+  String get contactDriverTitle;
+
+  /// No description provided for @maskedCallTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Masked call'**
+  String get maskedCallTitle;
+
+  /// No description provided for @maskedCallBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Use a masked number for privacy'**
+  String get maskedCallBody;
+
+  /// No description provided for @inAppChatTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'In-app chat'**
+  String get inAppChatTitle;
+
+  /// No description provided for @inAppChatBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Secure messaging with driver'**
+  String get inAppChatBody;
+
+  /// No description provided for @startMaskedCall.
+  ///
+  /// In en, this message translates to:
+  /// **'Start masked call'**
+  String get startMaskedCall;
+
+  /// No description provided for @maskedCallHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Calling via masked number'**
+  String get maskedCallHint;
+
+  /// No description provided for @notificationArriving.
+  ///
+  /// In en, this message translates to:
+  /// **'Driver arriving'**
+  String get notificationArriving;
+
+  /// No description provided for @notificationArrivingBody.
+  ///
+  /// In en, this message translates to:
+  /// **'ETA 8 minutes'**
+  String get notificationArrivingBody;
+
+  /// No description provided for @helpCenterTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Help center'**
+  String get helpCenterTitle;
+
+  /// No description provided for @helpTopicPayment.
+  ///
+  /// In en, this message translates to:
+  /// **'Payment issues'**
+  String get helpTopicPayment;
+
+  /// No description provided for @helpTopicDriver.
+  ///
+  /// In en, this message translates to:
+  /// **'Driver support'**
+  String get helpTopicDriver;
+
+  /// No description provided for @helpTopicLostItem.
+  ///
+  /// In en, this message translates to:
+  /// **'Lost items'**
+  String get helpTopicLostItem;
+
+  /// No description provided for @reportIssueTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Report an issue'**
+  String get reportIssueTitle;
+
+  /// No description provided for @issueCategoryPayment.
+  ///
+  /// In en, this message translates to:
+  /// **'Payment'**
+  String get issueCategoryPayment;
+
+  /// No description provided for @issueCategoryDriver.
+  ///
+  /// In en, this message translates to:
+  /// **'Driver'**
+  String get issueCategoryDriver;
+
+  /// No description provided for @issueCategoryOther.
+  ///
+  /// In en, this message translates to:
+  /// **'Other'**
+  String get issueCategoryOther;
+
+  /// No description provided for @selectCategory.
+  ///
+  /// In en, this message translates to:
+  /// **'Select category'**
+  String get selectCategory;
+
+  /// No description provided for @submitIssue.
+  ///
+  /// In en, this message translates to:
+  /// **'Submit issue'**
+  String get submitIssue;
+
+  /// No description provided for @issueDescriptionHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Describe your issue'**
+  String get issueDescriptionHint;
+
+  /// No description provided for @airportEnhancementsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Airport enhancements'**
+  String get airportEnhancementsTitle;
+
+  /// No description provided for @flightTrackingTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Flight tracking'**
+  String get flightTrackingTitle;
+
+  /// No description provided for @flightStatusLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Flight status'**
+  String get flightStatusLabel;
+
+  /// No description provided for @flightStatusValue.
+  ///
+  /// In en, this message translates to:
+  /// **'On time · Terminal 3'**
+  String get flightStatusValue;
+
+  /// No description provided for @meetGreetTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Meet & greet'**
+  String get meetGreetTitle;
+
+  /// No description provided for @meetGreetBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Your driver will wait at arrivals with your name sign.'**
+  String get meetGreetBody;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {
