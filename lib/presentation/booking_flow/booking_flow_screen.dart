@@ -5,6 +5,7 @@ import 'package:dropzone_app/presentation/widgets/primary_button.dart';
 import 'package:dropzone_app/l10n/app_localizations.dart';
 import 'package:dropzone_app/presentation/bookings/booking_providers.dart';
 import 'package:dropzone_app/domain/entities/booking.dart';
+import 'package:dropzone_app/core/di/providers.dart';
 
 class BookingFlowScreen extends ConsumerStatefulWidget {
   const BookingFlowScreen({super.key});
@@ -39,6 +40,7 @@ class _BookingFlowScreenState extends ConsumerState<BookingFlowScreen> {
             return;
           }
           final repository = ref.read(bookingRepositoryProvider);
+          final analytics = ref.read(analyticsProvider);
           final booking = Booking(
             id: 'TEMP',
             tripType: tripType,
@@ -52,6 +54,10 @@ class _BookingFlowScreenState extends ConsumerState<BookingFlowScreen> {
           final messenger = ScaffoldMessenger.of(context);
           final router = GoRouter.of(context);
           await repository.createBooking(booking);
+          await analytics.trackEvent('booking_created', params: {
+            'tripType': tripType.name,
+            'vehicleClass': vehicleClass.name,
+          });
           if (!mounted) return;
           messenger.showSnackBar(
             SnackBar(content: Text(localizations.bookingCreated)),

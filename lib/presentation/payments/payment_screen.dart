@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:dropzone_app/presentation/payments/payment_providers.dart';
 import 'package:dropzone_app/presentation/widgets/primary_button.dart';
 import 'package:dropzone_app/l10n/app_localizations.dart';
+import 'package:dropzone_app/core/di/providers.dart';
 
 class PaymentScreen extends ConsumerWidget {
   const PaymentScreen({super.key, this.amount = 320});
@@ -47,7 +48,12 @@ class PaymentScreen extends ConsumerWidget {
             PrimaryButton(
               label: localizations.payNow,
               onPressed: () async {
+                final analytics = ref.read(analyticsProvider);
                 final receipt = await ref.read(payWithCardProvider(amount).future);
+                await analytics.trackEvent('payment_success', params: {
+                  'amount': amount,
+                  'currency': 'AED',
+                });
                 if (!context.mounted) return;
                 ScaffoldMessenger.of(context).showSnackBar(
                   SnackBar(content: Text(localizations.paymentSuccess(receipt.id))),
