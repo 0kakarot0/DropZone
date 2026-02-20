@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:dropzone_app/presentation/payments/payment_providers.dart';
 import 'package:dropzone_app/presentation/widgets/primary_button.dart';
 import 'package:dropzone_app/l10n/app_localizations.dart';
 import 'package:dropzone_app/core/di/providers.dart';
+import 'package:dropzone_app/presentation/widgets/result_popup.dart';
 
 class PaymentScreen extends ConsumerWidget {
   const PaymentScreen({super.key, this.amount = 320});
@@ -49,15 +51,48 @@ class PaymentScreen extends ConsumerWidget {
               label: localizations.payNow,
               onPressed: () async {
                 final analytics = ref.read(analyticsProvider);
-                final receipt = await ref.read(payWithCardProvider(amount).future);
-                await analytics.trackEvent('payment_success', params: {
-                  'amount': amount,
-                  'currency': 'AED',
-                });
-                if (!context.mounted) return;
-                ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(content: Text(localizations.paymentSuccess(receipt.id))),
-                );
+                try {
+                  final receipt = await ref.read(payWithCardProvider(amount).future);
+                  await analytics.trackEvent('payment_success', params: {
+                    'amount': amount,
+                    'currency': 'AED',
+                  });
+                  if (!context.mounted) return;
+                  await showDialog<void>(
+                    context: context,
+                    barrierDismissible: false,
+                    builder: (context) => ResultPopup(
+                      title: localizations.paymentSuccessTitle,
+                      message: localizations.paymentSuccess(receipt.id),
+                      type: ResultType.success,
+                      buttonLabel: localizations.goHome,
+                      onAction: () {
+                        Navigator.of(context).pop();
+                        context.go('/');
+                      },
+                    ),
+                  );
+                } catch (error) {
+                  await analytics.trackEvent('payment_failed', params: {
+                    'amount': amount,
+                    'currency': 'AED',
+                  });
+                  if (!context.mounted) return;
+                  await showDialog<void>(
+                    context: context,
+                    barrierDismissible: false,
+                    builder: (context) => ResultPopup(
+                      title: localizations.paymentFailedTitle,
+                      message: localizations.paymentFailedMessage,
+                      type: ResultType.error,
+                      buttonLabel: localizations.goHome,
+                      onAction: () {
+                        Navigator.of(context).pop();
+                        context.go('/');
+                      },
+                    ),
+                  );
+                }
               },
             ),
           ],
