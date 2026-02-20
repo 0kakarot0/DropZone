@@ -151,6 +151,12 @@ class AppLocalizationsEn extends AppLocalizations {
   String get saveProfile => 'Save profile';
 
   @override
+  String get profileSavedTitle => 'Profile saved';
+
+  @override
+  String get profileSavedMessage => 'Your profile has been updated.';
+
+  @override
   String get upcoming => 'Upcoming';
 
   @override
@@ -191,6 +197,24 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get cancelBooking => 'Cancel booking';
+
+  @override
+  String get cancelConfirmTitle => 'Cancel booking?';
+
+  @override
+  String get cancelConfirmMessage => 'Are you sure you want to cancel this booking?';
+
+  @override
+  String get keepBooking => 'Keep booking';
+
+  @override
+  String get confirmCancel => 'Cancel booking';
+
+  @override
+  String get editBookingTitle => 'Edit booking';
+
+  @override
+  String get saveChanges => 'Save changes';
 
   @override
   String get bookingCreated => 'Booking request submitted';
@@ -351,6 +375,12 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get submitIssue => 'Submit issue';
+
+  @override
+  String get issueSubmittedTitle => 'Issue submitted';
+
+  @override
+  String get issueSubmittedMessage => 'Thanks — our team will get back to you shortly.';
 
   @override
   String get issueDescriptionHint => 'Describe your issue';

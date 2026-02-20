@@ -59,8 +59,10 @@ class BookingDetailScreen extends StatelessWidget {
               Expanded(
                 child: OutlinedButton(
                   onPressed: () {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(content: Text(localizations.rescheduleConfirmed)),
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (_) => EditBookingScreen(booking: booking),
+                      ),
                     );
                   },
                   child: Text(localizations.reschedule),
@@ -70,10 +72,30 @@ class BookingDetailScreen extends StatelessWidget {
               Expanded(
                 child: PrimaryButton(
                   label: localizations.cancelBooking,
-                  onPressed: () {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(content: Text(localizations.cancelConfirmed)),
+                  onPressed: () async {
+                    final dialogContext = context;
+                    final confirmed = await showDialog<bool>(
+                      context: context,
+                      builder: (context) => AlertDialog(
+                        title: Text(localizations.cancelConfirmTitle),
+                        content: Text(localizations.cancelConfirmMessage),
+                        actions: [
+                          TextButton(
+                            onPressed: () => Navigator.of(context).pop(false),
+                            child: Text(localizations.keepBooking),
+                          ),
+                          FilledButton(
+                            onPressed: () => Navigator.of(context).pop(true),
+                            child: Text(localizations.confirmCancel),
+                          ),
+                        ],
+                      ),
                     );
+                    if (confirmed == true && dialogContext.mounted) {
+                      ScaffoldMessenger.of(dialogContext).showSnackBar(
+                        SnackBar(content: Text(localizations.cancelConfirmed)),
+                      );
+                    }
                   },
                 ),
               ),
@@ -97,6 +119,49 @@ class _StatusTile extends StatelessWidget {
       leading: Icon(active ? Icons.check_circle : Icons.circle_outlined,
           color: active ? Colors.green : Colors.grey),
       title: Text(label),
+    );
+  }
+}
+
+class EditBookingScreen extends StatelessWidget {
+  const EditBookingScreen({super.key, required this.booking});
+
+  final Booking booking;
+
+  @override
+  Widget build(BuildContext context) {
+    final localizations = AppLocalizations.of(context);
+
+    return Scaffold(
+      appBar: AppBar(title: Text(localizations.editBookingTitle)),
+      body: ListView(
+        padding: const EdgeInsets.all(20),
+        children: [
+          TextField(
+            decoration: InputDecoration(hintText: booking.pickup),
+          ),
+          const SizedBox(height: 12),
+          TextField(
+            decoration: InputDecoration(hintText: booking.dropoff),
+          ),
+          const SizedBox(height: 12),
+          TextField(
+            decoration: InputDecoration(
+              hintText: booking.dateTime.toLocal().toString().split('.').first,
+            ),
+          ),
+          const SizedBox(height: 20),
+          PrimaryButton(
+            label: localizations.saveChanges,
+            onPressed: () {
+              Navigator.of(context).pop();
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(content: Text(localizations.rescheduleConfirmed)),
+              );
+            },
+          ),
+        ],
+      ),
     );
   }
 }

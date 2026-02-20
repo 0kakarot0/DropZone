@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:dropzone_app/l10n/app_localizations.dart';
 import 'package:dropzone_app/presentation/widgets/primary_button.dart';
+import 'package:dropzone_app/presentation/widgets/result_popup.dart';
 
 class SupportScreen extends StatelessWidget {
   const SupportScreen({super.key});
@@ -41,7 +42,25 @@ class SupportScreen extends StatelessWidget {
             decoration: InputDecoration(hintText: localizations.issueDescriptionHint),
           ),
           const SizedBox(height: 16),
-          PrimaryButton(label: localizations.submitIssue, onPressed: () {}),
+          PrimaryButton(
+            label: localizations.submitIssue,
+            onPressed: () async {
+              await showDialog<void>(
+                context: context,
+                barrierDismissible: false,
+                builder: (context) => ResultPopup(
+                  title: localizations.issueSubmittedTitle,
+                  message: localizations.issueSubmittedMessage,
+                  type: ResultType.success,
+                  buttonLabel: localizations.goHome,
+                  onAction: () {
+                    Navigator.of(context).pop();
+                    Navigator.of(context).popUntil((route) => route.isFirst);
+                  },
+                ),
+              );
+            },
+          ),
         ],
       ),
     );
