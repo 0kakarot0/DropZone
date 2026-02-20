@@ -232,6 +232,18 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
+  String get paymentSuccessTitle => 'Payment successful';
+
+  @override
+  String get paymentFailedTitle => 'Payment failed';
+
+  @override
+  String get paymentFailedMessage => 'We couldn’t process the payment. Please try again later.';
+
+  @override
+  String get goHome => 'Go to Home';
+
+  @override
   String get receiptTitle => 'Receipt';
 
   @override
