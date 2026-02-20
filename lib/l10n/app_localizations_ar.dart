@@ -232,6 +232,18 @@ class AppLocalizationsAr extends AppLocalizations {
   }
 
   @override
+  String get paymentSuccessTitle => 'تم الدفع بنجاح';
+
+  @override
+  String get paymentFailedTitle => 'فشل الدفع';
+
+  @override
+  String get paymentFailedMessage => 'تعذر معالجة الدفع. يرجى المحاولة لاحقاً.';
+
+  @override
+  String get goHome => 'العودة للرئيسية';
+
+  @override
   String get receiptTitle => 'الإيصال';
 
   @override
