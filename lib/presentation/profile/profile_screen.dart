@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:dropzone_app/presentation/widgets/primary_button.dart';
+import 'package:dropzone_app/presentation/widgets/result_popup.dart';
 import 'package:dropzone_app/l10n/app_localizations.dart';
 
 class ProfileScreen extends StatelessWidget {
@@ -46,7 +47,25 @@ class ProfileScreen extends StatelessWidget {
           const SizedBox(height: 12),
           const TextField(decoration: InputDecoration(hintText: 'Notes for driver')),
           const SizedBox(height: 20),
-          PrimaryButton(label: localizations.saveProfile, onPressed: () {}),
+          PrimaryButton(
+            label: localizations.saveProfile,
+            onPressed: () async {
+              await showDialog<void>(
+                context: context,
+                barrierDismissible: false,
+                builder: (context) => ResultPopup(
+                  title: localizations.profileSavedTitle,
+                  message: localizations.profileSavedMessage,
+                  type: ResultType.success,
+                  buttonLabel: localizations.goHome,
+                  onAction: () {
+                    Navigator.of(context).pop();
+                    Navigator.of(context).popUntil((route) => route.isFirst);
+                  },
+                ),
+              );
+            },
+          ),
         ],
       ),
     );

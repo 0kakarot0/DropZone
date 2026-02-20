@@ -151,6 +151,12 @@ class AppLocalizationsAr extends AppLocalizations {
   String get saveProfile => 'حفظ الملف';
 
   @override
+  String get profileSavedTitle => 'تم حفظ الملف';
+
+  @override
+  String get profileSavedMessage => 'تم تحديث ملفك الشخصي.';
+
+  @override
   String get upcoming => 'القادمة';
 
   @override
@@ -191,6 +197,24 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get cancelBooking => 'إلغاء الحجز';
+
+  @override
+  String get cancelConfirmTitle => 'إلغاء الحجز؟';
+
+  @override
+  String get cancelConfirmMessage => 'هل أنت متأكد أنك تريد إلغاء هذا الحجز؟';
+
+  @override
+  String get keepBooking => 'الاحتفاظ بالحجز';
+
+  @override
+  String get confirmCancel => 'إلغاء الحجز';
+
+  @override
+  String get editBookingTitle => 'تعديل الحجز';
+
+  @override
+  String get saveChanges => 'حفظ التغييرات';
 
   @override
   String get bookingCreated => 'تم إرسال طلب الحجز';
@@ -351,6 +375,12 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get submitIssue => 'إرسال المشكلة';
+
+  @override
+  String get issueSubmittedTitle => 'تم إرسال المشكلة';
+
+  @override
+  String get issueSubmittedMessage => 'شكراً لك — سنعود إليك قريباً.';
 
   @override
   String get issueDescriptionHint => 'صف مشكلتك';

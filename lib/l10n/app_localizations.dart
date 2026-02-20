@@ -383,6 +383,18 @@ abstract class AppLocalizations {
   /// **'Save profile'**
   String get saveProfile;
 
+  /// No description provided for @profileSavedTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Profile saved'**
+  String get profileSavedTitle;
+
+  /// No description provided for @profileSavedMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Your profile has been updated.'**
+  String get profileSavedMessage;
+
   /// No description provided for @upcoming.
   ///
   /// In en, this message translates to:
@@ -466,6 +478,42 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Cancel booking'**
   String get cancelBooking;
+
+  /// No description provided for @cancelConfirmTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Cancel booking?'**
+  String get cancelConfirmTitle;
+
+  /// No description provided for @cancelConfirmMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Are you sure you want to cancel this booking?'**
+  String get cancelConfirmMessage;
+
+  /// No description provided for @keepBooking.
+  ///
+  /// In en, this message translates to:
+  /// **'Keep booking'**
+  String get keepBooking;
+
+  /// No description provided for @confirmCancel.
+  ///
+  /// In en, this message translates to:
+  /// **'Cancel booking'**
+  String get confirmCancel;
+
+  /// No description provided for @editBookingTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Edit booking'**
+  String get editBookingTitle;
+
+  /// No description provided for @saveChanges.
+  ///
+  /// In en, this message translates to:
+  /// **'Save changes'**
+  String get saveChanges;
 
   /// No description provided for @bookingCreated.
   ///
@@ -766,6 +814,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Submit issue'**
   String get submitIssue;
+
+  /// No description provided for @issueSubmittedTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Issue submitted'**
+  String get issueSubmittedTitle;
+
+  /// No description provided for @issueSubmittedMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Thanks — our team will get back to you shortly.'**
+  String get issueSubmittedMessage;
 
   /// No description provided for @issueDescriptionHint.
   ///
