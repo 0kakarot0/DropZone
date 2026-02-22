@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:dropzone_app/l10n/app_localizations.dart';
 import 'package:dropzone_app/presentation/widgets/primary_button.dart';
 import 'package:dropzone_app/presentation/widgets/result_popup.dart';
@@ -45,9 +46,7 @@ class SupportScreen extends StatelessWidget {
           PrimaryButton(
             label: localizations.submitIssue,
             onPressed: () async {
-              // Capture navigator BEFORE opening dialog to avoid using
-              // the dialog's inner BuildContext for stack-wide navigation.
-              final nav = Navigator.of(context);
+              final router = GoRouter.of(context);
               await showDialog<void>(
                 context: context,
                 barrierDismissible: false,
@@ -58,7 +57,7 @@ class SupportScreen extends StatelessWidget {
                   buttonLabel: localizations.goHome,
                   onAction: () {
                     Navigator.of(dialogCtx).pop(); // close dialog
-                    nav.popUntil((route) => route.isFirst); // clear stack
+                    router.go('/'); // navigate to Home tab
                   },
                 ),
               );
