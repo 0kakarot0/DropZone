@@ -69,6 +69,8 @@
   "confirmCancel": "إلغاء الحجز",
   "editBookingTitle": "تعديل الحجز",
   "saveChanges": "حفظ التغييرات",
+  "selectDate": "اختر التاريخ",
+  "selectTime": "اختر الوقت",
   "bookingCreated": "تم إرسال طلب الحجز",
   "surchargeNote": "قد تُطبق رسوم المطار والرسوم الليلية",
   "errorLabel": "خطأ",

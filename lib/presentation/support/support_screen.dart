@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:dropzone_app/l10n/app_localizations.dart';
 import 'package:dropzone_app/presentation/widgets/primary_button.dart';
 import 'package:dropzone_app/presentation/widgets/result_popup.dart';
+import 'package:go_router/go_router.dart';
 
 class SupportScreen extends StatelessWidget {
   const SupportScreen({super.key});
@@ -54,8 +55,7 @@ class SupportScreen extends StatelessWidget {
                   type: ResultType.success,
                   buttonLabel: localizations.goHome,
                   onAction: () {
-                    Navigator.of(context).pop();
-                    Navigator.of(context).popUntil((route) => route.isFirst);
+                    context.go('/');
                   },
                 ),
               );

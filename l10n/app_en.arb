@@ -69,6 +69,8 @@
   "confirmCancel": "Cancel booking",
   "editBookingTitle": "Edit booking",
   "saveChanges": "Save changes",
+  "selectDate": "Select date",
+  "selectTime": "Select time",
   "bookingCreated": "Booking request submitted",
   "surchargeNote": "Airport fees and night surcharges may apply",
   "errorLabel": "Error",

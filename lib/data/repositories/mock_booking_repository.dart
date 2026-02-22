@@ -60,6 +60,7 @@ class MockBookingRepository implements BookingRepository {
   @override
   Future<void> cancelBooking(String id) async {
     await Future<void>.delayed(const Duration(milliseconds: 300));
+    _upcoming.removeWhere((booking) => booking.id == id);
   }
 
   @override
@@ -77,6 +78,24 @@ class MockBookingRepository implements BookingRepository {
   @override
   Future<void> rescheduleBooking(String id, DateTime newDate) async {
     await Future<void>.delayed(const Duration(milliseconds: 300));
+    _upcoming.replaceRange(
+      0,
+      _upcoming.length,
+      _upcoming.map(
+        (booking) => booking.id == id
+            ? Booking(
+                id: booking.id,
+                tripType: booking.tripType,
+                pickup: booking.pickup,
+                dropoff: booking.dropoff,
+                dateTime: newDate,
+                vehicleClass: booking.vehicleClass,
+                status: booking.status,
+                price: booking.price,
+              )
+            : booking,
+      ),
+    );
   }
 
   @override
@@ -86,5 +105,19 @@ class MockBookingRepository implements BookingRepository {
   }) async {
     await Future<void>.delayed(const Duration(milliseconds: 200));
     return 250 + (vehicleClass.index * 60);
+  }
+
+  @override
+  Future<Booking?> getBookingById(String id) async {
+    await Future<void>.delayed(const Duration(milliseconds: 200));
+    try {
+      return _upcoming.firstWhere((booking) => booking.id == id);
+    } catch (_) {
+      try {
+        return _past.firstWhere((booking) => booking.id == id);
+      } catch (_) {
+        return null;
+      }
+    }
   }
 }

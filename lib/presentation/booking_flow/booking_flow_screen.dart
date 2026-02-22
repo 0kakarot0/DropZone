@@ -21,6 +21,7 @@ class _BookingFlowScreenState extends ConsumerState<BookingFlowScreen> {
   String pickup = '';
   String dropoff = '';
   DateTime? dateTime;
+  final TextEditingController dateController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -125,12 +126,24 @@ class _BookingFlowScreenState extends ConsumerState<BookingFlowScreen> {
             content: Column(
               children: [
                 TextField(
-                  decoration: const InputDecoration(hintText: 'Select date'),
-                  onChanged: (_) => dateTime = DateTime.now().add(const Duration(days: 2)),
+                  controller: dateController,
+                  readOnly: true,
+                  decoration: InputDecoration(hintText: localizations.selectDate),
+                  onTap: () async {
+                    final picked = await showDatePicker(
+                      context: context,
+                      firstDate: DateTime.now(),
+                      lastDate: DateTime.now().add(const Duration(days: 365)),
+                    );
+                    if (picked != null) {
+                      dateTime = picked;
+                      dateController.text = picked.toLocal().toString().split(' ').first;
+                    }
+                  },
                 ),
                 const SizedBox(height: 12),
                 TextField(
-                  decoration: const InputDecoration(hintText: 'Select time'),
+                  decoration: InputDecoration(hintText: localizations.selectTime),
                   onChanged: (_) => dateTime = DateTime.now().add(const Duration(hours: 6)),
                 ),
               ],
