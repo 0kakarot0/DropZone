@@ -128,5 +128,13 @@
   "flightStatusValue": "On time · Terminal 3",
   "meetGreetTitle": "Meet & greet",
   "meetGreetBody": "Your driver will wait at arrivals with your name sign.",
-  "saveFlightInfo": "Save flight details"
+  "saveFlightInfo": "Save flight details",
+  "selectTime": "Select time",
+  "noDateSelected": "No date selected",
+  "noTimeSelected": "No time selected",
+  "deleteBookingTitle": "Delete booking?",
+  "deleteBookingMessage": "This booking will be permanently removed.",
+  "confirmDelete": "Delete",
+  "bookingDeletedConfirmed": "Booking deleted",
+  "rescheduleSuccess": "Booking rescheduled successfully"
 }

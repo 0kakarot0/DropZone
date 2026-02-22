@@ -45,17 +45,20 @@ class SupportScreen extends StatelessWidget {
           PrimaryButton(
             label: localizations.submitIssue,
             onPressed: () async {
+              // Capture navigator BEFORE opening dialog to avoid using
+              // the dialog's inner BuildContext for stack-wide navigation.
+              final nav = Navigator.of(context);
               await showDialog<void>(
                 context: context,
                 barrierDismissible: false,
-                builder: (context) => ResultPopup(
+                builder: (dialogCtx) => ResultPopup(
                   title: localizations.issueSubmittedTitle,
                   message: localizations.issueSubmittedMessage,
                   type: ResultType.success,
                   buttonLabel: localizations.goHome,
                   onAction: () {
-                    Navigator.of(context).pop();
-                    Navigator.of(context).popUntil((route) => route.isFirst);
+                    Navigator.of(dialogCtx).pop(); // close dialog
+                    nav.popUntil((route) => route.isFirst); // clear stack
                   },
                 ),
               );

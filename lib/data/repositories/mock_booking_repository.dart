@@ -60,6 +60,14 @@ class MockBookingRepository implements BookingRepository {
   @override
   Future<void> cancelBooking(String id) async {
     await Future<void>.delayed(const Duration(milliseconds: 300));
+    _upcoming.removeWhere((b) => b.id == id);
+  }
+
+  @override
+  Future<void> deleteBooking(String id) async {
+    await Future<void>.delayed(const Duration(milliseconds: 300));
+    _upcoming.removeWhere((b) => b.id == id);
+    _past.removeWhere((b) => b.id == id);
   }
 
   @override
@@ -75,8 +83,23 @@ class MockBookingRepository implements BookingRepository {
   }
 
   @override
-  Future<void> rescheduleBooking(String id, DateTime newDate) async {
+  Future<Booking> rescheduleBooking(String id, DateTime newDate) async {
     await Future<void>.delayed(const Duration(milliseconds: 300));
+    final index = _upcoming.indexWhere((b) => b.id == id);
+    if (index == -1) throw StateError('Booking $id not found');
+    final old = _upcoming[index];
+    final updated = Booking(
+      id: old.id,
+      tripType: old.tripType,
+      pickup: old.pickup,
+      dropoff: old.dropoff,
+      dateTime: newDate,
+      vehicleClass: old.vehicleClass,
+      status: old.status,
+      price: old.price,
+    );
+    _upcoming[index] = updated;
+    return updated;
   }
 
   @override

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:intl/intl.dart';
 import 'package:dropzone_app/presentation/widgets/primary_button.dart';
 import 'package:dropzone_app/l10n/app_localizations.dart';
 import 'package:dropzone_app/presentation/bookings/booking_providers.dart';
@@ -20,12 +21,46 @@ class _BookingFlowScreenState extends ConsumerState<BookingFlowScreen> {
   VehicleClass vehicleClass = VehicleClass.sedan;
   String pickup = '';
   String dropoff = '';
-  DateTime? dateTime;
+
+  // Date/time chosen via pickers — defaults to +4 h from now if not set.
+  DateTime? _pickedDate;
+  TimeOfDay? _pickedTime;
+
+  DateTime get _resolvedDateTime {
+    if (_pickedDate == null) {
+      return DateTime.now().add(const Duration(hours: 4));
+    }
+    final t = _pickedTime ?? TimeOfDay.now();
+    return DateTime(
+        _pickedDate!.year, _pickedDate!.month, _pickedDate!.day, t.hour, t.minute);
+  }
+
+  Future<void> _pickDate() async {
+    final tomorrow = DateTime.now().add(const Duration(days: 1));
+    final picked = await showDatePicker(
+      context: context,
+      initialDate: _pickedDate != null && _pickedDate!.isAfter(tomorrow)
+          ? _pickedDate!
+          : tomorrow,
+      firstDate: tomorrow,
+      lastDate: DateTime.now().add(const Duration(days: 365)),
+    );
+    if (picked != null) setState(() => _pickedDate = picked);
+  }
+
+  Future<void> _pickTime() async {
+    final picked = await showTimePicker(
+      context: context,
+      initialTime: _pickedTime ?? TimeOfDay.now(),
+    );
+    if (picked != null) setState(() => _pickedTime = picked);
+  }
 
   @override
   Widget build(BuildContext context) {
     final localizations = AppLocalizations.of(context);
     final priceAsync = ref.watch(priceEstimateProvider(vehicleClass));
+    final dateFmt = DateFormat('dd MMM yyyy');
 
     return Scaffold(
       appBar: AppBar(
@@ -46,7 +81,7 @@ class _BookingFlowScreenState extends ConsumerState<BookingFlowScreen> {
             tripType: tripType,
             pickup: pickup.isEmpty ? localizations.pickup : pickup,
             dropoff: dropoff.isEmpty ? localizations.dropoff : dropoff,
-            dateTime: dateTime ?? DateTime.now().add(const Duration(hours: 4)),
+            dateTime: _resolvedDateTime,
             vehicleClass: vehicleClass,
             status: BookingStatus.requested,
             price: priceAsync.value ?? 250,
@@ -82,6 +117,7 @@ class _BookingFlowScreenState extends ConsumerState<BookingFlowScreen> {
           );
         },
         steps: [
+          // ── Step 1: Trip type ─────────────────────────────────────────────
           Step(
             title: Text(localizations.tripType),
             content: Column(
@@ -104,38 +140,125 @@ class _BookingFlowScreenState extends ConsumerState<BookingFlowScreen> {
               ],
             ),
           ),
+
+          // ── Step 2: Pickup / Dropoff ──────────────────────────────────────
           Step(
             title: Text(localizations.pickup),
             content: Column(
               children: [
                 TextField(
-                  decoration: const InputDecoration(hintText: 'Pickup location'),
-                  onChanged: (value) => pickup = value,
+                  decoration:
+                      const InputDecoration(hintText: 'Pickup location'),
+                  onChanged: (v) => pickup = v,
                 ),
                 const SizedBox(height: 12),
                 TextField(
-                  decoration: const InputDecoration(hintText: 'Drop‑off location'),
-                  onChanged: (value) => dropoff = value,
+                  decoration:
+                      const InputDecoration(hintText: 'Drop‑off location'),
+                  onChanged: (v) => dropoff = v,
                 ),
               ],
             ),
           ),
+
+          // ── Step 3: Date & Time (pickers) ─────────────────────────────────
           Step(
             title: Text(localizations.date),
             content: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                TextField(
-                  decoration: const InputDecoration(hintText: 'Select date'),
-                  onChanged: (_) => dateTime = DateTime.now().add(const Duration(days: 2)),
+                // Date picker tile
+                Text(localizations.date,
+                    style: Theme.of(context).textTheme.labelLarge),
+                const SizedBox(height: 6),
+                InkWell(
+                  onTap: _pickDate,
+                  borderRadius: BorderRadius.circular(12),
+                  child: Container(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 16, vertical: 14),
+                    decoration: BoxDecoration(
+                      border: Border.all(
+                          color: Theme.of(context).colorScheme.outline),
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    child: Row(
+                      children: [
+                        const Icon(Icons.calendar_today_outlined),
+                        const SizedBox(width: 12),
+                        Text(
+                          _pickedDate != null
+                              ? dateFmt.format(_pickedDate!)
+                              : localizations.noDateSelected,
+                          style: _pickedDate == null
+                              ? Theme.of(context)
+                                  .textTheme
+                                  .bodyMedium
+                                  ?.copyWith(color: Colors.grey)
+                              : null,
+                        ),
+                      ],
+                    ),
+                  ),
                 ),
-                const SizedBox(height: 12),
-                TextField(
-                  decoration: const InputDecoration(hintText: 'Select time'),
-                  onChanged: (_) => dateTime = DateTime.now().add(const Duration(hours: 6)),
+                const SizedBox(height: 16),
+
+                // Time picker tile
+                Text(localizations.time,
+                    style: Theme.of(context).textTheme.labelLarge),
+                const SizedBox(height: 6),
+                InkWell(
+                  onTap: _pickedDate != null ? _pickTime : null,
+                  borderRadius: BorderRadius.circular(12),
+                  child: Container(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 16, vertical: 14),
+                    decoration: BoxDecoration(
+                      border: Border.all(
+                        color: _pickedDate != null
+                            ? Theme.of(context).colorScheme.outline
+                            : Colors.grey.shade300,
+                      ),
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    child: Row(
+                      children: [
+                        Icon(
+                          Icons.access_time_outlined,
+                          color: _pickedDate == null ? Colors.grey : null,
+                        ),
+                        const SizedBox(width: 12),
+                        Text(
+                          _pickedTime != null
+                              ? _pickedTime!.format(context)
+                              : localizations.noTimeSelected,
+                          style: _pickedTime == null
+                              ? Theme.of(context)
+                                  .textTheme
+                                  .bodyMedium
+                                  ?.copyWith(color: Colors.grey)
+                              : null,
+                        ),
+                      ],
+                    ),
+                  ),
                 ),
+                if (_pickedDate == null)
+                  Padding(
+                    padding: const EdgeInsets.only(top: 6),
+                    child: Text(
+                      'Select a date first',
+                      style: Theme.of(context)
+                          .textTheme
+                          .bodySmall
+                          ?.copyWith(color: Colors.grey),
+                    ),
+                  ),
               ],
             ),
           ),
+
+          // ── Step 4: Vehicle class ─────────────────────────────────────────
           Step(
             title: Text(localizations.vehicleClass),
             content: Column(
@@ -153,7 +276,8 @@ class _BookingFlowScreenState extends ConsumerState<BookingFlowScreen> {
                 _SelectTile(
                   label: localizations.vehicleLuxury,
                   selected: vehicleClass == VehicleClass.luxury,
-                  onTap: () => setState(() => vehicleClass = VehicleClass.luxury),
+                  onTap: () =>
+                      setState(() => vehicleClass = VehicleClass.luxury),
                 ),
                 _SelectTile(
                   label: localizations.vehicleVan,
@@ -163,6 +287,8 @@ class _BookingFlowScreenState extends ConsumerState<BookingFlowScreen> {
               ],
             ),
           ),
+
+          // ── Step 5: Summary ───────────────────────────────────────────────
           Step(
             title: Text(localizations.summary),
             content: Column(
@@ -175,8 +301,10 @@ class _BookingFlowScreenState extends ConsumerState<BookingFlowScreen> {
                     'AED ${price.toStringAsFixed(0)}',
                     style: Theme.of(context).textTheme.titleLarge,
                   ),
-                  loading: () => const Text('—', semanticsLabel: 'Loading'),
-                  error: (error, _) => Text('${localizations.errorLabel}: $error'),
+                  loading: () =>
+                      const Text('—', semanticsLabel: 'Loading'),
+                  error: (e, _) =>
+                      Text('${localizations.errorLabel}: $e'),
                 ),
                 const SizedBox(height: 8),
                 Text(localizations.surchargeNote),

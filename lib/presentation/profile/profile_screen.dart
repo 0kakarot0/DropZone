@@ -50,17 +50,20 @@ class ProfileScreen extends StatelessWidget {
           PrimaryButton(
             label: localizations.saveProfile,
             onPressed: () async {
+              // Capture navigator BEFORE opening dialog to avoid using
+              // the dialog's inner BuildContext for stack-wide navigation.
+              final nav = Navigator.of(context);
               await showDialog<void>(
                 context: context,
                 barrierDismissible: false,
-                builder: (context) => ResultPopup(
+                builder: (dialogCtx) => ResultPopup(
                   title: localizations.profileSavedTitle,
                   message: localizations.profileSavedMessage,
                   type: ResultType.success,
                   buttonLabel: localizations.goHome,
                   onAction: () {
-                    Navigator.of(context).pop();
-                    Navigator.of(context).popUntil((route) => route.isFirst);
+                    Navigator.of(dialogCtx).pop(); // close dialog
+                    nav.popUntil((route) => route.isFirst); // clear stack
                   },
                 ),
               );

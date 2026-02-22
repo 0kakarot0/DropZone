@@ -39,7 +39,7 @@ class BookingsScreen extends ConsumerWidget {
 class _BookingList extends ConsumerWidget {
   const _BookingList({required this.provider});
 
-  final FutureProvider<List<Booking>> provider;
+  final ProviderListenable<AsyncValue<List<Booking>>> provider;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

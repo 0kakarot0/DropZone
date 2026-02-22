@@ -5,7 +5,8 @@ abstract class BookingRepository {
   Future<List<Booking>> getPastBookings();
   Future<Booking> createBooking(Booking booking);
   Future<void> cancelBooking(String id);
-  Future<void> rescheduleBooking(String id, DateTime newDate);
+  Future<void> deleteBooking(String id);
+  Future<Booking> rescheduleBooking(String id, DateTime newDate);
   Future<double> estimatePrice({
     required TripType tripType,
     required VehicleClass vehicleClass,

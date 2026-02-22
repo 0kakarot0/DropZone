@@ -870,27 +870,51 @@ abstract class AppLocalizations {
   String get meetGreetBody;
 
   /// No description provided for @selectTime.
+  ///
+  /// In en, this message translates to:
+  /// **'Select time'**
   String get selectTime;
 
   /// No description provided for @noDateSelected.
+  ///
+  /// In en, this message translates to:
+  /// **'No date selected'**
   String get noDateSelected;
 
   /// No description provided for @noTimeSelected.
+  ///
+  /// In en, this message translates to:
+  /// **'No time selected'**
   String get noTimeSelected;
 
   /// No description provided for @deleteBookingTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete booking?'**
   String get deleteBookingTitle;
 
   /// No description provided for @deleteBookingMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'This booking will be permanently removed.'**
   String get deleteBookingMessage;
 
   /// No description provided for @confirmDelete.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete'**
   String get confirmDelete;
 
   /// No description provided for @bookingDeletedConfirmed.
+  ///
+  /// In en, this message translates to:
+  /// **'Booking deleted'**
   String get bookingDeletedConfirmed;
 
   /// No description provided for @rescheduleSuccess.
+  ///
+  /// In en, this message translates to:
+  /// **'Booking rescheduled successfully'**
   String get rescheduleSuccess;
 }
 

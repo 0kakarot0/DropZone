@@ -128,5 +128,13 @@
   "issueCategoryDriver": "السائق",
   "issueCategoryOther": "أخرى",
   "selectCategory": "اختر الفئة",
-  "submitIssue": "إرسال المشكلة"
+  "submitIssue": "إرسال المشكلة",
+  "selectTime": "اختر الوقت",
+  "noDateSelected": "لم يتم اختيار تاريخ",
+  "noTimeSelected": "لم يتم اختيار وقت",
+  "deleteBookingTitle": "حذف الحجز؟",
+  "deleteBookingMessage": "سيتم حذف هذا الحجز نهائياً.",
+  "confirmDelete": "حذف",
+  "bookingDeletedConfirmed": "تم حذف الحجز",
+  "rescheduleSuccess": "تم إعادة جدولة الحجز بنجاح"
 }
