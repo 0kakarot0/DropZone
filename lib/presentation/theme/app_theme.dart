@@ -5,11 +5,15 @@ class AppTheme {
   static ThemeData light() {
     return ThemeData(
       useMaterial3: true,
+      brightness: Brightness.dark,
       colorScheme: ColorScheme.fromSeed(
         seedColor: AppColors.primary,
+        brightness: Brightness.dark,
         primary: AppColors.primary,
+        onPrimary: Colors.black, // Dark text on yellow buttons
         secondary: AppColors.accent,
         surface: AppColors.surface,
+        onSurface: AppColors.textPrimary,
       ),
       scaffoldBackgroundColor: AppColors.background,
       textTheme: const TextTheme(
@@ -61,10 +65,15 @@ class AppTheme {
         foregroundColor: AppColors.textPrimary,
         centerTitle: true,
       ),
+      filledButtonTheme: FilledButtonThemeData(
+        style: FilledButton.styleFrom(
+          foregroundColor: Colors.black, // ensure text on primary button is readable
+        ),
+      ),
     );
   }
 
   static ThemeData dark() {
-    return ThemeData.dark(useMaterial3: true);
+    return light(); // Both themes are now the dark brand theme
   }
 }
