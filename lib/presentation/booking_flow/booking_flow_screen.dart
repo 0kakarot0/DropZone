@@ -21,18 +21,54 @@ class _BookingFlowScreenState extends ConsumerState<BookingFlowScreen> {
   VehicleClass vehicleClass = VehicleClass.sedan;
   String pickup = '';
   String dropoff = '';
+  int passengers = 1;
+  String notes = '';
 
-  // Date/time chosen via pickers — defaults to +4 h from now if not set.
   DateTime? _pickedDate;
   TimeOfDay? _pickedTime;
 
+  // The price estimate is stored as plain widget state.
+  // It is fetched exactly once (imperatively) when the user navigates to the
+  // summary step — never reactively inside build().
+  AsyncValue<PriceEstimate> _priceEstimate = const AsyncValue.loading();
+  bool _estimateFetched = false;
+
   DateTime get _resolvedDateTime {
     if (_pickedDate == null) {
-      return DateTime.now().add(const Duration(hours: 4));
+      // Use a fixed time (4 h from init) so the value never drifts between
+      // builds. Calling DateTime.now() in build() created ever-changing
+      // provider keys that bypassed Riverpod's cache on every rebuild.
+      return _defaultPickupTime;
     }
     final t = _pickedTime ?? TimeOfDay.now();
     return DateTime(
         _pickedDate!.year, _pickedDate!.month, _pickedDate!.day, t.hour, t.minute);
+  }
+
+  // Computed once when the State object is created.
+  late final DateTime _defaultPickupTime =
+      DateTime.now().add(const Duration(hours: 4));
+
+  /// Calls the estimate API exactly once when the summary step is shown.
+  /// Subsequent rebuilds have no effect because [_estimateFetched] is guarded.
+  Future<void> _fetchEstimateOnce() async {
+    if (_estimateFetched) return;
+    _estimateFetched = true;
+
+    // Show loading immediately.
+    setState(() => _priceEstimate = const AsyncValue.loading());
+
+    try {
+      final repo = ref.read(bookingRepositoryProvider);
+      final result = await repo.estimatePrice(
+        serviceType: tripType,
+        pickupTime: _resolvedDateTime,
+        passengers: passengers,
+      );
+      if (mounted) setState(() => _priceEstimate = AsyncValue.data(result));
+    } catch (e, st) {
+      if (mounted) setState(() => _priceEstimate = AsyncValue.error(e, st));
+    }
   }
 
   Future<void> _pickDate() async {
@@ -59,7 +95,9 @@ class _BookingFlowScreenState extends ConsumerState<BookingFlowScreen> {
   @override
   Widget build(BuildContext context) {
     final localizations = AppLocalizations.of(context);
-    final priceAsync = ref.watch(priceEstimateProvider(vehicleClass));
+    // _priceEstimate is plain widget state — never watched via a provider.
+    // No provider rebuild can trigger an API call.
+    final priceAsync = _priceEstimate;
     final dateFmt = DateFormat('dd MMM yyyy');
 
     return Scaffold(
@@ -70,25 +108,33 @@ class _BookingFlowScreenState extends ConsumerState<BookingFlowScreen> {
         type: StepperType.vertical,
         currentStep: currentStep,
         onStepContinue: () async {
-          if (currentStep < 4) {
-            setState(() => currentStep += 1);
+          if (currentStep < 5) {
+            final nextStep = currentStep + 1;
+            setState(() => currentStep = nextStep);
+            // Trigger ONE estimate fetch when entering the summary step (index 5).
+            if (nextStep == 5) _fetchEstimateOnce();
             return;
           }
           final repository = ref.read(bookingRepositoryProvider);
           final analytics = ref.read(analyticsProvider);
           final booking = Booking(
-            id: 'TEMP',
+            id: -1,
             tripType: tripType,
             pickup: pickup.isEmpty ? localizations.pickup : pickup,
             dropoff: dropoff.isEmpty ? localizations.dropoff : dropoff,
             dateTime: _resolvedDateTime,
             vehicleClass: vehicleClass,
-            status: BookingStatus.requested,
-            price: priceAsync.value ?? 250,
+            status: BookingStatus.created,
+            passengers: passengers,
+            notes: notes.isNotEmpty ? notes : null,
+            priceEstimateCents: _priceEstimate.value?.totalCents,
+            currency: _priceEstimate.value?.currency ?? 'AED',
           );
           final messenger = ScaffoldMessenger.of(context);
           final router = GoRouter.of(context);
           await repository.createBooking(booking);
+          // Refresh the bookings list in the background.
+          ref.read(bookingsProvider.notifier).refresh();
           await analytics.trackEvent('booking_created', params: {
             'tripType': tripType.name,
             'vehicleClass': vehicleClass.name,
@@ -109,7 +155,7 @@ class _BookingFlowScreenState extends ConsumerState<BookingFlowScreen> {
           return Padding(
             padding: const EdgeInsets.only(top: 16),
             child: PrimaryButton(
-              label: currentStep == 4
+              label: currentStep == 5
                   ? localizations.confirmRequest
                   : localizations.continueLabel,
               onPressed: details.onStepContinue,
@@ -117,7 +163,7 @@ class _BookingFlowScreenState extends ConsumerState<BookingFlowScreen> {
           );
         },
         steps: [
-          // ── Step 1: Trip type ─────────────────────────────────────────────
+          // ── Step 1: Trip type ──────────────────────────────────────────────
           Step(
             title: Text(localizations.tripType),
             content: Column(
@@ -141,7 +187,7 @@ class _BookingFlowScreenState extends ConsumerState<BookingFlowScreen> {
             ),
           ),
 
-          // ── Step 2: Pickup / Dropoff ──────────────────────────────────────
+          // ── Step 2: Pickup / Dropoff ───────────────────────────────────────
           Step(
             title: Text(localizations.pickup),
             content: Column(
@@ -161,13 +207,12 @@ class _BookingFlowScreenState extends ConsumerState<BookingFlowScreen> {
             ),
           ),
 
-          // ── Step 3: Date & Time (pickers) ─────────────────────────────────
+          // ── Step 3: Date & Time ────────────────────────────────────────────
           Step(
             title: Text(localizations.date),
             content: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                // Date picker tile
                 Text(localizations.date,
                     style: Theme.of(context).textTheme.labelLarge),
                 const SizedBox(height: 6),
@@ -202,8 +247,6 @@ class _BookingFlowScreenState extends ConsumerState<BookingFlowScreen> {
                   ),
                 ),
                 const SizedBox(height: 16),
-
-                // Time picker tile
                 Text(localizations.time,
                     style: Theme.of(context).textTheme.labelLarge),
                 const SizedBox(height: 6),
@@ -258,7 +301,51 @@ class _BookingFlowScreenState extends ConsumerState<BookingFlowScreen> {
             ),
           ),
 
-          // ── Step 4: Vehicle class ─────────────────────────────────────────
+          // ── Step 4: Passengers ─────────────────────────────────────────────
+          Step(
+            title: Text(localizations.passengers),
+            content: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  localizations.passengers,
+                  style: Theme.of(context).textTheme.labelLarge,
+                ),
+                const SizedBox(height: 8),
+                Row(
+                  children: [
+                    IconButton(
+                      onPressed: passengers > 1
+                          ? () => setState(() => passengers--)
+                          : null,
+                      icon: const Icon(Icons.remove_circle_outline),
+                    ),
+                    Text(
+                      '$passengers',
+                      style: Theme.of(context).textTheme.titleLarge,
+                    ),
+                    IconButton(
+                      onPressed: passengers < 10
+                          ? () => setState(() => passengers++)
+                          : null,
+                      icon: const Icon(Icons.add_circle_outline),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 12),
+                TextField(
+                  maxLines: 3,
+                  decoration: const InputDecoration(
+                    hintText: 'Notes for driver (optional)',
+                    border: OutlineInputBorder(),
+                  ),
+                  onChanged: (v) => notes = v,
+                ),
+              ],
+            ),
+          ),
+
+          // ── Step 5: Vehicle class ──────────────────────────────────────────
           Step(
             title: Text(localizations.vehicleClass),
             content: Column(
@@ -288,7 +375,7 @@ class _BookingFlowScreenState extends ConsumerState<BookingFlowScreen> {
             ),
           ),
 
-          // ── Step 5: Summary ───────────────────────────────────────────────
+          // ── Step 6: Summary ────────────────────────────────────────────────
           Step(
             title: Text(localizations.summary),
             content: Column(
@@ -297,8 +384,8 @@ class _BookingFlowScreenState extends ConsumerState<BookingFlowScreen> {
                 Text(localizations.estimatedPrice),
                 const SizedBox(height: 8),
                 priceAsync.when(
-                  data: (price) => Text(
-                    'AED ${price.toStringAsFixed(0)}',
+                  data: (estimate) => Text(
+                    '${estimate.currency} ${estimate.totalAed.toStringAsFixed(0)}',
                     style: Theme.of(context).textTheme.titleLarge,
                   ),
                   loading: () =>
