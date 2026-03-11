@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "314041044476",
+    "project_id": "dropzone-flutter-app",
+    "storage_bucket": "dropzone-flutter-app.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:314041044476:android:dcc89d225091825a8e3679",
+        "android_client_info": {
+          "package_name": "com.example.dropzone_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCYknc0Ca5zmHFUHBq_TVPIeUL6TrxY15A"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

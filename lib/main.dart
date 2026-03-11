@@ -1,10 +1,25 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_stripe/flutter_stripe.dart';
+
+import 'package:dropzone_app/firebase_options.dart';
+import 'package:dropzone_app/core/config/env.dart';
 import 'package:dropzone_app/presentation/app/app_router.dart';
 import 'package:dropzone_app/presentation/theme/app_theme.dart';
 import 'package:dropzone_app/l10n/app_localizations.dart';
 
-void main() {
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+
+  // Initialise Stripe with the publishable key for the current environment.
+  Stripe.publishableKey = devEnv.stripePublishableKey;
+  await Stripe.instance.applySettings();
+
   runApp(const ProviderScope(child: DropZoneApp()));
 }
 
