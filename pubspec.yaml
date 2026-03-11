@@ -40,6 +40,13 @@ dependencies:
   # Networking
   dio: ^5.7.0
 
+  # Firebase
+  firebase_core: ^3.6.0
+  firebase_auth: ^5.3.1
+
+  # Payments
+  flutter_stripe: ^10.2.0
+
   # Utilities
   intl: ^0.19.0
 

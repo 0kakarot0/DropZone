@@ -31,27 +31,24 @@ class _BookingDetailScreenState extends ConsumerState<BookingDetailScreen> {
 
   String _statusLabel(AppLocalizations l, BookingStatus status) {
     switch (status) {
-      case BookingStatus.requested:
-        return l.statusRequested;
+      case BookingStatus.pendingPayment:
+        return 'Pending Payment';
       case BookingStatus.confirmed:
+      case BookingStatus.created:
         return l.statusConfirmed;
-      case BookingStatus.driverAssigned:
+      case BookingStatus.rescheduled:
         return l.statusDriverAssigned;
-      case BookingStatus.enRoute:
-        return l.statusEnRoute;
-      case BookingStatus.completed:
-        return l.statusCompleted;
       case BookingStatus.cancelled:
         return l.statusCancelled;
     }
   }
 
-  Future<void> _onDelete(AppLocalizations l) async {
+  Future<void> _onCancel(AppLocalizations l) async {
     final confirmed = await showDialog<bool>(
       context: context,
       builder: (ctx) => AlertDialog(
-        title: Text(l.deleteBookingTitle),
-        content: Text(l.deleteBookingMessage),
+        title: Text(l.cancelConfirmTitle),
+        content: Text(l.cancelConfirmMessage),
         actions: [
           TextButton(
             onPressed: () => Navigator.of(ctx).pop(false),
@@ -62,7 +59,7 @@ class _BookingDetailScreenState extends ConsumerState<BookingDetailScreen> {
               backgroundColor: Theme.of(context).colorScheme.error,
             ),
             onPressed: () => Navigator.of(ctx).pop(true),
-            child: Text(l.confirmDelete),
+            child: Text(l.confirmCancel),
           ),
         ],
       ),
@@ -70,18 +67,20 @@ class _BookingDetailScreenState extends ConsumerState<BookingDetailScreen> {
 
     if (confirmed != true || !mounted) return;
 
-    await ref
-        .read(upcomingBookingsProvider.notifier)
-        .deleteBooking(_booking.id);
+    try {
+      await ref.read(bookingsProvider.notifier).cancelBooking(_booking.id);
+      if (!mounted) return;
 
-    if (!mounted) return;
-
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text(l.bookingDeletedConfirmed)),
-    );
-
-    // Navigate back to the bookings list (one level up)
-    Navigator.of(context).pop();
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text(l.cancelConfirmed)),
+      );
+      Navigator.of(context).pop();
+    } catch (e) {
+      if (!mounted) return;
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('${l.errorLabel}: $e')),
+      );
+    }
   }
 
   Future<void> _onReschedule(AppLocalizations l) async {
@@ -103,6 +102,7 @@ class _BookingDetailScreenState extends ConsumerState<BookingDetailScreen> {
   Widget build(BuildContext context) {
     final l = AppLocalizations.of(context);
     final dateFmt = DateFormat('dd MMM yyyy, HH:mm');
+    final eventsAsync = ref.watch(bookingEventsProvider(_booking.id));
 
     return Scaffold(
       appBar: AppBar(title: Text(l.bookingDetails)),
@@ -111,9 +111,13 @@ class _BookingDetailScreenState extends ConsumerState<BookingDetailScreen> {
         children: [
           Card(
             child: ListTile(
-              title: Text(_booking.id),
+              title: Text('#${_booking.id}'),
               subtitle: Text('${_booking.pickup} → ${_booking.dropoff}'),
-              trailing: Text('AED ${_booking.price.toStringAsFixed(0)}'),
+              trailing: Text(
+                _booking.priceEstimateCents != null
+                    ? 'AED ${_booking.priceAed.toStringAsFixed(0)}'
+                    : '',
+              ),
             ),
           ),
           const SizedBox(height: 8),
@@ -127,47 +131,86 @@ class _BookingDetailScreenState extends ConsumerState<BookingDetailScreen> {
                   ),
             ),
           ),
+          if (_booking.passengers != null)
+            Padding(
+              padding: const EdgeInsets.only(top: 4, left: 4),
+              child: Text(
+                '${l.passengers}: ${_booking.passengers}',
+                style: Theme.of(context).textTheme.bodySmall,
+              ),
+            ),
+          if (_booking.notes != null && _booking.notes!.isNotEmpty)
+            Padding(
+              padding: const EdgeInsets.only(top: 4, left: 4),
+              child: Text(
+                _booking.notes!,
+                style: Theme.of(context).textTheme.bodySmall,
+              ),
+            ),
           const SizedBox(height: 20),
+
+          // ── Status chip ───────────────────────────────────────────────────
+          Row(
+            children: [
+              Chip(
+                label: Text(_statusLabel(l, _booking.status)),
+                backgroundColor:
+                    _booking.status == BookingStatus.cancelled
+                        ? Theme.of(context).colorScheme.errorContainer
+                        : Theme.of(context).colorScheme.primaryContainer,
+              ),
+            ],
+          ),
+          const SizedBox(height: 20),
+
+          // ── Event timeline ────────────────────────────────────────────────
           Text(l.statusTimeline,
               style: Theme.of(context).textTheme.titleLarge),
           const SizedBox(height: 12),
-          _StatusTile(
-              label: _statusLabel(l, _booking.status), active: true),
-          _StatusTile(
-              label: l.statusConfirmed,
-              active: _booking.status.index >= 1),
-          _StatusTile(
-              label: l.statusDriverAssigned,
-              active: _booking.status.index >= 2),
-          _StatusTile(
-              label: l.statusEnRoute,
-              active: _booking.status.index >= 3),
-          _StatusTile(
-              label: l.statusCompleted,
-              active: _booking.status.index >= 4),
+          eventsAsync.when(
+            data: (events) {
+              if (events.isEmpty) {
+                return Text(l.emptyBookings,
+                    style: Theme.of(context).textTheme.bodyMedium);
+              }
+              return Column(
+                children: events
+                    .map((e) => _EventTile(event: e))
+                    .toList(),
+              );
+            },
+            loading: () => const Center(child: CircularProgressIndicator()),
+            error: (e, _) =>
+                Text('${l.errorLabel}: $e'),
+          ),
           const SizedBox(height: 20),
+
+          // ── Cancellation policy ───────────────────────────────────────────
           Text(l.policyTitle,
               style: Theme.of(context).textTheme.titleLarge),
           const SizedBox(height: 8),
           Text(l.policyBody),
           const SizedBox(height: 20),
-          Row(
-            children: [
-              Expanded(
-                child: OutlinedButton(
-                  onPressed: () => _onReschedule(l),
-                  child: Text(l.reschedule),
+
+          // ── Action buttons ────────────────────────────────────────────────
+          if (_booking.status != BookingStatus.cancelled)
+            Row(
+              children: [
+                Expanded(
+                  child: OutlinedButton(
+                    onPressed: () => _onReschedule(l),
+                    child: Text(l.reschedule),
+                  ),
                 ),
-              ),
-              const SizedBox(width: 12),
-              Expanded(
-                child: PrimaryButton(
-                  label: l.cancelBooking,
-                  onPressed: () => _onDelete(l),
+                const SizedBox(width: 12),
+                Expanded(
+                  child: PrimaryButton(
+                    label: l.cancelBooking,
+                    onPressed: () => _onCancel(l),
+                  ),
                 ),
-              ),
-            ],
-          ),
+              ],
+            ),
         ],
       ),
     );
@@ -175,23 +218,21 @@ class _BookingDetailScreenState extends ConsumerState<BookingDetailScreen> {
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
-// _StatusTile
+// _EventTile
 // ─────────────────────────────────────────────────────────────────────────────
 
-class _StatusTile extends StatelessWidget {
-  const _StatusTile({required this.label, required this.active});
-
-  final String label;
-  final bool active;
+class _EventTile extends StatelessWidget {
+  const _EventTile({required this.event});
+  final BookingEvent event;
 
   @override
   Widget build(BuildContext context) {
+    final timeFmt = DateFormat('dd MMM, HH:mm');
     return ListTile(
-      leading: Icon(
-        active ? Icons.check_circle : Icons.circle_outlined,
-        color: active ? Colors.green : Colors.grey,
-      ),
-      title: Text(label),
+      dense: true,
+      leading: const Icon(Icons.circle, size: 10),
+      title: Text(event.description),
+      subtitle: Text(timeFmt.format(event.createdAt.toLocal())),
     );
   }
 }
@@ -222,7 +263,6 @@ class _EditBookingScreenState extends ConsumerState<EditBookingScreen> {
     _selectedTime = TimeOfDay(hour: dt.hour, minute: dt.minute);
   }
 
-  /// Combined DateTime from the picked date + time.
   DateTime get _combined => DateTime(
         _selectedDate.year,
         _selectedDate.month,
@@ -254,9 +294,15 @@ class _EditBookingScreenState extends ConsumerState<EditBookingScreen> {
     setState(() => _saving = true);
     try {
       final updated = await ref
-          .read(upcomingBookingsProvider.notifier)
+          .read(bookingsProvider.notifier)
           .rescheduleBooking(widget.booking.id, _combined);
       if (mounted) Navigator.of(context).pop(updated);
+    } catch (e) {
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('${l.errorLabel}: $e')),
+        );
+      }
     } finally {
       if (mounted) setState(() => _saving = false);
     }
@@ -272,7 +318,6 @@ class _EditBookingScreenState extends ConsumerState<EditBookingScreen> {
       body: ListView(
         padding: const EdgeInsets.all(20),
         children: [
-          // Pickup (read-only preview — full editing out of scope for this sprint)
           TextField(
             readOnly: true,
             decoration: InputDecoration(
@@ -290,9 +335,7 @@ class _EditBookingScreenState extends ConsumerState<EditBookingScreen> {
           ),
           const SizedBox(height: 20),
 
-          // ── Date picker tile ──────────────────────────────────────────────
-          Text(l.date,
-              style: Theme.of(context).textTheme.titleMedium),
+          Text(l.date, style: Theme.of(context).textTheme.titleMedium),
           const SizedBox(height: 8),
           InkWell(
             onTap: _pickDate,
@@ -317,9 +360,7 @@ class _EditBookingScreenState extends ConsumerState<EditBookingScreen> {
           ),
           const SizedBox(height: 16),
 
-          // ── Time picker tile ──────────────────────────────────────────────
-          Text(l.time,
-              style: Theme.of(context).textTheme.titleMedium),
+          Text(l.time, style: Theme.of(context).textTheme.titleMedium),
           const SizedBox(height: 8),
           InkWell(
             onTap: _pickTime,
