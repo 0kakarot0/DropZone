@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:dropzone_app/presentation/booking_flow/booking_flow_screen.dart';
@@ -17,6 +18,16 @@ final GlobalKey<NavigatorState> _rootNavigatorKey = GlobalKey<NavigatorState>();
 
 final GoRouter appRouter = GoRouter(
   navigatorKey: _rootNavigatorKey,
+  // Redirect unauthenticated users to /auth.
+  // Uses authStateChanges() so the guard re-evaluates after sign-in.
+  redirect: (context, state) {
+    final loggedIn = FirebaseAuth.instance.currentUser != null;
+    final goingToAuth = state.matchedLocation.startsWith('/auth');
+    if (!loggedIn && !goingToAuth) return '/auth';
+    if (loggedIn && goingToAuth) return '/';
+    return null;
+  },
+  refreshListenable: _AuthStateListenable(),
   routes: <RouteBase>[
     GoRoute(
       path: '/auth',
@@ -26,7 +37,9 @@ final GoRouter appRouter = GoRouter(
         GoRoute(
           path: 'otp',
           name: 'otp',
-          builder: (context, state) => const OtpScreen(),
+          builder: (context, state) => OtpScreen(
+            verificationId: state.extra as String,
+          ),
         ),
       ],
     ),
@@ -82,6 +95,13 @@ final GoRouter appRouter = GoRouter(
     ),
   ],
 );
+
+/// Makes GoRouter re-run its redirect when Firebase auth state changes.
+class _AuthStateListenable extends ChangeNotifier {
+  _AuthStateListenable() {
+    FirebaseAuth.instance.authStateChanges().listen((_) => notifyListeners());
+  }
+}
 
 class PlaceholderScreen extends StatelessWidget {
   const PlaceholderScreen({super.key, required this.title});
