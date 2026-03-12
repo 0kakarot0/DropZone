@@ -20,7 +20,7 @@ class Env {
 // Physical device:     http://<your-mac-lan-ip>:8080  (run: ipconfig getifaddr en0)
 Env get devEnv => Env(
   environment: AppEnvironment.dev,
-  apiBaseUrl: 'http://192.168.1.6:8080', // ← Mac LAN IP; update if network changes
+  apiBaseUrl: dotenv.env['API_BASE_URL'] ?? 'http://127.0.0.1:8080',
   stripePublishableKey: dotenv.env['STRIPE_PUBLISHABLE_KEY'] ?? '',
 );
 
