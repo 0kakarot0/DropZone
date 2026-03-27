@@ -28,6 +28,7 @@ class HttpBookingRepository implements BookingRepository {
         pickupTime: booking.dateTime,
         passengers: booking.passengers,
         notes: booking.notes,
+        paymentMethod: booking.paymentMethod,
       ),
     );
     return _fromDto(dto);
@@ -90,6 +91,14 @@ class HttpBookingRepository implements BookingRepository {
         .toList();
   }
 
+  // ── Last Booking ──────────────────────────────────────────────────────────
+  @override
+  Future<Booking?> getLastBooking() async {
+    final dto = await _service.getLastBooking();
+    if (dto == null) return null;
+    return _fromDto(dto);
+  }
+
   // ── DTO → Domain ───────────────────────────────────────────────────────────
   Booking _fromDto(BookingResponseDto dto) {
     return Booking(
@@ -103,6 +112,8 @@ class HttpBookingRepository implements BookingRepository {
       notes: dto.notes,
       priceEstimateCents: dto.priceEstimateCents,
       currency: dto.currency,
+      paymentMethod: dto.paymentMethod,
+      driverId: dto.driverId,
     );
   }
 }

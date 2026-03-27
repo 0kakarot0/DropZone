@@ -5,6 +5,7 @@ import 'package:dropzone_app/domain/entities/booking.dart';
 import 'package:dropzone_app/presentation/widgets/primary_button.dart';
 import 'package:dropzone_app/l10n/app_localizations.dart';
 import 'package:dropzone_app/presentation/bookings/booking_providers.dart';
+import 'package:dropzone_app/presentation/tracking/trip_tracking_screen.dart';
 
 // ─────────────────────────────────────────────────────────────────────────────
 // BookingDetailScreen
@@ -40,7 +41,25 @@ class _BookingDetailScreenState extends ConsumerState<BookingDetailScreen> {
         return l.statusDriverAssigned;
       case BookingStatus.cancelled:
         return l.statusCancelled;
+      case BookingStatus.assigned:
+        return 'Driver Assigned';
+      case BookingStatus.driverEnRoute:
+        return 'Driver En Route';
+      case BookingStatus.arrived:
+        return 'Driver Arrived';
+      case BookingStatus.inProgress:
+        return 'In Progress';
+      case BookingStatus.completed:
+        return 'Completed';
     }
+  }
+
+  /// Whether this booking status supports live tracking.
+  bool _isTrackable(BookingStatus status) {
+    return status == BookingStatus.assigned ||
+        status == BookingStatus.driverEnRoute ||
+        status == BookingStatus.arrived ||
+        status == BookingStatus.inProgress;
   }
 
   Future<void> _onCancel(AppLocalizations l) async {
@@ -101,6 +120,7 @@ class _BookingDetailScreenState extends ConsumerState<BookingDetailScreen> {
   @override
   Widget build(BuildContext context) {
     final l = AppLocalizations.of(context);
+    final theme = Theme.of(context);
     final dateFmt = DateFormat('dd MMM yyyy, HH:mm');
     final eventsAsync = ref.watch(bookingEventsProvider(_booking.id));
 
@@ -149,6 +169,38 @@ class _BookingDetailScreenState extends ConsumerState<BookingDetailScreen> {
             ),
           const SizedBox(height: 20),
 
+          // ── Driver Info (if assigned) ──────────────────────────────────
+          if (_booking.driverId != null)
+            Card(
+              color: theme.colorScheme.primaryContainer,
+              child: ListTile(
+                leading: CircleAvatar(
+                  backgroundColor: theme.colorScheme.primary,
+                  child: Icon(Icons.person, color: theme.colorScheme.onPrimary),
+                ),
+                title: const Text('Driver Assigned'),
+                subtitle: Text('Driver #${_booking.driverId}'),
+                trailing: const Icon(Icons.directions_car),
+              ),
+            ),
+          if (_booking.driverId != null) const SizedBox(height: 12),
+
+          // ── Track Ride button (for active rides) ──────────────────────
+          if (_isTrackable(_booking.status))
+            Padding(
+              padding: const EdgeInsets.only(bottom: 16),
+              child: PrimaryButton(
+                label: '📍 Track Ride',
+                onPressed: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (_) => TripTrackingScreen(bookingId: _booking.id),
+                    ),
+                  );
+                },
+              ),
+            ),
+
           // ── Status chip ───────────────────────────────────────────────────
           Row(
             children: [
@@ -156,8 +208,10 @@ class _BookingDetailScreenState extends ConsumerState<BookingDetailScreen> {
                 label: Text(_statusLabel(l, _booking.status)),
                 backgroundColor:
                     _booking.status == BookingStatus.cancelled
-                        ? Theme.of(context).colorScheme.errorContainer
-                        : Theme.of(context).colorScheme.primaryContainer,
+                        ? theme.colorScheme.errorContainer
+                        : _isTrackable(_booking.status)
+                            ? theme.colorScheme.tertiaryContainer
+                            : theme.colorScheme.primaryContainer,
               ),
             ],
           ),

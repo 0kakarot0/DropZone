@@ -47,3 +47,6 @@ app.*.map.json
 # Local Documentation
 *.docx
 generate_doc.py
+
+# Env files
+.env

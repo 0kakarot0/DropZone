@@ -49,9 +49,12 @@ final GoRouter appRouter = GoRouter(
       builder: (context, state) => const PaymentScreen(),
     ),
     GoRoute(
-      path: '/tracking',
+      path: '/tracking/:bookingId',
       name: 'tracking',
-      builder: (context, state) => const TripTrackingScreen(),
+      builder: (context, state) {
+        final bookingId = int.parse(state.pathParameters['bookingId']!);
+        return TripTrackingScreen(bookingId: bookingId);
+      },
     ),
     GoRoute(
       path: '/airport',

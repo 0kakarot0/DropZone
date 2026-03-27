@@ -25,4 +25,7 @@ abstract class BookingRepository {
 
   /// Get the event timeline for a booking.
   Future<List<BookingEvent>> getBookingEvents(int id);
+
+  /// Get the user's most recent booking (for quick re-book).
+  Future<Booking?> getLastBooking();
 }
