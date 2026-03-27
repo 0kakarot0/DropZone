@@ -10,6 +10,7 @@ import 'package:dropzone_app/l10n/app_localizations.dart';
 import 'package:dropzone_app/presentation/bookings/booking_providers.dart';
 import 'package:dropzone_app/domain/entities/booking.dart';
 import 'package:dropzone_app/core/di/providers.dart';
+import 'package:dropzone_app/core/di/preferences_providers.dart';
 
 class BookingFlowScreen extends ConsumerStatefulWidget {
   const BookingFlowScreen({super.key});
@@ -49,7 +50,39 @@ class _BookingFlowScreenState extends ConsumerState<BookingFlowScreen> {
       notes = draft.notes;
       _pickedDate = draft.pickedDate;
       _pickedTime = draft.pickedTime;
+    } else {
+      // Pre-fill from saved user preferences if no draft exists.
+      _applyPreferences();
     }
+  }
+
+  /// Applies user preferences as defaults for pickup/dropoff/passengers.
+  void _applyPreferences() {
+    final prefsAsync = ref.read(userPreferencesProvider);
+    prefsAsync.whenData((prefs) {
+      if (prefs.defaultPickup != null && prefs.defaultPickup!.isNotEmpty) {
+        pickup = prefs.defaultPickup!;
+      }
+      if (prefs.defaultDropoff != null && prefs.defaultDropoff!.isNotEmpty) {
+        dropoff = prefs.defaultDropoff!;
+      }
+      if (prefs.defaultPassengers > 1) {
+        passengers = prefs.defaultPassengers;
+      }
+    });
+  }
+
+  /// Fills form state from the last booking for quick re-book.
+  void _applyLastBooking(Booking last) {
+    setState(() {
+      tripType = last.tripType;
+      pickup = last.pickup;
+      dropoff = last.dropoff;
+      passengers = last.passengers ?? 1;
+      notes = last.notes ?? '';
+      vehicleClass = last.vehicleClass;
+      currentStep = 0;
+    });
   }
 
   /// Persists the current field values to the draft provider.
@@ -144,7 +177,13 @@ class _BookingFlowScreenState extends ConsumerState<BookingFlowScreen> {
       appBar: AppBar(
         title: Text(localizations.bookingTitle),
       ),
-      body: Stepper(
+      body: Column(
+        children: [
+          // ── Quick Re-book Banner ─────────────────────────────────────────
+          _buildRebookBanner(),
+          // ── Booking Stepper ──────────────────────────────────────────────
+          Expanded(
+            child: Stepper(
         type: StepperType.vertical,
         currentStep: currentStep,
         onStepContinue: () async {
@@ -520,6 +559,70 @@ class _BookingFlowScreenState extends ConsumerState<BookingFlowScreen> {
           ),
         ],
       ),
+    ),
+  ],
+),
+    );
+  }
+
+  /// Builds a "Re-book last ride" banner if the user has a previous booking.
+  Widget _buildRebookBanner() {
+    final lastBookingAsync = ref.watch(lastBookingProvider);
+    return lastBookingAsync.when(
+      data: (lastBooking) {
+        if (lastBooking == null) return const SizedBox.shrink();
+        return Container(
+          margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+          child: Material(
+            borderRadius: BorderRadius.circular(12),
+            color: Theme.of(context).colorScheme.primaryContainer,
+            child: InkWell(
+              borderRadius: BorderRadius.circular(12),
+              onTap: () => _applyLastBooking(lastBooking),
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                child: Row(
+                  children: [
+                    Icon(
+                      Icons.replay_rounded,
+                      color: Theme.of(context).colorScheme.onPrimaryContainer,
+                    ),
+                    const SizedBox(width: 12),
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            'Re-book last ride',
+                            style: Theme.of(context).textTheme.titleSmall?.copyWith(
+                                  color: Theme.of(context).colorScheme.onPrimaryContainer,
+                                ),
+                          ),
+                          Text(
+                            '${lastBooking.pickup} → ${lastBooking.dropoff}',
+                            style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                                  color: Theme.of(context).colorScheme.onPrimaryContainer.withOpacity(0.7),
+                                ),
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                        ],
+                      ),
+                    ),
+                    Icon(
+                      Icons.arrow_forward_ios,
+                      size: 16,
+                      color: Theme.of(context).colorScheme.onPrimaryContainer,
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
+        );
+      },
+      loading: () => const SizedBox.shrink(),
+      error: (_, __) => const SizedBox.shrink(),
     );
   }
 }

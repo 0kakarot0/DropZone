@@ -85,6 +85,24 @@ class ApiBookingService {
         .toList();
   }
 
+  // ── GET /api/bookings/last ────────────────────────────────────────────────
+  Future<BookingResponseDto?> getLastBooking() async {
+    try {
+      final response = await _call(() => _dio.get<Map<String, dynamic>>(
+            '/api/bookings/last',
+          ));
+      return BookingResponseDto.fromJson(response.data!);
+    } on DioException catch (e) {
+      // 204 No Content = user has no bookings yet
+      if (e.response?.statusCode == 204) return null;
+      rethrow;
+    } catch (e) {
+      // NotFoundException means no bookings
+      if (e is NotFoundException) return null;
+      rethrow;
+    }
+  }
+
   // ── Error translation ──────────────────────────────────────────────────────
   Future<Response<T>> _call<T>(Future<Response<T>> Function() fn) async {
     try {

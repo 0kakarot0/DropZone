@@ -91,6 +91,15 @@ class HttpBookingRepository implements BookingRepository {
   }
 
   // ── DTO → Domain ───────────────────────────────────────────────────────────
+
+  // ── Last Booking ──────────────────────────────────────────────────────────
+  @override
+  Future<Booking?> getLastBooking() async {
+    final dto = await _service.getLastBooking();
+    if (dto == null) return null;
+    return _fromDto(dto);
+  }
+
   Booking _fromDto(BookingResponseDto dto) {
     return Booking(
       id: dto.id ?? -1,

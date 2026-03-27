@@ -149,4 +149,10 @@ class MockBookingRepository implements BookingRepository {
       ),
     ];
   }
+
+  @override
+  Future<Booking?> getLastBooking() async {
+    await Future<void>.delayed(const Duration(milliseconds: 200));
+    return _bookings.isNotEmpty ? _bookings.first : null;
+  }
 }
