@@ -40,6 +40,16 @@ class _BookingDetailScreenState extends ConsumerState<BookingDetailScreen> {
         return l.statusDriverAssigned;
       case BookingStatus.cancelled:
         return l.statusCancelled;
+      case BookingStatus.assigned:
+        return 'Driver Assigned';
+      case BookingStatus.driverEnRoute:
+        return 'Driver En Route';
+      case BookingStatus.arrived:
+        return 'Driver Arrived';
+      case BookingStatus.inProgress:
+        return 'In Progress';
+      case BookingStatus.completed:
+        return 'Completed';
     }
   }
 

@@ -28,6 +28,7 @@ class HttpBookingRepository implements BookingRepository {
         pickupTime: booking.dateTime,
         passengers: booking.passengers,
         notes: booking.notes,
+        paymentMethod: booking.paymentMethod,
       ),
     );
     return _fromDto(dto);
@@ -112,6 +113,8 @@ class HttpBookingRepository implements BookingRepository {
       notes: dto.notes,
       priceEstimateCents: dto.priceEstimateCents,
       currency: dto.currency,
+      paymentMethod: dto.paymentMethod,
+      driverId: dto.driverId,
     );
   }
 }

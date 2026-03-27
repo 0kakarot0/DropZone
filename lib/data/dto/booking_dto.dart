@@ -19,6 +19,8 @@ class BookingResponseDto {
     this.currency,
     this.createdAt,
     this.updatedAt,
+    this.driverId,
+    this.paymentMethod,
   });
 
   final int? id;
@@ -33,6 +35,8 @@ class BookingResponseDto {
   final String? currency;
   final DateTime? createdAt;
   final DateTime? updatedAt;
+  final int? driverId;
+  final String? paymentMethod;
 
   factory BookingResponseDto.fromJson(Map<String, dynamic> json) {
     return BookingResponseDto(
@@ -54,6 +58,8 @@ class BookingResponseDto {
       updatedAt: json['updatedAt'] != null
           ? DateTime.parse(json['updatedAt'] as String)
           : null,
+      driverId: (json['driverId'] as num?)?.toInt(),
+      paymentMethod: json['paymentMethod'] as String?,
     );
   }
 }
@@ -70,6 +76,7 @@ class CreateBookingRequestDto {
     required this.pickupTime,
     this.passengers,
     this.notes,
+    this.paymentMethod,
   });
 
   final String serviceType;
@@ -78,6 +85,7 @@ class CreateBookingRequestDto {
   final DateTime pickupTime;
   final int? passengers;
   final String? notes;
+  final String? paymentMethod;
 
   Map<String, dynamic> toJson() => {
         'serviceType': serviceType,
@@ -86,6 +94,7 @@ class CreateBookingRequestDto {
         'pickupTime': pickupTime.toUtc().toIso8601String(),
         if (passengers != null) 'passengers': passengers,
         if (notes != null && notes!.isNotEmpty) 'notes': notes,
+        if (paymentMethod != null) 'paymentMethod': paymentMethod,
       };
 }
 

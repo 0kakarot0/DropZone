@@ -8,6 +8,11 @@ enum BookingStatus {
   created,
   cancelled,
   rescheduled,
+  assigned,
+  driverEnRoute,
+  arrived,
+  inProgress,
+  completed,
 }
 
 // Client-side enums not on the server — kept for UX in booking flow.
@@ -63,6 +68,16 @@ extension BookingStatusApi on BookingStatus {
         return BookingStatus.cancelled;
       case 'RESCHEDULED':
         return BookingStatus.rescheduled;
+      case 'ASSIGNED':
+        return BookingStatus.assigned;
+      case 'DRIVER_EN_ROUTE':
+        return BookingStatus.driverEnRoute;
+      case 'ARRIVED':
+        return BookingStatus.arrived;
+      case 'IN_PROGRESS':
+        return BookingStatus.inProgress;
+      case 'COMPLETED':
+        return BookingStatus.completed;
       default:
         return BookingStatus.pendingPayment;
     }
@@ -86,6 +101,8 @@ class Booking {
     this.notes,
     this.priceEstimateCents,
     this.currency,
+    this.paymentMethod,
+    this.driverId,
   });
 
   /// Server-assigned integer ID. -1 when not yet persisted.
@@ -103,6 +120,12 @@ class Booking {
   final String? notes;
   final int? priceEstimateCents;
   final String? currency;
+
+  /// Payment method: CARD or CASH.
+  final String? paymentMethod;
+
+  /// Assigned driver ID (null if unassigned).
+  final int? driverId;
 
   /// Convenience: price in AED as double.
   double get priceAed =>

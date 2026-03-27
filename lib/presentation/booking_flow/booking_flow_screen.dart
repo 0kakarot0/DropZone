@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_stripe/flutter_stripe.dart' hide Card;
+import 'package:flutter_stripe/flutter_stripe.dart' hide Card, PaymentMethod;
 import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 import 'package:dropzone_app/data/services/payment_service.dart';
@@ -9,6 +9,7 @@ import 'package:dropzone_app/presentation/widgets/primary_button.dart';
 import 'package:dropzone_app/l10n/app_localizations.dart';
 import 'package:dropzone_app/presentation/bookings/booking_providers.dart';
 import 'package:dropzone_app/domain/entities/booking.dart';
+import 'package:dropzone_app/domain/entities/payment_method.dart';
 import 'package:dropzone_app/core/di/providers.dart';
 import 'package:dropzone_app/core/di/preferences_providers.dart';
 
@@ -27,6 +28,7 @@ class _BookingFlowScreenState extends ConsumerState<BookingFlowScreen> {
   String dropoff = '';
   int passengers = 1;
   String notes = '';
+  PaymentMethod _paymentMethod = PaymentMethod.card;
 
   DateTime? _pickedDate;
   TimeOfDay? _pickedTime;
@@ -187,12 +189,12 @@ class _BookingFlowScreenState extends ConsumerState<BookingFlowScreen> {
         type: StepperType.vertical,
         currentStep: currentStep,
         onStepContinue: () async {
-          if (currentStep < 5) {
+          if (currentStep < 6) {
             final nextStep = currentStep + 1;
             setState(() => currentStep = nextStep);
             _saveDraft();
-            // Trigger ONE estimate fetch when entering the summary step (index 5).
-            if (nextStep == 5) _fetchEstimateOnce();
+            // Trigger ONE estimate fetch when entering the summary step (index 6).
+            if (nextStep == 6) _fetchEstimateOnce();
             return;
           }
 
@@ -231,6 +233,7 @@ class _BookingFlowScreenState extends ConsumerState<BookingFlowScreen> {
               notes: notes.isNotEmpty ? notes : null,
               priceEstimateCents: _priceEstimate.value?.totalCents,
               currency: _priceEstimate.value?.currency ?? 'AED',
+              paymentMethod: _paymentMethod.apiValue,
             );
 
             // 1. Create the booking.
@@ -238,8 +241,23 @@ class _BookingFlowScreenState extends ConsumerState<BookingFlowScreen> {
             await analytics.trackEvent('booking_created', params: {
               'tripType': tripType.name,
               'vehicleClass': vehicleClass.name,
+              'paymentMethod': _paymentMethod.name,
             });
             if (!mounted) return;
+
+            // CASH bookings skip Stripe — they go straight to CONFIRMED.
+            if (_paymentMethod == PaymentMethod.cash) {
+              ref.invalidate(bookingsProvider);
+              ref.read(bookingDraftProvider.notifier).clear();
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(content: Text(localizations.bookingCreated)),
+              );
+              if (!mounted) return;
+              GoRouter.of(context).go('/bookings');
+              return;
+            }
+
+            // CARD bookings proceed with Stripe payment.
 
             // 2. Fetch a Stripe PaymentIntent for the new booking.
             final intentResult =
@@ -303,7 +321,7 @@ class _BookingFlowScreenState extends ConsumerState<BookingFlowScreen> {
           return Padding(
             padding: const EdgeInsets.only(top: 16),
             child: PrimaryButton(
-              label: currentStep == 5
+              label: currentStep == 6
                   ? localizations.confirmRequest
                   : localizations.continueLabel,
               onPressed: details.onStepContinue,
@@ -533,8 +551,50 @@ class _BookingFlowScreenState extends ConsumerState<BookingFlowScreen> {
               ],
             ),
           ),
+          // ── Step 6: Payment Method ─────────────────────────────────────
+          Step(
+            title: const Text('Payment Method'),
+            content: Column(
+              children: [
+                _SelectTile(
+                  label: '💳  Pay by Card',
+                  selected: _paymentMethod == PaymentMethod.card,
+                  onTap: () => setState(() => _paymentMethod = PaymentMethod.card),
+                ),
+                _SelectTile(
+                  label: '💵  Pay with Cash',
+                  selected: _paymentMethod == PaymentMethod.cash,
+                  onTap: () => setState(() => _paymentMethod = PaymentMethod.cash),
+                ),
+                if (_paymentMethod == PaymentMethod.cash)
+                  Container(
+                    margin: const EdgeInsets.only(top: 8),
+                    padding: const EdgeInsets.all(12),
+                    decoration: BoxDecoration(
+                      color: Theme.of(context).colorScheme.tertiaryContainer,
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    child: Row(
+                      children: [
+                        Icon(Icons.info_outline,
+                            color: Theme.of(context).colorScheme.onTertiaryContainer),
+                        const SizedBox(width: 8),
+                        Expanded(
+                          child: Text(
+                            'Pay the driver directly at the end of the ride.',
+                            style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                                  color: Theme.of(context).colorScheme.onTertiaryContainer,
+                                ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+              ],
+            ),
+          ),
 
-          // ── Step 6: Summary ────────────────────────────────────────────────
+          // ── Step 7: Summary ────────────────────────────────────────────────
           Step(
             title: Text(localizations.summary),
             content: Column(
