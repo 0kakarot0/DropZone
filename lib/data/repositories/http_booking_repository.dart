@@ -91,8 +91,6 @@ class HttpBookingRepository implements BookingRepository {
         .toList();
   }
 
-  // ── DTO → Domain ───────────────────────────────────────────────────────────
-
   // ── Last Booking ──────────────────────────────────────────────────────────
   @override
   Future<Booking?> getLastBooking() async {
@@ -101,6 +99,7 @@ class HttpBookingRepository implements BookingRepository {
     return _fromDto(dto);
   }
 
+  // ── DTO → Domain ───────────────────────────────────────────────────────────
   Booking _fromDto(BookingResponseDto dto) {
     return Booking(
       id: dto.id ?? -1,
