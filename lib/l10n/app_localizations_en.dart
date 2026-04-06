@@ -1,3 +1,5 @@
+// ignore: unused_import
+import 'package:intl/intl.dart' as intl;
 import 'app_localizations.dart';
 
 // ignore_for_file: type=lint
@@ -160,6 +162,53 @@ class AppLocalizationsEn extends AppLocalizations {
   String get profileSavedMessage => 'Your profile has been updated.';
 
   @override
+  String get fullNameLabel => 'Full name';
+
+  @override
+  String get emailLabel => 'Email';
+
+  @override
+  String get bookingPreferencesTitle => 'Booking preferences';
+
+  @override
+  String get bookingPreferencesSubtitle =>
+      'Set defaults that pre-fill your booking form.';
+
+  @override
+  String get defaultPickupHint => 'Default pickup location';
+
+  @override
+  String get defaultDropoffHint => 'Default drop-off location';
+
+  @override
+  String get defaultPassengersLabel => 'Default passengers: ';
+
+  @override
+  String get savePreferences => 'Save preferences';
+
+  @override
+  String get preferencesSaved => 'Preferences saved';
+
+  @override
+  String preferencesSaveError(Object error) {
+    return 'Could not save preferences: $error';
+  }
+
+  @override
+  String profileSaveError(Object error) {
+    return 'Could not save profile: $error';
+  }
+
+  @override
+  String profileLoadError(Object error) {
+    return 'Could not load profile: $error';
+  }
+
+  @override
+  String get profileFieldsManagedNotice =>
+      'Company details, cost center, rider notes, and saved passengers are not editable from the rider app yet.';
+
+  @override
   String get upcoming => 'Upcoming';
 
   @override
@@ -193,7 +242,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get policyTitle => 'Cancellation policy';
 
   @override
-  String get policyBody => 'Free cancellation up to 2 hours before pickup. Fees may apply afterwards.';
+  String get policyBody =>
+      'Free cancellation up to 2 hours before pickup. Fees may apply afterwards.';
 
   @override
   String get reschedule => 'Reschedule';
@@ -205,7 +255,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get cancelConfirmTitle => 'Cancel booking?';
 
   @override
-  String get cancelConfirmMessage => 'Are you sure you want to cancel this booking?';
+  String get cancelConfirmMessage =>
+      'Are you sure you want to cancel this booking?';
 
   @override
   String get keepBooking => 'Keep booking';
@@ -280,10 +331,12 @@ class AppLocalizationsEn extends AppLocalizations {
   String get paymentFailedTitle => 'Payment failed';
 
   @override
-  String get paymentFailedMessage => 'We couldn’t process the payment. Please try again later.';
+  String get paymentFailedMessage =>
+      'We couldn’t process the payment. Please try again later.';
 
   @override
-  String get paymentBookingConfirmed => 'Payment successful! Booking confirmed.';
+  String get paymentBookingConfirmed =>
+      'Payment successful! Booking confirmed.';
 
   @override
   String paymentFailedError(Object error) {
@@ -362,9 +415,6 @@ class AppLocalizationsEn extends AppLocalizations {
   String get saveFlightInfo => 'Save flight details';
 
   @override
-  String get flightSaveUnavailableMessage => 'Flight detail saving is not available in the rider app yet.';
-
-  @override
   String get contactDriverTitle => 'Contact driver';
 
   @override
@@ -389,7 +439,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get maskedCallUnavailableTitle => 'Masked calling unavailable';
 
   @override
-  String get maskedCallUnavailableMessage => 'Masked calling is not available from the rider app yet.';
+  String get maskedCallUnavailableMessage =>
+      'Masked calling is not available from the rider app yet.';
 
   @override
   String get notificationArriving => 'Driver arriving';
@@ -431,13 +482,16 @@ class AppLocalizationsEn extends AppLocalizations {
   String get issueSubmittedTitle => 'Issue submitted';
 
   @override
-  String get issueSubmittedMessage => 'Thanks — our team will get back to you shortly.';
+  String get issueSubmittedMessage =>
+      'Thanks — our team will get back to you shortly.';
 
   @override
-  String get supportSubmissionUnavailableTitle => 'Support submission unavailable';
+  String get supportSubmissionUnavailableTitle =>
+      'Support submission unavailable';
 
   @override
-  String get supportSubmissionUnavailableMessage => 'Issue submission is not available from the rider app yet. Please use the listed help topics or contact operations directly.';
+  String get supportSubmissionUnavailableMessage =>
+      'Issue submission is not available from the rider app yet. Please use the listed help topics or contact operations directly.';
 
   @override
   String get dismissLabel => 'Dismiss';
@@ -464,7 +518,12 @@ class AppLocalizationsEn extends AppLocalizations {
   String get meetGreetTitle => 'Meet & greet';
 
   @override
-  String get meetGreetBody => 'Your driver will wait at arrivals with your name sign.';
+  String get meetGreetBody =>
+      'Your driver will wait at arrivals with your name sign.';
+
+  @override
+  String get flightSaveUnavailableMessage =>
+      'Flight detail saving is not available in the rider app yet.';
 
   @override
   String get selectTime => 'Select time';
@@ -479,7 +538,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get deleteBookingTitle => 'Delete booking?';
 
   @override
-  String get deleteBookingMessage => 'This booking will be permanently removed.';
+  String get deleteBookingMessage =>
+      'This booking will be permanently removed.';
 
   @override
   String get confirmDelete => 'Delete';
@@ -489,51 +549,6 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get rescheduleSuccess => 'Booking rescheduled successfully';
-
-  @override
-  String get fullNameLabel => 'Full name';
-
-  @override
-  String get emailLabel => 'Email';
-
-  @override
-  String get bookingPreferencesTitle => 'Booking preferences';
-
-  @override
-  String get bookingPreferencesSubtitle => 'Set defaults that pre-fill your booking form.';
-
-  @override
-  String get defaultPickupHint => 'Default pickup location';
-
-  @override
-  String get defaultDropoffHint => 'Default drop-off location';
-
-  @override
-  String get defaultPassengersLabel => 'Default passengers: ';
-
-  @override
-  String get savePreferences => 'Save preferences';
-
-  @override
-  String get preferencesSaved => 'Preferences saved';
-
-  @override
-  String preferencesSaveError(Object error) {
-    return 'Could not save preferences: $error';
-  }
-
-  @override
-  String profileSaveError(Object error) {
-    return 'Could not save profile: $error';
-  }
-
-  @override
-  String profileLoadError(Object error) {
-    return 'Could not load profile: $error';
-  }
-
-  @override
-  String get profileFieldsManagedNotice => 'Company details, cost center, rider notes, and saved passengers are not editable from the rider app yet.';
 
   @override
   String get authEmailLabel => 'Email';
@@ -565,7 +580,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get leaveBookingTitle => 'Leave booking?';
 
   @override
-  String get leaveBookingMessage => 'You have unsaved booking details. Your progress will be saved as a draft so you can continue later.';
+  String get leaveBookingMessage =>
+      'You have unsaved booking details. Your progress will be saved as a draft so you can continue later.';
 
   @override
   String get continueBooking => 'Continue booking';
@@ -592,7 +608,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get noTrackingAvailable => 'No tracking available';
 
   @override
-  String get trackingAvailableAfterAssignment => 'Tracking is available once a driver is assigned';
+  String get trackingAvailableAfterAssignment =>
+      'Tracking is available once a driver is assigned';
 
   @override
   String get trackingStatusAssigned => 'Driver assigned, waiting for pickup';
@@ -637,6 +654,16 @@ class AppLocalizationsEn extends AppLocalizations {
   String get pickDropoffLocationTitle => 'Pick drop-off location';
 
   @override
+  String get mapPickerInstruction => 'Move the map to choose a location';
+
+  @override
+  String get mapPickerCoordinatesOnlyHint =>
+      'Coordinates will be used until address lookup is connected.';
+
+  @override
+  String get mapPickerConfirmLocation => 'Confirm location';
+
+  @override
   String get selectDateFirst => 'Select a date first';
 
   @override
@@ -652,13 +679,16 @@ class AppLocalizationsEn extends AppLocalizations {
   String get payWithCash => 'Pay with cash';
 
   @override
-  String get cashPaymentHint => 'Pay the driver directly at the end of the ride.';
+  String get cashPaymentHint =>
+      'Pay the driver directly at the end of the ride.';
 
   @override
-  String get priceEstimateLoadingMessage => 'Price estimate is still loading, please wait.';
+  String get priceEstimateLoadingMessage =>
+      'Price estimate is still loading, please wait.';
 
   @override
-  String get priceEstimateRetryMessage => 'Could not load price estimate, retrying.';
+  String get priceEstimateRetryMessage =>
+      'Could not load price estimate, retrying.';
 
   @override
   String bookingCompleteError(Object error) {

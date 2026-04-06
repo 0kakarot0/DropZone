@@ -654,6 +654,16 @@ class AppLocalizationsEn extends AppLocalizations {
   String get pickDropoffLocationTitle => 'Pick drop-off location';
 
   @override
+  String get mapPickerInstruction => 'Move the map to choose a location';
+
+  @override
+  String get mapPickerCoordinatesOnlyHint =>
+      'Coordinates will be used until address lookup is connected.';
+
+  @override
+  String get mapPickerConfirmLocation => 'Confirm location';
+
+  @override
   String get selectDateFirst => 'Select a date first';
 
   @override

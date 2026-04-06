@@ -1310,6 +1310,24 @@ abstract class AppLocalizations {
   /// **'Pick drop-off location'**
   String get pickDropoffLocationTitle;
 
+  /// No description provided for @mapPickerInstruction.
+  ///
+  /// In en, this message translates to:
+  /// **'Move the map to choose a location'**
+  String get mapPickerInstruction;
+
+  /// No description provided for @mapPickerCoordinatesOnlyHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Coordinates will be used until address lookup is connected.'**
+  String get mapPickerCoordinatesOnlyHint;
+
+  /// No description provided for @mapPickerConfirmLocation.
+  ///
+  /// In en, this message translates to:
+  /// **'Confirm location'**
+  String get mapPickerConfirmLocation;
+
   /// No description provided for @selectDateFirst.
   ///
   /// In en, this message translates to:

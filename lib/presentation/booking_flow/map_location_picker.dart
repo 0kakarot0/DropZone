@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:dropzone_app/l10n/app_localizations.dart';
 
 /// Result returned from the [MapLocationPicker].
 class PickedLocation {
@@ -47,7 +48,7 @@ class _MapLocationPickerState extends State<MapLocationPicker> {
   bool _isMoving = false;
 
   // Address text — shows coordinates until a geocoding API is wired.
-  String _addressText = 'Move map to select location';
+  String? _addressText;
 
   @override
   void initState() {
@@ -77,10 +78,11 @@ class _MapLocationPickerState extends State<MapLocationPicker> {
   }
 
   void _onConfirm() {
+    final localizations = AppLocalizations.of(context);
     Navigator.pop(
       context,
       PickedLocation(
-        address: _addressText,
+        address: _addressText ?? localizations.mapPickerInstruction,
         latitude: _centre.latitude,
         longitude: _centre.longitude,
       ),
@@ -89,8 +91,10 @@ class _MapLocationPickerState extends State<MapLocationPicker> {
 
   @override
   Widget build(BuildContext context) {
+    final localizations = AppLocalizations.of(context);
     final theme = Theme.of(context);
     final isDark = theme.brightness == Brightness.dark;
+    final addressText = _addressText ?? localizations.mapPickerInstruction;
 
     return Scaffold(
       extendBodyBehindAppBar: true,
@@ -277,7 +281,7 @@ class _MapLocationPickerState extends State<MapLocationPicker> {
                       const SizedBox(width: 8),
                       Expanded(
                         child: Text(
-                          _addressText,
+                          addressText,
                           style: TextStyle(
                             fontSize: 14,
                             color: isDark ? Colors.white70 : Colors.black87,
@@ -287,6 +291,13 @@ class _MapLocationPickerState extends State<MapLocationPicker> {
                         ),
                       ),
                     ],
+                  ),
+                  const SizedBox(height: 8),
+                  Text(
+                    localizations.mapPickerCoordinatesOnlyHint,
+                    style: theme.textTheme.bodySmall?.copyWith(
+                      color: isDark ? Colors.white54 : Colors.black54,
+                    ),
                   ),
                   const SizedBox(height: 16),
                   // Confirm button
@@ -303,8 +314,8 @@ class _MapLocationPickerState extends State<MapLocationPicker> {
                         ),
                         elevation: 0,
                       ),
-                      child: const Text(
-                        'Confirm Location',
+                      child: Text(
+                        localizations.mapPickerConfirmLocation,
                         style: TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.w600,

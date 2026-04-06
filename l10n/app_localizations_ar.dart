@@ -649,6 +649,16 @@ class AppLocalizationsAr extends AppLocalizations {
   String get pickDropoffLocationTitle => 'اختر موقع الوصول';
 
   @override
+  String get mapPickerInstruction => 'حرّك الخريطة لاختيار الموقع';
+
+  @override
+  String get mapPickerCoordinatesOnlyHint =>
+      'سيتم استخدام الإحداثيات إلى أن يتم ربط البحث عن العنوان.';
+
+  @override
+  String get mapPickerConfirmLocation => 'تأكيد الموقع';
+
+  @override
   String get selectDateFirst => 'اختر التاريخ أولاً';
 
   @override

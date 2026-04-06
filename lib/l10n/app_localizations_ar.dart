@@ -1,3 +1,5 @@
+// ignore: unused_import
+import 'package:intl/intl.dart' as intl;
 import 'app_localizations.dart';
 
 // ignore_for_file: type=lint
@@ -160,6 +162,53 @@ class AppLocalizationsAr extends AppLocalizations {
   String get profileSavedMessage => 'تم تحديث ملفك الشخصي.';
 
   @override
+  String get fullNameLabel => 'الاسم الكامل';
+
+  @override
+  String get emailLabel => 'البريد الإلكتروني';
+
+  @override
+  String get bookingPreferencesTitle => 'تفضيلات الحجز';
+
+  @override
+  String get bookingPreferencesSubtitle =>
+      'اضبط القيم الافتراضية لتعبئة نموذج الحجز مسبقاً.';
+
+  @override
+  String get defaultPickupHint => 'موقع الانطلاق الافتراضي';
+
+  @override
+  String get defaultDropoffHint => 'موقع الوصول الافتراضي';
+
+  @override
+  String get defaultPassengersLabel => 'الركاب الافتراضيون: ';
+
+  @override
+  String get savePreferences => 'حفظ التفضيلات';
+
+  @override
+  String get preferencesSaved => 'تم حفظ التفضيلات';
+
+  @override
+  String preferencesSaveError(Object error) {
+    return 'تعذر حفظ التفضيلات: $error';
+  }
+
+  @override
+  String profileSaveError(Object error) {
+    return 'تعذر حفظ الملف الشخصي: $error';
+  }
+
+  @override
+  String profileLoadError(Object error) {
+    return 'تعذر تحميل الملف الشخصي: $error';
+  }
+
+  @override
+  String get profileFieldsManagedNotice =>
+      'تفاصيل الشركة ومركز التكلفة وملاحظات الراكب والركاب المحفوظون غير قابلة للتعديل من تطبيق الراكب حالياً.';
+
+  @override
   String get upcoming => 'القادمة';
 
   @override
@@ -193,7 +242,8 @@ class AppLocalizationsAr extends AppLocalizations {
   String get policyTitle => 'سياسة الإلغاء';
 
   @override
-  String get policyBody => 'إلغاء مجاني حتى ساعتين قبل الموعد. قد تُطبّق رسوم بعد ذلك.';
+  String get policyBody =>
+      'إلغاء مجاني حتى ساعتين قبل الموعد. قد تُطبّق رسوم بعد ذلك.';
 
   @override
   String get reschedule => 'إعادة جدولة';
@@ -362,9 +412,6 @@ class AppLocalizationsAr extends AppLocalizations {
   String get saveFlightInfo => 'حفظ تفاصيل الرحلة';
 
   @override
-  String get flightSaveUnavailableMessage => 'حفظ تفاصيل الرحلة غير متاح في تطبيق الراكب حالياً.';
-
-  @override
   String get contactDriverTitle => 'التواصل مع السائق';
 
   @override
@@ -389,7 +436,8 @@ class AppLocalizationsAr extends AppLocalizations {
   String get maskedCallUnavailableTitle => 'المكالمة المخفية غير متاحة';
 
   @override
-  String get maskedCallUnavailableMessage => 'المكالمة المخفية غير متاحة من تطبيق الراكب حالياً.';
+  String get maskedCallUnavailableMessage =>
+      'المكالمة المخفية غير متاحة من تطبيق الراكب حالياً.';
 
   @override
   String get notificationArriving => 'السائق في الطريق';
@@ -437,7 +485,8 @@ class AppLocalizationsAr extends AppLocalizations {
   String get supportSubmissionUnavailableTitle => 'إرسال طلب الدعم غير متاح';
 
   @override
-  String get supportSubmissionUnavailableMessage => 'إرسال المشاكل غير متاح من تطبيق الراكب حالياً. يرجى استخدام مواضيع المساعدة المعروضة أو التواصل مع فريق العمليات مباشرة.';
+  String get supportSubmissionUnavailableMessage =>
+      'إرسال المشاكل غير متاح من تطبيق الراكب حالياً. يرجى استخدام مواضيع المساعدة المعروضة أو التواصل مع فريق العمليات مباشرة.';
 
   @override
   String get dismissLabel => 'إغلاق';
@@ -467,6 +516,10 @@ class AppLocalizationsAr extends AppLocalizations {
   String get meetGreetBody => 'سيكون السائق بانتظارك عند الوصول مع لوحة باسمك.';
 
   @override
+  String get flightSaveUnavailableMessage =>
+      'حفظ تفاصيل الرحلة غير متاح في تطبيق الراكب حالياً.';
+
+  @override
   String get selectTime => 'اختر الوقت';
 
   @override
@@ -491,51 +544,6 @@ class AppLocalizationsAr extends AppLocalizations {
   String get rescheduleSuccess => 'تم إعادة جدولة الحجز بنجاح';
 
   @override
-  String get fullNameLabel => 'الاسم الكامل';
-
-  @override
-  String get emailLabel => 'البريد الإلكتروني';
-
-  @override
-  String get bookingPreferencesTitle => 'تفضيلات الحجز';
-
-  @override
-  String get bookingPreferencesSubtitle => 'اضبط القيم الافتراضية لتعبئة نموذج الحجز مسبقاً.';
-
-  @override
-  String get defaultPickupHint => 'موقع الانطلاق الافتراضي';
-
-  @override
-  String get defaultDropoffHint => 'موقع الوصول الافتراضي';
-
-  @override
-  String get defaultPassengersLabel => 'الركاب الافتراضيون: ';
-
-  @override
-  String get savePreferences => 'حفظ التفضيلات';
-
-  @override
-  String get preferencesSaved => 'تم حفظ التفضيلات';
-
-  @override
-  String preferencesSaveError(Object error) {
-    return 'تعذر حفظ التفضيلات: $error';
-  }
-
-  @override
-  String profileSaveError(Object error) {
-    return 'تعذر حفظ الملف الشخصي: $error';
-  }
-
-  @override
-  String profileLoadError(Object error) {
-    return 'تعذر تحميل الملف الشخصي: $error';
-  }
-
-  @override
-  String get profileFieldsManagedNotice => 'تفاصيل الشركة ومركز التكلفة وملاحظات الراكب والركاب المحفوظون غير قابلة للتعديل من تطبيق الراكب حالياً.';
-
-  @override
   String get authEmailLabel => 'البريد الإلكتروني';
 
   @override
@@ -551,10 +559,12 @@ class AppLocalizationsAr extends AppLocalizations {
   String get authFillTestCredentials => 'اضغط لملء بيانات الاختبار';
 
   @override
-  String get authMissingCredentialsSignIn => 'أدخل البريد الإلكتروني وكلمة المرور.';
+  String get authMissingCredentialsSignIn =>
+      'أدخل البريد الإلكتروني وكلمة المرور.';
 
   @override
-  String get authMissingCredentialsCreate => 'أدخل البريد الإلكتروني وكلمة المرور أولاً.';
+  String get authMissingCredentialsCreate =>
+      'أدخل البريد الإلكتروني وكلمة المرور أولاً.';
 
   @override
   String authGenericError(Object error) {
@@ -565,7 +575,8 @@ class AppLocalizationsAr extends AppLocalizations {
   String get leaveBookingTitle => 'مغادرة الحجز؟';
 
   @override
-  String get leaveBookingMessage => 'لديك تفاصيل حجز غير محفوظة. سيتم حفظ التقدم كمسودة لتتمكن من المتابعة لاحقاً.';
+  String get leaveBookingMessage =>
+      'لديك تفاصيل حجز غير محفوظة. سيتم حفظ التقدم كمسودة لتتمكن من المتابعة لاحقاً.';
 
   @override
   String get continueBooking => 'متابعة الحجز';
@@ -592,7 +603,8 @@ class AppLocalizationsAr extends AppLocalizations {
   String get noTrackingAvailable => 'لا يوجد تتبع متاح';
 
   @override
-  String get trackingAvailableAfterAssignment => 'يصبح التتبع متاحاً بعد تعيين سائق';
+  String get trackingAvailableAfterAssignment =>
+      'يصبح التتبع متاحاً بعد تعيين سائق';
 
   @override
   String get trackingStatusAssigned => 'تم تعيين السائق، بانتظار الانطلاق';
@@ -637,6 +649,16 @@ class AppLocalizationsAr extends AppLocalizations {
   String get pickDropoffLocationTitle => 'اختر موقع الوصول';
 
   @override
+  String get mapPickerInstruction => 'حرّك الخريطة لاختيار الموقع';
+
+  @override
+  String get mapPickerCoordinatesOnlyHint =>
+      'سيتم استخدام الإحداثيات إلى أن يتم ربط البحث عن العنوان.';
+
+  @override
+  String get mapPickerConfirmLocation => 'تأكيد الموقع';
+
+  @override
   String get selectDateFirst => 'اختر التاريخ أولاً';
 
   @override
@@ -655,10 +677,12 @@ class AppLocalizationsAr extends AppLocalizations {
   String get cashPaymentHint => 'ادفع للسائق مباشرة عند نهاية الرحلة.';
 
   @override
-  String get priceEstimateLoadingMessage => 'لا يزال السعر التقديري قيد التحميل، يرجى الانتظار.';
+  String get priceEstimateLoadingMessage =>
+      'لا يزال السعر التقديري قيد التحميل، يرجى الانتظار.';
 
   @override
-  String get priceEstimateRetryMessage => 'تعذر تحميل السعر التقديري، تتم إعادة المحاولة.';
+  String get priceEstimateRetryMessage =>
+      'تعذر تحميل السعر التقديري، تتم إعادة المحاولة.';
 
   @override
   String bookingCompleteError(Object error) {
