@@ -7,6 +7,7 @@ import 'package:dropzone_app/presentation/bookings/booking_providers.dart';
 import 'package:dropzone_app/presentation/bookings/booking_detail_screen.dart';
 import 'package:dropzone_app/domain/entities/booking.dart';
 import 'package:dropzone_app/presentation/widgets/skeleton_card.dart';
+import 'package:dropzone_app/presentation/widgets/booking_location_summary.dart';
 import 'package:dropzone_app/l10n/app_localizations.dart';
 
 class BookingsScreen extends ConsumerWidget {
@@ -230,8 +231,19 @@ class _BookingCardState extends ConsumerState<_BookingCard> {
 
             // ── Booking details ───────────────────────────────────────────
             ListTile(
-              title: Text('#${booking.id} · ${booking.pickup} → ${booking.dropoff}'),
-              subtitle: Text(dateFmt.format(booking.dateTime.toLocal())),
+              title: Text('#${booking.id}'),
+              subtitle: Padding(
+                padding: const EdgeInsets.only(top: 8),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    BookingLocationSummary(booking: booking, compact: true),
+                    const SizedBox(height: 8),
+                    Text(dateFmt.format(booking.dateTime.toLocal())),
+                  ],
+                ),
+              ),
               trailing: _StatusChip(status: booking.status),
             ),
           ],

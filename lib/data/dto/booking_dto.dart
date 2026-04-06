@@ -107,19 +107,28 @@ class CreateBookingRequestDto {
   final double? dropoffLatitude;
   final double? dropoffLongitude;
 
-  Map<String, dynamic> toJson() => {
-        'serviceType': serviceType,
-        'pickupLocation': pickupLocation,
-        'dropoffLocation': dropoffLocation,
-        'pickupTime': pickupTime.toUtc().toIso8601String(),
-        if (passengers != null) 'passengers': passengers,
-        if (notes != null && notes!.isNotEmpty) 'notes': notes,
-        if (paymentMethod != null) 'paymentMethod': paymentMethod,
-        if (pickupLatitude != null) 'pickupLatitude': pickupLatitude,
-        if (pickupLongitude != null) 'pickupLongitude': pickupLongitude,
-        if (dropoffLatitude != null) 'dropoffLatitude': dropoffLatitude,
-        if (dropoffLongitude != null) 'dropoffLongitude': dropoffLongitude,
-      };
+  Map<String, dynamic> toJson() {
+    final json = <String, dynamic>{
+      'serviceType': serviceType,
+      'pickupLocation': pickupLocation,
+      'dropoffLocation': dropoffLocation,
+      'pickupTime': pickupTime.toUtc().toIso8601String(),
+      if (passengers != null) 'passengers': passengers,
+      if (notes != null && notes!.isNotEmpty) 'notes': notes,
+      if (paymentMethod != null) 'paymentMethod': paymentMethod,
+    };
+
+    if (pickupLatitude != null && pickupLongitude != null) {
+      json['pickupLatitude'] = pickupLatitude;
+      json['pickupLongitude'] = pickupLongitude;
+    }
+    if (dropoffLatitude != null && dropoffLongitude != null) {
+      json['dropoffLatitude'] = dropoffLatitude;
+      json['dropoffLongitude'] = dropoffLongitude;
+    }
+
+    return json;
+  }
 }
 
 // ─────────────────────────────────────────────────────────────────────────────

@@ -6,6 +6,7 @@ import 'package:dropzone_app/presentation/widgets/primary_button.dart';
 import 'package:dropzone_app/l10n/app_localizations.dart';
 import 'package:dropzone_app/presentation/bookings/booking_providers.dart';
 import 'package:dropzone_app/presentation/tracking/trip_tracking_screen.dart';
+import 'package:dropzone_app/presentation/widgets/booking_location_summary.dart';
 
 // ─────────────────────────────────────────────────────────────────────────────
 // BookingDetailScreen
@@ -130,13 +131,32 @@ class _BookingDetailScreenState extends ConsumerState<BookingDetailScreen> {
         padding: const EdgeInsets.all(20),
         children: [
           Card(
-            child: ListTile(
-              title: Text('#${_booking.id}'),
-              subtitle: Text('${_booking.pickup} → ${_booking.dropoff}'),
-              trailing: Text(
-                _booking.priceEstimateCents != null
-                    ? 'AED ${_booking.priceAed.toStringAsFixed(0)}'
-                    : '',
+            child: Padding(
+              padding: const EdgeInsets.all(16),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          '#${_booking.id}',
+                          style: theme.textTheme.titleMedium,
+                        ),
+                        const SizedBox(height: 12),
+                        BookingLocationSummary(booking: _booking),
+                      ],
+                    ),
+                  ),
+                  const SizedBox(width: 12),
+                  Text(
+                    _booking.priceEstimateCents != null
+                        ? 'AED ${_booking.priceAed.toStringAsFixed(0)}'
+                        : '',
+                    style: theme.textTheme.titleSmall,
+                  ),
+                ],
               ),
             ),
           ),

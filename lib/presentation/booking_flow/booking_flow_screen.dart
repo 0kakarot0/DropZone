@@ -100,6 +100,8 @@ class _BookingFlowScreenState extends ConsumerState<BookingFlowScreen> {
 
   /// Persists the current field values to the draft provider.
   void _saveDraft() {
+    final hasCompletePickupCoords = _pickupLat != null && _pickupLng != null;
+    final hasCompleteDropoffCoords = _dropoffLat != null && _dropoffLng != null;
     ref.read(bookingDraftProvider.notifier).update((_) => BookingDraft(
           currentStep: currentStep,
           tripType: tripType,
@@ -110,10 +112,10 @@ class _BookingFlowScreenState extends ConsumerState<BookingFlowScreen> {
           notes: notes,
           pickedDate: _pickedDate,
           pickedTime: _pickedTime,
-          pickupLatitude: _pickupLat,
-          pickupLongitude: _pickupLng,
-          dropoffLatitude: _dropoffLat,
-          dropoffLongitude: _dropoffLng,
+          pickupLatitude: hasCompletePickupCoords ? _pickupLat : null,
+          pickupLongitude: hasCompletePickupCoords ? _pickupLng : null,
+          dropoffLatitude: hasCompleteDropoffCoords ? _dropoffLat : null,
+          dropoffLongitude: hasCompleteDropoffCoords ? _dropoffLng : null,
         ));
   }
 
@@ -242,6 +244,11 @@ class _BookingFlowScreenState extends ConsumerState<BookingFlowScreen> {
             final analytics = ref.read(analyticsProvider);
             final paymentSvc = ref.read(paymentServiceProvider);
 
+            final hasCompletePickupCoords =
+                _pickupLat != null && _pickupLng != null;
+            final hasCompleteDropoffCoords =
+                _dropoffLat != null && _dropoffLng != null;
+
              final booking = Booking(
               id: -1,
               tripType: tripType,
@@ -255,10 +262,10 @@ class _BookingFlowScreenState extends ConsumerState<BookingFlowScreen> {
               priceEstimateCents: _priceEstimate.value?.totalCents,
               currency: _priceEstimate.value?.currency ?? 'AED',
               paymentMethod: _paymentMethod.apiValue,
-              pickupLatitude: _pickupLat,
-              pickupLongitude: _pickupLng,
-              dropoffLatitude: _dropoffLat,
-              dropoffLongitude: _dropoffLng,
+              pickupLatitude: hasCompletePickupCoords ? _pickupLat : null,
+              pickupLongitude: hasCompletePickupCoords ? _pickupLng : null,
+              dropoffLatitude: hasCompleteDropoffCoords ? _dropoffLat : null,
+              dropoffLongitude: hasCompleteDropoffCoords ? _dropoffLng : null,
             );
 
             // 1. Create the booking.
@@ -423,10 +430,14 @@ class _BookingFlowScreenState extends ConsumerState<BookingFlowScreen> {
                     ),
                   ),
                   controller: TextEditingController(text: pickup),
-                  onChanged: (v) => pickup = v,
+                  onChanged: (v) {
+                    pickup = v;
+                    _pickupLat = null;
+                    _pickupLng = null;
+                  },
                 ),
                 const SizedBox(height: 4),
-                if (_pickupLat != null)
+                if (_pickupLat != null && _pickupLng != null)
                   Padding(
                     padding: const EdgeInsets.only(left: 4),
                     child: Row(
@@ -471,10 +482,14 @@ class _BookingFlowScreenState extends ConsumerState<BookingFlowScreen> {
                     ),
                   ),
                   controller: TextEditingController(text: dropoff),
-                  onChanged: (v) => dropoff = v,
+                  onChanged: (v) {
+                    dropoff = v;
+                    _dropoffLat = null;
+                    _dropoffLng = null;
+                  },
                 ),
                 const SizedBox(height: 4),
-                if (_dropoffLat != null)
+                if (_dropoffLat != null && _dropoffLng != null)
                   Padding(
                     padding: const EdgeInsets.only(left: 4),
                     child: Row(
