@@ -27,6 +27,8 @@ class _BookingFlowScreenState extends ConsumerState<BookingFlowScreen> {
   VehicleClass vehicleClass = VehicleClass.sedan;
   String pickup = '';
   String dropoff = '';
+  late final TextEditingController _pickupController;
+  late final TextEditingController _dropoffController;
   int passengers = 1;
   String notes = '';
   PaymentMethod _paymentMethod = PaymentMethod.card;
@@ -47,6 +49,9 @@ class _BookingFlowScreenState extends ConsumerState<BookingFlowScreen> {
   @override
   void initState() {
     super.initState();
+    _pickupController = TextEditingController();
+    _dropoffController = TextEditingController();
+
     // Restore any previously saved draft so the user doesn't lose progress.
     final draft = ref.read(bookingDraftProvider);
     if (draft.hasProgress) {
@@ -67,6 +72,16 @@ class _BookingFlowScreenState extends ConsumerState<BookingFlowScreen> {
       // Pre-fill from saved user preferences if no draft exists.
       _applyPreferences();
     }
+
+    _pickupController.text = pickup;
+    _dropoffController.text = dropoff;
+  }
+
+  @override
+  void dispose() {
+    _pickupController.dispose();
+    _dropoffController.dispose();
+    super.dispose();
   }
 
   /// Applies user preferences as defaults for pickup/dropoff/passengers.
@@ -75,9 +90,11 @@ class _BookingFlowScreenState extends ConsumerState<BookingFlowScreen> {
     prefsAsync.whenData((prefs) {
       if (prefs.defaultPickup != null && prefs.defaultPickup!.isNotEmpty) {
         pickup = prefs.defaultPickup!;
+        _pickupController.text = pickup;
       }
       if (prefs.defaultDropoff != null && prefs.defaultDropoff!.isNotEmpty) {
         dropoff = prefs.defaultDropoff!;
+        _dropoffController.text = dropoff;
       }
       if (prefs.defaultPassengers > 1) {
         passengers = prefs.defaultPassengers;
@@ -91,6 +108,8 @@ class _BookingFlowScreenState extends ConsumerState<BookingFlowScreen> {
       tripType = last.tripType;
       pickup = last.pickup;
       dropoff = last.dropoff;
+      _pickupController.text = pickup;
+      _dropoffController.text = dropoff;
       passengers = last.passengers ?? 1;
       notes = last.notes ?? '';
       vehicleClass = last.vehicleClass;
@@ -422,6 +441,7 @@ class _BookingFlowScreenState extends ConsumerState<BookingFlowScreen> {
                         if (result != null) {
                           setState(() {
                             pickup = result.address;
+                            _pickupController.text = pickup;
                             _pickupLat = result.latitude;
                             _pickupLng = result.longitude;
                           });
@@ -429,11 +449,19 @@ class _BookingFlowScreenState extends ConsumerState<BookingFlowScreen> {
                       },
                     ),
                   ),
-                  controller: TextEditingController(text: pickup),
+                  controller: _pickupController,
                   onChanged: (v) {
+                    final shouldClearCoords =
+                        _pickupLat != null || _pickupLng != null;
+                    if (shouldClearCoords) {
+                      setState(() {
+                        pickup = v;
+                        _pickupLat = null;
+                        _pickupLng = null;
+                      });
+                      return;
+                    }
                     pickup = v;
-                    _pickupLat = null;
-                    _pickupLng = null;
                   },
                 ),
                 const SizedBox(height: 4),
@@ -474,6 +502,7 @@ class _BookingFlowScreenState extends ConsumerState<BookingFlowScreen> {
                         if (result != null) {
                           setState(() {
                             dropoff = result.address;
+                            _dropoffController.text = dropoff;
                             _dropoffLat = result.latitude;
                             _dropoffLng = result.longitude;
                           });
@@ -481,11 +510,19 @@ class _BookingFlowScreenState extends ConsumerState<BookingFlowScreen> {
                       },
                     ),
                   ),
-                  controller: TextEditingController(text: dropoff),
+                  controller: _dropoffController,
                   onChanged: (v) {
+                    final shouldClearCoords =
+                        _dropoffLat != null || _dropoffLng != null;
+                    if (shouldClearCoords) {
+                      setState(() {
+                        dropoff = v;
+                        _dropoffLat = null;
+                        _dropoffLng = null;
+                      });
+                      return;
+                    }
                     dropoff = v;
-                    _dropoffLat = null;
-                    _dropoffLng = null;
                   },
                 ),
                 const SizedBox(height: 4),
