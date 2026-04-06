@@ -29,6 +29,10 @@ class HttpBookingRepository implements BookingRepository {
         passengers: booking.passengers,
         notes: booking.notes,
         paymentMethod: booking.paymentMethod,
+        pickupLatitude: booking.pickupLatitude,
+        pickupLongitude: booking.pickupLongitude,
+        dropoffLatitude: booking.dropoffLatitude,
+        dropoffLongitude: booking.dropoffLongitude,
       ),
     );
     return _fromDto(dto);
@@ -114,6 +118,10 @@ class HttpBookingRepository implements BookingRepository {
       currency: dto.currency,
       paymentMethod: dto.paymentMethod,
       driverId: dto.driverId,
+      pickupLatitude: dto.pickupLatitude,
+      pickupLongitude: dto.pickupLongitude,
+      dropoffLatitude: dto.dropoffLatitude,
+      dropoffLongitude: dto.dropoffLongitude,
     );
   }
 }

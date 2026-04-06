@@ -1,3 +1,5 @@
+// ignore: unused_import
+import 'package:intl/intl.dart' as intl;
 import 'app_localizations.dart';
 
 // ignore_for_file: type=lint
@@ -20,6 +22,9 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get navProfile => 'الملف الشخصي';
+
+  @override
+  String get activeRideTitle => 'رحلة نشطة';
 
   @override
   String get homeHeroTitle => 'سائق خاص بالحجز المسبق.';
@@ -157,6 +162,53 @@ class AppLocalizationsAr extends AppLocalizations {
   String get profileSavedMessage => 'تم تحديث ملفك الشخصي.';
 
   @override
+  String get fullNameLabel => 'الاسم الكامل';
+
+  @override
+  String get emailLabel => 'البريد الإلكتروني';
+
+  @override
+  String get bookingPreferencesTitle => 'تفضيلات الحجز';
+
+  @override
+  String get bookingPreferencesSubtitle =>
+      'اضبط القيم الافتراضية لتعبئة نموذج الحجز مسبقاً.';
+
+  @override
+  String get defaultPickupHint => 'موقع الانطلاق الافتراضي';
+
+  @override
+  String get defaultDropoffHint => 'موقع الوصول الافتراضي';
+
+  @override
+  String get defaultPassengersLabel => 'الركاب الافتراضيون: ';
+
+  @override
+  String get savePreferences => 'حفظ التفضيلات';
+
+  @override
+  String get preferencesSaved => 'تم حفظ التفضيلات';
+
+  @override
+  String preferencesSaveError(Object error) {
+    return 'تعذر حفظ التفضيلات: $error';
+  }
+
+  @override
+  String profileSaveError(Object error) {
+    return 'تعذر حفظ الملف الشخصي: $error';
+  }
+
+  @override
+  String profileLoadError(Object error) {
+    return 'تعذر تحميل الملف الشخصي: $error';
+  }
+
+  @override
+  String get profileFieldsManagedNotice =>
+      'تفاصيل الشركة ومركز التكلفة وملاحظات الراكب والركاب المحفوظون غير قابلة للتعديل من تطبيق الراكب حالياً.';
+
+  @override
   String get upcoming => 'القادمة';
 
   @override
@@ -190,7 +242,8 @@ class AppLocalizationsAr extends AppLocalizations {
   String get policyTitle => 'سياسة الإلغاء';
 
   @override
-  String get policyBody => 'إلغاء مجاني حتى ساعتين قبل الموعد. قد تُطبّق رسوم بعد ذلك.';
+  String get policyBody =>
+      'إلغاء مجاني حتى ساعتين قبل الموعد. قد تُطبّق رسوم بعد ذلك.';
 
   @override
   String get reschedule => 'إعادة جدولة';
@@ -232,6 +285,21 @@ class AppLocalizationsAr extends AppLocalizations {
   String get cancelConfirmed => 'تم إلغاء الحجز';
 
   @override
+  String get statusPendingPayment => 'الدفع معلق';
+
+  @override
+  String get statusArrivedShort => 'وصل';
+
+  @override
+  String get statusInProgressShort => 'قيد التنفيذ';
+
+  @override
+  String get statusRescheduled => 'أعيدت الجدولة';
+
+  @override
+  String get statusCreated => 'تم الإنشاء';
+
+  @override
   String get paymentTitle => 'الدفع';
 
   @override
@@ -265,6 +333,22 @@ class AppLocalizationsAr extends AppLocalizations {
   String get paymentFailedMessage => 'تعذر معالجة الدفع. يرجى المحاولة لاحقاً.';
 
   @override
+  String get paymentBookingConfirmed => 'تم الدفع بنجاح! تم تأكيد الحجز.';
+
+  @override
+  String paymentFailedError(Object error) {
+    return 'فشل الدفع: $error';
+  }
+
+  @override
+  String get paymentPendingTitle => 'الدفع معلق';
+
+  @override
+  String paymentPendingMessage(Object dateTime) {
+    return 'سيتم إلغاء هذا الحجز تلقائياً إذا لم يتم استلام الدفع قبل موعد الرحلة المجدول ($dateTime).';
+  }
+
+  @override
   String get goHome => 'العودة للرئيسية';
 
   @override
@@ -288,12 +372,20 @@ class AppLocalizationsAr extends AppLocalizations {
   String get driverAssignedSubtitle => 'أحمد • لكزس ES • DXB 1234';
 
   @override
+  String driverNumber(Object id) {
+    return 'السائق #$id';
+  }
+
+  @override
   String get etaLabel => 'الوقت المتوقع';
 
   @override
   String etaValue(Object minutes) {
     return '$minutes';
   }
+
+  @override
+  String get trackRide => 'تتبع الرحلة';
 
   @override
   String get contactDriver => 'تواصل مع السائق';
@@ -341,6 +433,13 @@ class AppLocalizationsAr extends AppLocalizations {
   String get maskedCallHint => 'الاتصال عبر رقم مخفي';
 
   @override
+  String get maskedCallUnavailableTitle => 'المكالمة المخفية غير متاحة';
+
+  @override
+  String get maskedCallUnavailableMessage =>
+      'المكالمة المخفية غير متاحة من تطبيق الراكب حالياً.';
+
+  @override
   String get notificationArriving => 'السائق في الطريق';
 
   @override
@@ -383,6 +482,16 @@ class AppLocalizationsAr extends AppLocalizations {
   String get issueSubmittedMessage => 'شكراً لك — سنعود إليك قريباً.';
 
   @override
+  String get supportSubmissionUnavailableTitle => 'إرسال طلب الدعم غير متاح';
+
+  @override
+  String get supportSubmissionUnavailableMessage =>
+      'إرسال المشاكل غير متاح من تطبيق الراكب حالياً. يرجى استخدام مواضيع المساعدة المعروضة أو التواصل مع فريق العمليات مباشرة.';
+
+  @override
+  String get dismissLabel => 'إغلاق';
+
+  @override
   String get issueDescriptionHint => 'صف مشكلتك';
 
   @override
@@ -390,6 +499,9 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get flightTrackingTitle => 'تتبع الرحلة';
+
+  @override
+  String get flightNumberHint => 'رقم الرحلة';
 
   @override
   String get flightStatusLabel => 'حالة الرحلة';
@@ -402,6 +514,10 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get meetGreetBody => 'سيكون السائق بانتظارك عند الوصول مع لوحة باسمك.';
+
+  @override
+  String get flightSaveUnavailableMessage =>
+      'حفظ تفاصيل الرحلة غير متاح في تطبيق الراكب حالياً.';
 
   @override
   String get selectTime => 'اختر الوقت';
@@ -426,4 +542,143 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get rescheduleSuccess => 'تم إعادة جدولة الحجز بنجاح';
+
+  @override
+  String get authEmailLabel => 'البريد الإلكتروني';
+
+  @override
+  String get authPasswordLabel => 'كلمة المرور';
+
+  @override
+  String get authSignIn => 'تسجيل الدخول';
+
+  @override
+  String get authCreateAccount => 'إنشاء حساب';
+
+  @override
+  String get authFillTestCredentials => 'اضغط لملء بيانات الاختبار';
+
+  @override
+  String get authMissingCredentialsSignIn =>
+      'أدخل البريد الإلكتروني وكلمة المرور.';
+
+  @override
+  String get authMissingCredentialsCreate =>
+      'أدخل البريد الإلكتروني وكلمة المرور أولاً.';
+
+  @override
+  String authGenericError(Object error) {
+    return 'خطأ: $error';
+  }
+
+  @override
+  String get leaveBookingTitle => 'مغادرة الحجز؟';
+
+  @override
+  String get leaveBookingMessage =>
+      'لديك تفاصيل حجز غير محفوظة. سيتم حفظ التقدم كمسودة لتتمكن من المتابعة لاحقاً.';
+
+  @override
+  String get continueBooking => 'متابعة الحجز';
+
+  @override
+  String get menuLabel => 'القائمة';
+
+  @override
+  String get leaveLabel => 'مغادرة';
+
+  @override
+  String get signOut => 'تسجيل الخروج';
+
+  @override
+  String get guestLabel => 'زائر';
+
+  @override
+  String get paymentCancelled => 'تم إلغاء الدفع.';
+
+  @override
+  String get trackingErrorTitle => 'حدث خطأ ما';
+
+  @override
+  String get noTrackingAvailable => 'لا يوجد تتبع متاح';
+
+  @override
+  String get trackingAvailableAfterAssignment =>
+      'يصبح التتبع متاحاً بعد تعيين سائق';
+
+  @override
+  String get trackingStatusAssigned => 'تم تعيين السائق، بانتظار الانطلاق';
+
+  @override
+  String get trackingStatusEnRoute => 'السائق في الطريق';
+
+  @override
+  String get trackingStatusArrived => 'وصل السائق إلى نقطة الانطلاق';
+
+  @override
+  String get trackingStatusInProgress => 'الرحلة جارية';
+
+  @override
+  String get trackingStepAssigned => 'تم التعيين';
+
+  @override
+  String get trackingStepEnRoute => 'في الطريق';
+
+  @override
+  String get trackingStepArrived => 'وصل';
+
+  @override
+  String get trackingStepInProgress => 'قيد التنفيذ';
+
+  @override
+  String get trackingFallbackDriver => 'السائق';
+
+  @override
+  String get pickupLocationHint => 'موقع الانطلاق';
+
+  @override
+  String get dropoffLocationHint => 'موقع الوصول';
+
+  @override
+  String get pickOnMapTooltip => 'اختر على الخريطة';
+
+  @override
+  String get pickPickupLocationTitle => 'اختر موقع الانطلاق';
+
+  @override
+  String get pickDropoffLocationTitle => 'اختر موقع الوصول';
+
+  @override
+  String get selectDateFirst => 'اختر التاريخ أولاً';
+
+  @override
+  String get notesForDriverHint => 'ملاحظات للسائق (اختياري)';
+
+  @override
+  String get paymentMethodTitle => 'طريقة الدفع';
+
+  @override
+  String get payByCard => 'الدفع بالبطاقة';
+
+  @override
+  String get payWithCash => 'الدفع نقداً';
+
+  @override
+  String get cashPaymentHint => 'ادفع للسائق مباشرة عند نهاية الرحلة.';
+
+  @override
+  String get priceEstimateLoadingMessage =>
+      'لا يزال السعر التقديري قيد التحميل، يرجى الانتظار.';
+
+  @override
+  String get priceEstimateRetryMessage =>
+      'تعذر تحميل السعر التقديري، تتم إعادة المحاولة.';
+
+  @override
+  String bookingCompleteError(Object error) {
+    return 'تعذر إكمال الحجز: $error';
+  }
+
+  @override
+  String get rebookLastRide => 'إعادة حجز آخر رحلة';
 }

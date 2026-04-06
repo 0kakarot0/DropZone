@@ -98,6 +98,11 @@ class _BookingCardState extends ConsumerState<_BookingCard> {
   bool _paying = false;
 
   Future<void> _payNow() async {
+    final localizations = AppLocalizations.of(context);
+    final messenger = ScaffoldMessenger.of(context);
+    final paymentSheetStyle = Theme.of(context).brightness == Brightness.dark
+        ? ThemeMode.dark
+        : ThemeMode.light;
     setState(() => _paying = true);
     try {
       final paymentSvc = ref.read(paymentServiceProvider);
@@ -108,9 +113,7 @@ class _BookingCardState extends ConsumerState<_BookingCard> {
         paymentSheetParameters: SetupPaymentSheetParameters(
           merchantDisplayName: 'DropZone Chauffeur',
           paymentIntentClientSecret: intentResult.clientSecret,
-          style: Theme.of(context).brightness == Brightness.dark
-              ? ThemeMode.dark
-              : ThemeMode.light,
+          style: paymentSheetStyle,
         ),
       );
       await Stripe.instance.presentPaymentSheet();
@@ -122,22 +125,25 @@ class _BookingCardState extends ConsumerState<_BookingCard> {
       // and every watching widget (including this card) rebuilds.
       ref.invalidate(bookingsProvider);
       if (mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Payment successful! Booking confirmed.')),
+        messenger.showSnackBar(
+          SnackBar(content: Text(localizations.paymentBookingConfirmed)),
         );
       }
     } on StripeException catch (e) {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-              content: Text(e.error.localizedMessage ?? 'Payment cancelled.')),
+            content: Text(
+              e.error.localizedMessage ?? localizations.paymentCancelled,
+            ),
+          ),
         );
       }
     } catch (e) {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('Payment failed: $e'),
+            content: Text(localizations.paymentFailedError(e.toString())),
             backgroundColor: Theme.of(context).colorScheme.error,
           ),
         );
@@ -150,6 +156,7 @@ class _BookingCardState extends ConsumerState<_BookingCard> {
   @override
   Widget build(BuildContext context) {
     final booking = widget.booking;
+    final localizations = AppLocalizations.of(context);
     final isPending = booking.status == BookingStatus.pendingPayment;
     final dateFmt = DateFormat('dd MMM yyyy • HH:mm');
 
@@ -179,7 +186,7 @@ class _BookingCardState extends ConsumerState<_BookingCard> {
                             color: Colors.white, size: 18),
                         const SizedBox(width: 8),
                         Text(
-                          'Payment pending',
+                          localizations.paymentPendingTitle,
                           style: Theme.of(context)
                               .textTheme
                               .labelLarge
@@ -191,9 +198,9 @@ class _BookingCardState extends ConsumerState<_BookingCard> {
                     ),
                     const SizedBox(height: 4),
                     Text(
-                      'This booking will be automatically cancelled if '
-                      'payment is not received before the scheduled ride '
-                      '(${dateFmt.format(booking.dateTime.toLocal())}).',
+                      localizations.paymentPendingMessage(
+                        dateFmt.format(booking.dateTime.toLocal()),
+                      ),
                       style: Theme.of(context)
                           .textTheme
                           .bodySmall
@@ -213,7 +220,7 @@ class _BookingCardState extends ConsumerState<_BookingCard> {
                                 height: 18,
                                 width: 18,
                                 child: CircularProgressIndicator(strokeWidth: 2))
-                            : const Text('Pay Now',
+                            : Text(localizations.payNow,
                                 style: TextStyle(fontWeight: FontWeight.bold)),
                       ),
                     ),
@@ -242,12 +249,15 @@ class _StatusChip extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final localizations = AppLocalizations.of(context);
     final (label, color) = switch (status) {
-      BookingStatus.pendingPayment => ('Pending', Colors.amber.shade700),
-      BookingStatus.confirmed => ('Confirmed', Colors.green),
-      BookingStatus.cancelled => ('Cancelled', Colors.red),
-      BookingStatus.rescheduled => ('Rescheduled', Colors.blue),
-      _ => ('Created', Colors.grey),
+      BookingStatus.pendingPayment =>
+        (localizations.statusPendingPayment, Colors.amber.shade700),
+      BookingStatus.confirmed => (localizations.statusConfirmed, Colors.green),
+      BookingStatus.cancelled => (localizations.statusCancelled, Colors.red),
+      BookingStatus.rescheduled =>
+        (localizations.statusRescheduled, Colors.blue),
+      _ => (localizations.statusCreated, Colors.grey),
     };
 
     return Chip(

@@ -33,24 +33,24 @@ class _BookingDetailScreenState extends ConsumerState<BookingDetailScreen> {
   String _statusLabel(AppLocalizations l, BookingStatus status) {
     switch (status) {
       case BookingStatus.pendingPayment:
-        return 'Pending Payment';
+        return l.statusPendingPayment;
       case BookingStatus.confirmed:
       case BookingStatus.created:
         return l.statusConfirmed;
       case BookingStatus.rescheduled:
-        return l.statusDriverAssigned;
+        return l.statusRescheduled;
       case BookingStatus.cancelled:
         return l.statusCancelled;
       case BookingStatus.assigned:
-        return 'Driver Assigned';
+        return l.statusDriverAssigned;
       case BookingStatus.driverEnRoute:
-        return 'Driver En Route';
+        return l.statusEnRoute;
       case BookingStatus.arrived:
-        return 'Driver Arrived';
+        return l.statusArrivedShort;
       case BookingStatus.inProgress:
-        return 'In Progress';
+        return l.statusInProgressShort;
       case BookingStatus.completed:
-        return 'Completed';
+        return l.statusCompleted;
     }
   }
 
@@ -178,8 +178,8 @@ class _BookingDetailScreenState extends ConsumerState<BookingDetailScreen> {
                   backgroundColor: theme.colorScheme.primary,
                   child: Icon(Icons.person, color: theme.colorScheme.onPrimary),
                 ),
-                title: const Text('Driver Assigned'),
-                subtitle: Text('Driver #${_booking.driverId}'),
+                title: Text(l.statusDriverAssigned),
+                subtitle: Text(l.driverNumber(_booking.driverId!)),
                 trailing: const Icon(Icons.directions_car),
               ),
             ),
@@ -190,7 +190,7 @@ class _BookingDetailScreenState extends ConsumerState<BookingDetailScreen> {
             Padding(
               padding: const EdgeInsets.only(bottom: 16),
               child: PrimaryButton(
-                label: '📍 Track Ride',
+                label: l.trackRide,
                 onPressed: () {
                   Navigator.of(context).push(
                     MaterialPageRoute(
@@ -440,7 +440,7 @@ class _EditBookingScreenState extends ConsumerState<EditBookingScreen> {
           const SizedBox(height: 24),
 
           PrimaryButton(
-            label: _saving ? '…' : l.saveChanges,
+            label: l.saveChanges,
             onPressed: _saving ? null : () => _save(l),
           ),
         ],

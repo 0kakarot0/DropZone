@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:dropzone_app/l10n/app_localizations.dart';
 import 'package:dropzone_app/presentation/widgets/primary_button.dart';
 import 'package:dropzone_app/presentation/widgets/result_popup.dart';
@@ -46,18 +45,16 @@ class SupportScreen extends StatelessWidget {
           PrimaryButton(
             label: localizations.submitIssue,
             onPressed: () async {
-              final router = GoRouter.of(context);
               await showDialog<void>(
                 context: context,
                 barrierDismissible: false,
                 builder: (dialogCtx) => ResultPopup(
-                  title: localizations.issueSubmittedTitle,
-                  message: localizations.issueSubmittedMessage,
-                  type: ResultType.success,
-                  buttonLabel: localizations.goHome,
+                  title: localizations.supportSubmissionUnavailableTitle,
+                  message: localizations.supportSubmissionUnavailableMessage,
+                  type: ResultType.error,
+                  buttonLabel: localizations.dismissLabel,
                   onAction: () {
-                    Navigator.of(dialogCtx).pop(); // close dialog
-                    router.go('/'); // navigate to Home tab
+                    Navigator.of(dialogCtx).pop();
                   },
                 ),
               );

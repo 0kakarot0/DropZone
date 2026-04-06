@@ -125,6 +125,12 @@ abstract class AppLocalizations {
   /// **'Profile'**
   String get navProfile;
 
+  /// No description provided for @activeRideTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Active ride'**
+  String get activeRideTitle;
+
   /// No description provided for @homeHeroTitle.
   ///
   /// In en, this message translates to:
@@ -545,6 +551,36 @@ abstract class AppLocalizations {
   /// **'Booking cancelled'**
   String get cancelConfirmed;
 
+  /// No description provided for @statusPendingPayment.
+  ///
+  /// In en, this message translates to:
+  /// **'Pending payment'**
+  String get statusPendingPayment;
+
+  /// No description provided for @statusArrivedShort.
+  ///
+  /// In en, this message translates to:
+  /// **'Arrived'**
+  String get statusArrivedShort;
+
+  /// No description provided for @statusInProgressShort.
+  ///
+  /// In en, this message translates to:
+  /// **'In progress'**
+  String get statusInProgressShort;
+
+  /// No description provided for @statusRescheduled.
+  ///
+  /// In en, this message translates to:
+  /// **'Rescheduled'**
+  String get statusRescheduled;
+
+  /// No description provided for @statusCreated.
+  ///
+  /// In en, this message translates to:
+  /// **'Created'**
+  String get statusCreated;
+
   /// No description provided for @paymentTitle.
   ///
   /// In en, this message translates to:
@@ -599,6 +635,30 @@ abstract class AppLocalizations {
   /// **'We couldn’t process the payment. Please try again later.'**
   String get paymentFailedMessage;
 
+  /// No description provided for @paymentBookingConfirmed.
+  ///
+  /// In en, this message translates to:
+  /// **'Payment successful! Booking confirmed.'**
+  String get paymentBookingConfirmed;
+
+  /// No description provided for @paymentFailedError.
+  ///
+  /// In en, this message translates to:
+  /// **'Payment failed: {error}'**
+  String paymentFailedError(Object error);
+
+  /// No description provided for @paymentPendingTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Payment pending'**
+  String get paymentPendingTitle;
+
+  /// No description provided for @paymentPendingMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'This booking will be automatically cancelled if payment is not received before the scheduled ride ({dateTime}).'**
+  String paymentPendingMessage(Object dateTime);
+
   /// No description provided for @goHome.
   ///
   /// In en, this message translates to:
@@ -641,6 +701,12 @@ abstract class AppLocalizations {
   /// **'Ahmed • Lexus ES • DXB 1234'**
   String get driverAssignedSubtitle;
 
+  /// No description provided for @driverNumber.
+  ///
+  /// In en, this message translates to:
+  /// **'Driver #{id}'**
+  String driverNumber(Object id);
+
   /// No description provided for @etaLabel.
   ///
   /// In en, this message translates to:
@@ -652,6 +718,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'{minutes}'**
   String etaValue(Object minutes);
+
+  /// No description provided for @trackRide.
+  ///
+  /// In en, this message translates to:
+  /// **'Track ride'**
+  String get trackRide;
 
   /// No description provided for @contactDriver.
   ///
@@ -701,6 +773,12 @@ abstract class AppLocalizations {
   /// **'Save flight details'**
   String get saveFlightInfo;
 
+  /// No description provided for @flightSaveUnavailableMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Flight detail saving is not available in the rider app yet.'**
+  String get flightSaveUnavailableMessage;
+
   /// No description provided for @contactDriverTitle.
   ///
   /// In en, this message translates to:
@@ -742,6 +820,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Calling via masked number'**
   String get maskedCallHint;
+
+  /// No description provided for @maskedCallUnavailableTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Masked calling unavailable'**
+  String get maskedCallUnavailableTitle;
+
+  /// No description provided for @maskedCallUnavailableMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Masked calling is not available from the rider app yet.'**
+  String get maskedCallUnavailableMessage;
 
   /// No description provided for @notificationArriving.
   ///
@@ -827,6 +917,24 @@ abstract class AppLocalizations {
   /// **'Thanks — our team will get back to you shortly.'**
   String get issueSubmittedMessage;
 
+  /// No description provided for @supportSubmissionUnavailableTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Support submission unavailable'**
+  String get supportSubmissionUnavailableTitle;
+
+  /// No description provided for @supportSubmissionUnavailableMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Issue submission is not available from the rider app yet. Please use the listed help topics or contact operations directly.'**
+  String get supportSubmissionUnavailableMessage;
+
+  /// No description provided for @dismissLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Dismiss'**
+  String get dismissLabel;
+
   /// No description provided for @issueDescriptionHint.
   ///
   /// In en, this message translates to:
@@ -844,6 +952,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Flight tracking'**
   String get flightTrackingTitle;
+
+  /// No description provided for @flightNumberHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Flight number'**
+  String get flightNumberHint;
 
   /// No description provided for @flightStatusLabel.
   ///
@@ -892,6 +1006,63 @@ abstract class AppLocalizations {
 
   /// No description provided for @rescheduleSuccess.
   String get rescheduleSuccess;
+
+  String get fullNameLabel;
+  String get emailLabel;
+  String get bookingPreferencesTitle;
+  String get bookingPreferencesSubtitle;
+  String get defaultPickupHint;
+  String get defaultDropoffHint;
+  String get defaultPassengersLabel;
+  String get savePreferences;
+  String get preferencesSaved;
+  String preferencesSaveError(Object error);
+  String profileSaveError(Object error);
+  String profileLoadError(Object error);
+  String get profileFieldsManagedNotice;
+  String get authEmailLabel;
+  String get authPasswordLabel;
+  String get authSignIn;
+  String get authCreateAccount;
+  String get authFillTestCredentials;
+  String get authMissingCredentialsSignIn;
+  String get authMissingCredentialsCreate;
+  String authGenericError(Object error);
+  String get leaveBookingTitle;
+  String get leaveBookingMessage;
+  String get continueBooking;
+  String get menuLabel;
+  String get leaveLabel;
+  String get signOut;
+  String get guestLabel;
+  String get paymentCancelled;
+  String get trackingErrorTitle;
+  String get noTrackingAvailable;
+  String get trackingAvailableAfterAssignment;
+  String get trackingStatusAssigned;
+  String get trackingStatusEnRoute;
+  String get trackingStatusArrived;
+  String get trackingStatusInProgress;
+  String get trackingStepAssigned;
+  String get trackingStepEnRoute;
+  String get trackingStepArrived;
+  String get trackingStepInProgress;
+  String get trackingFallbackDriver;
+  String get pickupLocationHint;
+  String get dropoffLocationHint;
+  String get pickOnMapTooltip;
+  String get pickPickupLocationTitle;
+  String get pickDropoffLocationTitle;
+  String get selectDateFirst;
+  String get notesForDriverHint;
+  String get paymentMethodTitle;
+  String get payByCard;
+  String get payWithCash;
+  String get cashPaymentHint;
+  String get priceEstimateLoadingMessage;
+  String get priceEstimateRetryMessage;
+  String bookingCompleteError(Object error);
+  String get rebookLastRide;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

@@ -16,6 +16,10 @@ class BookingDraft {
     this.pickedDate,
     this.pickedTime,
     this.currentStep = 0,
+    this.pickupLatitude,
+    this.pickupLongitude,
+    this.dropoffLatitude,
+    this.dropoffLongitude,
   });
 
   final TripType tripType;
@@ -27,6 +31,10 @@ class BookingDraft {
   final DateTime? pickedDate;
   final TimeOfDay? pickedTime;
   final int currentStep;
+  final double? pickupLatitude;
+  final double? pickupLongitude;
+  final double? dropoffLatitude;
+  final double? dropoffLongitude;
 
   /// True when the user has meaningfully started filling the form.
   bool get hasProgress =>
@@ -49,6 +57,12 @@ class BookingDraft {
     int? currentStep,
     bool clearDate = false,
     bool clearTime = false,
+    double? pickupLatitude,
+    double? pickupLongitude,
+    double? dropoffLatitude,
+    double? dropoffLongitude,
+    bool clearPickupCoords = false,
+    bool clearDropoffCoords = false,
   }) {
     return BookingDraft(
       tripType: tripType ?? this.tripType,
@@ -60,6 +74,10 @@ class BookingDraft {
       pickedDate: clearDate ? null : pickedDate ?? this.pickedDate,
       pickedTime: clearTime ? null : pickedTime ?? this.pickedTime,
       currentStep: currentStep ?? this.currentStep,
+      pickupLatitude: clearPickupCoords ? null : pickupLatitude ?? this.pickupLatitude,
+      pickupLongitude: clearPickupCoords ? null : pickupLongitude ?? this.pickupLongitude,
+      dropoffLatitude: clearDropoffCoords ? null : dropoffLatitude ?? this.dropoffLatitude,
+      dropoffLongitude: clearDropoffCoords ? null : dropoffLongitude ?? this.dropoffLongitude,
     );
   }
 }

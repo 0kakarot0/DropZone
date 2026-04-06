@@ -8,7 +8,6 @@ import 'package:dropzone_app/presentation/profile/profile_screen.dart';
 import 'package:dropzone_app/presentation/auth/auth_screen.dart';
 import 'package:dropzone_app/presentation/auth/otp_screen.dart';
 import 'package:dropzone_app/presentation/bookings/bookings_screen.dart';
-import 'package:dropzone_app/presentation/payments/payment_screen.dart';
 import 'package:dropzone_app/presentation/tracking/trip_tracking_screen.dart';
 import 'package:dropzone_app/presentation/support/support_screen.dart';
 import 'package:dropzone_app/presentation/airport/airport_enhancements_screen.dart';
@@ -42,11 +41,6 @@ final GoRouter appRouter = GoRouter(
           ),
         ),
       ],
-    ),
-    GoRoute(
-      path: '/payment',
-      name: 'payment',
-      builder: (context, state) => const PaymentScreen(),
     ),
     GoRoute(
       path: '/tracking/:bookingId',

@@ -17,8 +17,8 @@ class AirportEnhancementsScreen extends StatelessWidget {
           Text(localizations.flightTrackingTitle,
               style: Theme.of(context).textTheme.titleLarge),
           const SizedBox(height: 12),
-          const TextField(
-            decoration: InputDecoration(hintText: 'EK 202'),
+          TextField(
+            decoration: InputDecoration(hintText: localizations.flightNumberHint),
           ),
           const SizedBox(height: 12),
           Card(
@@ -34,7 +34,16 @@ class AirportEnhancementsScreen extends StatelessWidget {
           const SizedBox(height: 12),
           Text(localizations.meetGreetBody),
           const SizedBox(height: 20),
-          PrimaryButton(label: localizations.saveFlightInfo, onPressed: () {}),
+          PrimaryButton(
+            label: localizations.saveFlightInfo,
+            onPressed: () {
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(
+                  content: Text(localizations.flightSaveUnavailableMessage),
+                ),
+              );
+            },
+          ),
         ],
       ),
     );

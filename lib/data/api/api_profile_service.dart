@@ -1,12 +1,32 @@
 import 'package:dio/dio.dart';
+import 'package:dropzone_app/data/dto/profile_dto.dart';
 import 'package:dropzone_app/data/dto/preferences_dto.dart';
 import 'package:dropzone_app/core/utils/app_exception.dart';
 
-/// Raw Dio wrapper for profile-related APIs (preferences).
+/// Raw Dio wrapper for profile-related APIs.
 class ApiProfileService {
   const ApiProfileService(this._dio);
 
   final Dio _dio;
+
+  // ── GET /api/profile ──────────────────────────────────────────────────────
+  Future<ProfileResponseDto> getProfile() async {
+    final response = await _call(() => _dio.get<Map<String, dynamic>>(
+          '/api/profile',
+        ));
+    return ProfileResponseDto.fromJson(response.data!);
+  }
+
+  // ── PUT /api/profile ──────────────────────────────────────────────────────
+  Future<ProfileResponseDto> updateProfile(
+    UpdateProfileRequestDto request,
+  ) async {
+    final response = await _call(() => _dio.put<Map<String, dynamic>>(
+          '/api/profile',
+          data: request.toJson(),
+        ));
+    return ProfileResponseDto.fromJson(response.data!);
+  }
 
   // ── GET /api/profile/preferences ──────────────────────────────────────────
   Future<UserPreferencesResponseDto> getPreferences() async {

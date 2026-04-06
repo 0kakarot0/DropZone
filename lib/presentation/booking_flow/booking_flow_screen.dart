@@ -12,6 +12,7 @@ import 'package:dropzone_app/domain/entities/booking.dart';
 import 'package:dropzone_app/domain/entities/payment_method.dart';
 import 'package:dropzone_app/core/di/providers.dart';
 import 'package:dropzone_app/core/di/preferences_providers.dart';
+import 'package:dropzone_app/presentation/booking_flow/map_location_picker.dart';
 
 class BookingFlowScreen extends ConsumerStatefulWidget {
   const BookingFlowScreen({super.key});
@@ -33,6 +34,12 @@ class _BookingFlowScreenState extends ConsumerState<BookingFlowScreen> {
   DateTime? _pickedDate;
   TimeOfDay? _pickedTime;
 
+  // Coordinates from the map picker.
+  double? _pickupLat;
+  double? _pickupLng;
+  double? _dropoffLat;
+  double? _dropoffLng;
+
   // The price estimate is stored as plain widget state.
   AsyncValue<PriceEstimate> _priceEstimate = const AsyncValue.loading();
   bool _estimateFetched = false;
@@ -52,6 +59,10 @@ class _BookingFlowScreenState extends ConsumerState<BookingFlowScreen> {
       notes = draft.notes;
       _pickedDate = draft.pickedDate;
       _pickedTime = draft.pickedTime;
+      _pickupLat = draft.pickupLatitude;
+      _pickupLng = draft.pickupLongitude;
+      _dropoffLat = draft.dropoffLatitude;
+      _dropoffLng = draft.dropoffLongitude;
     } else {
       // Pre-fill from saved user preferences if no draft exists.
       _applyPreferences();
@@ -99,6 +110,10 @@ class _BookingFlowScreenState extends ConsumerState<BookingFlowScreen> {
           notes: notes,
           pickedDate: _pickedDate,
           pickedTime: _pickedTime,
+          pickupLatitude: _pickupLat,
+          pickupLongitude: _pickupLng,
+          dropoffLatitude: _dropoffLat,
+          dropoffLongitude: _dropoffLng,
         ));
   }
 
@@ -200,9 +215,15 @@ class _BookingFlowScreenState extends ConsumerState<BookingFlowScreen> {
 
           // Don't allow confirming while estimate is still loading or failed.
           final messenger = ScaffoldMessenger.of(context);
+          final router = GoRouter.of(context);
+          final theme = Theme.of(context);
+          final paymentSheetStyle = theme.brightness == Brightness.dark
+              ? ThemeMode.dark
+              : ThemeMode.light;
+          final errorColor = theme.colorScheme.error;
           if (_priceEstimate.isLoading) {
             messenger.showSnackBar(
-              const SnackBar(content: Text('Price estimate is still loading, please wait…')),
+              SnackBar(content: Text(localizations.priceEstimateLoadingMessage)),
             );
             return;
           }
@@ -211,7 +232,7 @@ class _BookingFlowScreenState extends ConsumerState<BookingFlowScreen> {
             setState(() => _estimateFetched = false);
             _fetchEstimateOnce();
             messenger.showSnackBar(
-              const SnackBar(content: Text('Could not load price estimate — retrying…')),
+              SnackBar(content: Text(localizations.priceEstimateRetryMessage)),
             );
             return;
           }
@@ -221,7 +242,7 @@ class _BookingFlowScreenState extends ConsumerState<BookingFlowScreen> {
             final analytics = ref.read(analyticsProvider);
             final paymentSvc = ref.read(paymentServiceProvider);
 
-            final booking = Booking(
+             final booking = Booking(
               id: -1,
               tripType: tripType,
               pickup: pickup.isEmpty ? localizations.pickup : pickup,
@@ -234,6 +255,10 @@ class _BookingFlowScreenState extends ConsumerState<BookingFlowScreen> {
               priceEstimateCents: _priceEstimate.value?.totalCents,
               currency: _priceEstimate.value?.currency ?? 'AED',
               paymentMethod: _paymentMethod.apiValue,
+              pickupLatitude: _pickupLat,
+              pickupLongitude: _pickupLng,
+              dropoffLatitude: _dropoffLat,
+              dropoffLongitude: _dropoffLng,
             );
 
             // 1. Create the booking.
@@ -249,11 +274,11 @@ class _BookingFlowScreenState extends ConsumerState<BookingFlowScreen> {
             if (_paymentMethod == PaymentMethod.cash) {
               ref.invalidate(bookingsProvider);
               ref.read(bookingDraftProvider.notifier).clear();
-              ScaffoldMessenger.of(context).showSnackBar(
+              messenger.showSnackBar(
                 SnackBar(content: Text(localizations.bookingCreated)),
               );
               if (!mounted) return;
-              GoRouter.of(context).go('/bookings');
+              router.go('/bookings');
               return;
             }
 
@@ -264,23 +289,26 @@ class _BookingFlowScreenState extends ConsumerState<BookingFlowScreen> {
                 await paymentSvc.createPaymentIntent(createdBooking.id);
             if (!mounted) return;
 
-            // 3. Initialise the Stripe PaymentSheet.
-            await Stripe.instance.initPaymentSheet(
-              paymentSheetParameters: SetupPaymentSheetParameters(
-                merchantDisplayName: 'DropZone Chauffeur',
-                paymentIntentClientSecret: intentResult.clientSecret,
-                style: Theme.of(context).brightness == Brightness.dark
-                    ? ThemeMode.dark
-                    : ThemeMode.light,
-              ),
-            );
-            if (!mounted) return;
+            // Detect stub payment provider (dev mode) — skip Stripe UI entirely.
+            final isStub = intentResult.clientSecret.startsWith('pi_stub');
 
-            // 4. Present the PaymentSheet — blocks until user completes / cancels.
-            await Stripe.instance.presentPaymentSheet();
-            if (!mounted) return;
+            if (!isStub) {
+              // 3. Initialise the Stripe PaymentSheet.
+              await Stripe.instance.initPaymentSheet(
+                paymentSheetParameters: SetupPaymentSheetParameters(
+                  merchantDisplayName: 'DropZone Chauffeur',
+                  paymentIntentClientSecret: intentResult.clientSecret,
+                  style: paymentSheetStyle,
+                ),
+              );
+              if (!mounted) return;
 
-            // 5. Confirm with backend (verifies with Stripe; webhook is secondary safety net).
+              // 4. Present the PaymentSheet — blocks until user completes / cancels.
+              await Stripe.instance.presentPaymentSheet();
+              if (!mounted) return;
+            }
+
+            // 5. Confirm with backend (verifies with Stripe; stub always succeeds).
             await paymentSvc.confirmPayment(createdBooking.id);
             if (!mounted) return;
 
@@ -291,23 +319,23 @@ class _BookingFlowScreenState extends ConsumerState<BookingFlowScreen> {
             ref.read(bookingDraftProvider.notifier).clear();
 
             // 8. Success — navigate to bookings list.
-            ScaffoldMessenger.of(context).showSnackBar(
+            messenger.showSnackBar(
               SnackBar(content: Text(localizations.bookingCreated)),
             );
             if (!mounted) return;
-            GoRouter.of(context).go('/bookings');
+            router.go('/bookings');
           } on StripeException catch (e) {
             if (!mounted) return;
-            final msg = e.error.localizedMessage ?? 'Payment cancelled.';
-            ScaffoldMessenger.of(context).showSnackBar(
+            final msg = e.error.localizedMessage ?? localizations.paymentCancelled;
+            messenger.showSnackBar(
               SnackBar(content: Text(msg)),
             );
           } catch (e) {
             if (!mounted) return;
-            ScaffoldMessenger.of(context).showSnackBar(
+            messenger.showSnackBar(
               SnackBar(
-                content: Text('Unable to complete booking: $e'),
-                backgroundColor: Theme.of(context).colorScheme.error,
+                content: Text(localizations.bookingCompleteError(e.toString())),
+                backgroundColor: errorColor,
               ),
             );
           }
@@ -368,18 +396,100 @@ class _BookingFlowScreenState extends ConsumerState<BookingFlowScreen> {
             content: Column(
               children: [
                 TextField(
-                  decoration:
-                      const InputDecoration(hintText: 'Pickup location'),
+                  decoration: InputDecoration(
+                    hintText: localizations.pickupLocationHint,
+                    suffixIcon: IconButton(
+                      icon: const Icon(Icons.map_outlined),
+                      tooltip: localizations.pickOnMapTooltip,
+                      onPressed: () async {
+                        final result = await Navigator.push<PickedLocation>(
+                          context,
+                          MaterialPageRoute(
+                            builder: (_) => MapLocationPicker(
+                              title: localizations.pickPickupLocationTitle,
+                              initialLatitude: _pickupLat ?? 33.6844,
+                              initialLongitude: _pickupLng ?? 73.0479,
+                            ),
+                          ),
+                        );
+                        if (result != null) {
+                          setState(() {
+                            pickup = result.address;
+                            _pickupLat = result.latitude;
+                            _pickupLng = result.longitude;
+                          });
+                        }
+                      },
+                    ),
+                  ),
                   controller: TextEditingController(text: pickup),
                   onChanged: (v) => pickup = v,
                 ),
+                const SizedBox(height: 4),
+                if (_pickupLat != null)
+                  Padding(
+                    padding: const EdgeInsets.only(left: 4),
+                    child: Row(
+                      children: [
+                        Icon(Icons.location_on, size: 14, color: Theme.of(context).colorScheme.primary),
+                        const SizedBox(width: 4),
+                        Text(
+                          '${_pickupLat!.toStringAsFixed(4)}, ${_pickupLng!.toStringAsFixed(4)}',
+                          style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                            color: Theme.of(context).colorScheme.primary,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
                 const SizedBox(height: 12),
                 TextField(
-                  decoration:
-                      const InputDecoration(hintText: 'Drop‑off location'),
+                  decoration: InputDecoration(
+                    hintText: localizations.dropoffLocationHint,
+                    suffixIcon: IconButton(
+                      icon: const Icon(Icons.map_outlined),
+                      tooltip: localizations.pickOnMapTooltip,
+                      onPressed: () async {
+                        final result = await Navigator.push<PickedLocation>(
+                          context,
+                          MaterialPageRoute(
+                            builder: (_) => MapLocationPicker(
+                              title: localizations.pickDropoffLocationTitle,
+                              initialLatitude: _dropoffLat ?? 33.6844,
+                              initialLongitude: _dropoffLng ?? 73.0479,
+                            ),
+                          ),
+                        );
+                        if (result != null) {
+                          setState(() {
+                            dropoff = result.address;
+                            _dropoffLat = result.latitude;
+                            _dropoffLng = result.longitude;
+                          });
+                        }
+                      },
+                    ),
+                  ),
                   controller: TextEditingController(text: dropoff),
                   onChanged: (v) => dropoff = v,
                 ),
+                const SizedBox(height: 4),
+                if (_dropoffLat != null)
+                  Padding(
+                    padding: const EdgeInsets.only(left: 4),
+                    child: Row(
+                      children: [
+                        Icon(Icons.location_on, size: 14, color: Theme.of(context).colorScheme.secondary),
+                        const SizedBox(width: 4),
+                        Text(
+                          '${_dropoffLat!.toStringAsFixed(4)}, ${_dropoffLng!.toStringAsFixed(4)}',
+                          style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                            color: Theme.of(context).colorScheme.secondary,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
               ],
             ),
           ),
@@ -467,7 +577,7 @@ class _BookingFlowScreenState extends ConsumerState<BookingFlowScreen> {
                   Padding(
                     padding: const EdgeInsets.only(top: 6),
                     child: Text(
-                      'Select a date first',
+                      localizations.selectDateFirst,
                       style: Theme.of(context)
                           .textTheme
                           .bodySmall
@@ -512,9 +622,9 @@ class _BookingFlowScreenState extends ConsumerState<BookingFlowScreen> {
                 const SizedBox(height: 12),
                 TextField(
                   maxLines: 3,
-                  decoration: const InputDecoration(
-                    hintText: 'Notes for driver (optional)',
-                    border: OutlineInputBorder(),
+                  decoration: InputDecoration(
+                    hintText: localizations.notesForDriverHint,
+                    border: const OutlineInputBorder(),
                   ),
                   onChanged: (v) => notes = v,
                 ),
@@ -553,16 +663,16 @@ class _BookingFlowScreenState extends ConsumerState<BookingFlowScreen> {
           ),
           // ── Step 6: Payment Method ─────────────────────────────────────
           Step(
-            title: const Text('Payment Method'),
+            title: Text(localizations.paymentMethodTitle),
             content: Column(
               children: [
                 _SelectTile(
-                  label: '💳  Pay by Card',
+                  label: localizations.payByCard,
                   selected: _paymentMethod == PaymentMethod.card,
                   onTap: () => setState(() => _paymentMethod = PaymentMethod.card),
                 ),
                 _SelectTile(
-                  label: '💵  Pay with Cash',
+                  label: localizations.payWithCash,
                   selected: _paymentMethod == PaymentMethod.cash,
                   onTap: () => setState(() => _paymentMethod = PaymentMethod.cash),
                 ),
@@ -581,7 +691,7 @@ class _BookingFlowScreenState extends ConsumerState<BookingFlowScreen> {
                         const SizedBox(width: 8),
                         Expanded(
                           child: Text(
-                            'Pay the driver directly at the end of the ride.',
+                            localizations.cashPaymentHint,
                             style: Theme.of(context).textTheme.bodySmall?.copyWith(
                                   color: Theme.of(context).colorScheme.onTertiaryContainer,
                                 ),
@@ -653,7 +763,7 @@ class _BookingFlowScreenState extends ConsumerState<BookingFlowScreen> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            'Re-book last ride',
+                            AppLocalizations.of(context).rebookLastRide,
                             style: Theme.of(context).textTheme.titleSmall?.copyWith(
                                   color: Theme.of(context).colorScheme.onPrimaryContainer,
                                 ),
@@ -661,7 +771,7 @@ class _BookingFlowScreenState extends ConsumerState<BookingFlowScreen> {
                           Text(
                             '${lastBooking.pickup} → ${lastBooking.dropoff}',
                             style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                                  color: Theme.of(context).colorScheme.onPrimaryContainer.withOpacity(0.7),
+                                  color: Theme.of(context).colorScheme.onPrimaryContainer.withValues(alpha: 0.7),
                                 ),
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,

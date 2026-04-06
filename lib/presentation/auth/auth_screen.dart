@@ -37,10 +37,11 @@ class _AuthScreenState extends State<AuthScreen> {
   }
 
   Future<void> _signIn() async {
+    final localizations = AppLocalizations.of(context);
     final email    = _emailCtrl.text.trim();
     final password = _passwordCtrl.text;
     if (email.isEmpty || password.isEmpty) {
-      setState(() => _error = 'Enter email and password.');
+      setState(() => _error = localizations.authMissingCredentialsSignIn);
       return;
     }
     setState(() { _loading = true; _error = null; });
@@ -51,15 +52,21 @@ class _AuthScreenState extends State<AuthScreen> {
     } on FirebaseAuthException catch (e) {
       if (mounted) setState(() { _error = e.message; _loading = false; });
     } catch (e) {
-      if (mounted) setState(() { _error = 'Error: $e'; _loading = false; });
+      if (mounted) {
+        setState(() {
+          _error = localizations.authGenericError(e.toString());
+          _loading = false;
+        });
+      }
     }
   }
 
   Future<void> _createAccount() async {
+    final localizations = AppLocalizations.of(context);
     final email    = _emailCtrl.text.trim();
     final password = _passwordCtrl.text;
     if (email.isEmpty || password.isEmpty) {
-      setState(() => _error = 'Enter email and password first.');
+      setState(() => _error = localizations.authMissingCredentialsCreate);
       return;
     }
     setState(() { _loading = true; _error = null; });
@@ -69,7 +76,12 @@ class _AuthScreenState extends State<AuthScreen> {
     } on FirebaseAuthException catch (e) {
       if (mounted) setState(() { _error = e.message; _loading = false; });
     } catch (e) {
-      if (mounted) setState(() { _error = 'Error: $e'; _loading = false; });
+      if (mounted) {
+        setState(() {
+          _error = localizations.authGenericError(e.toString());
+          _loading = false;
+        });
+      }
     }
   }
 
@@ -112,8 +124,8 @@ class _AuthScreenState extends State<AuthScreen> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const Text('Tap to fill test credentials',
-                              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 13)),
+                          Text(localizations.authFillTestCredentials,
+                              style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 13)),
                           Text('$_testEmail  ·  $_testPassword',
                               style: const TextStyle(fontSize: 12)),
                         ],
@@ -130,9 +142,9 @@ class _AuthScreenState extends State<AuthScreen> {
             TextField(
               controller: _emailCtrl,
               keyboardType: TextInputType.emailAddress,
-              decoration: const InputDecoration(
-                labelText: 'Email',
-                prefixIcon: Icon(Icons.email_outlined),
+              decoration: InputDecoration(
+                labelText: localizations.authEmailLabel,
+                prefixIcon: const Icon(Icons.email_outlined),
               ),
             ),
             const SizedBox(height: 12),
@@ -142,7 +154,7 @@ class _AuthScreenState extends State<AuthScreen> {
               controller: _passwordCtrl,
               obscureText: _obscure,
               decoration: InputDecoration(
-                labelText: 'Password',
+                labelText: localizations.authPasswordLabel,
                 prefixIcon: const Icon(Icons.lock_outline),
                 suffixIcon: IconButton(
                   icon: Icon(_obscure ? Icons.visibility_off : Icons.visibility),
@@ -170,11 +182,11 @@ class _AuthScreenState extends State<AuthScreen> {
             if (_loading)
               const Center(child: CircularProgressIndicator())
             else ...[
-              PrimaryButton(label: 'Sign In', onPressed: _signIn),
+              PrimaryButton(label: localizations.authSignIn, onPressed: _signIn),
               const SizedBox(height: 10),
               OutlinedButton(
                 onPressed: _createAccount,
-                child: const Text('Create Account'),
+                child: Text(localizations.authCreateAccount),
               ),
             ],
           ],

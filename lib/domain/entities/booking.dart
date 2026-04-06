@@ -103,6 +103,10 @@ class Booking {
     this.currency,
     this.paymentMethod,
     this.driverId,
+    this.pickupLatitude,
+    this.pickupLongitude,
+    this.dropoffLatitude,
+    this.dropoffLongitude,
   });
 
   /// Server-assigned integer ID. -1 when not yet persisted.
@@ -126,6 +130,14 @@ class Booking {
 
   /// Assigned driver ID (null if unassigned).
   final int? driverId;
+
+  /// Pickup coordinates from map picker (null if entered as text only).
+  final double? pickupLatitude;
+  final double? pickupLongitude;
+
+  /// Dropoff coordinates from map picker (null if entered as text only).
+  final double? dropoffLatitude;
+  final double? dropoffLongitude;
 
   /// Convenience: price in AED as double.
   double get priceAed =>

@@ -52,15 +52,14 @@ class MainShell extends ConsumerWidget {
             const Icon(Icons.edit_note_rounded, size: 40),
             const SizedBox(height: 12),
             Text(
-              'Leave booking?',
+              AppLocalizations.of(ctx).leaveBookingTitle,
               style: Theme.of(ctx).textTheme.titleLarge?.copyWith(
                     fontWeight: FontWeight.bold,
                   ),
             ),
             const SizedBox(height: 8),
             Text(
-              'You have unsaved booking details. Your progress will be saved '
-              'as a draft so you can continue later.',
+              AppLocalizations.of(ctx).leaveBookingMessage,
               textAlign: TextAlign.center,
               style: Theme.of(ctx).textTheme.bodyMedium?.copyWith(
                     color: Theme.of(ctx).colorScheme.onSurfaceVariant,
@@ -72,7 +71,7 @@ class MainShell extends ConsumerWidget {
               width: double.infinity,
               child: FilledButton(
                 onPressed: () => Navigator.of(ctx).pop(false),
-                child: const Text('Continue Booking'),
+                child: Text(AppLocalizations.of(ctx).continueBooking),
               ),
             ),
             const SizedBox(height: 10),
@@ -81,7 +80,7 @@ class MainShell extends ConsumerWidget {
               width: double.infinity,
               child: OutlinedButton(
                 onPressed: () => Navigator.of(ctx).pop(true),
-                child: const Text('Leave'),
+                child: Text(AppLocalizations.of(ctx).leaveLabel),
               ),
             ),
           ],
@@ -107,7 +106,7 @@ class MainShell extends ConsumerWidget {
         leading: Builder(
           builder: (ctx) => IconButton(
             icon: const Icon(Icons.menu),
-            tooltip: 'Menu',
+            tooltip: localizations.menuLabel,
             onPressed: () => Scaffold.of(ctx).openDrawer(),
           ),
         ),
@@ -134,13 +133,13 @@ class MainShell extends ConsumerWidget {
                   children: [
                     CircleAvatar(
                       radius: 30,
-                      backgroundColor: colorScheme.onPrimary.withOpacity(0.2),
+                      backgroundColor: colorScheme.onPrimary.withValues(alpha: 0.2),
                       child: Icon(Icons.person,
                           size: 34, color: colorScheme.onPrimary),
                     ),
                     const SizedBox(height: 12),
                     Text(
-                      user?.displayName ?? user?.email ?? 'Guest',
+                      user?.displayName ?? user?.email ?? localizations.guestLabel,
                       style: TextStyle(
                         color: colorScheme.onPrimary,
                         fontSize: 16,
@@ -151,7 +150,7 @@ class MainShell extends ConsumerWidget {
                       Text(
                         user!.email!,
                         style: TextStyle(
-                          color: colorScheme.onPrimary.withOpacity(0.8),
+                          color: colorScheme.onPrimary.withValues(alpha: 0.8),
                           fontSize: 13,
                         ),
                       ),
@@ -189,8 +188,8 @@ class MainShell extends ConsumerWidget {
               // Sign out
               ListTile(
                 leading: const Icon(Icons.logout, color: Colors.redAccent),
-                title: const Text('Sign Out',
-                    style: TextStyle(color: Colors.redAccent)),
+                title: Text(localizations.signOut,
+                    style: const TextStyle(color: Colors.redAccent)),
                 onTap: () async {
                   Navigator.pop(context);
                   await FirebaseAuth.instance.signOut();
@@ -201,7 +200,7 @@ class MainShell extends ConsumerWidget {
               Padding(
                 padding: const EdgeInsets.all(16),
                 child: Text(
-                  'DropZone Chauffeur',
+                  localizations.appTitle,
                   style: TextStyle(
                       color: colorScheme.onSurfaceVariant, fontSize: 12),
                   textAlign: TextAlign.center,
@@ -224,8 +223,10 @@ class MainShell extends ConsumerWidget {
           switch (index) {
             case 0:
               context.go('/');
+              return;
             case 1:
               context.go('/bookings');
+              return;
           }
         },
         destinations: <NavigationDestination>[

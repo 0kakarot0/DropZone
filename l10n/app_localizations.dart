@@ -62,7 +62,8 @@ import 'app_localizations_en.dart';
 /// be consistent with the languages listed in the AppLocalizations.supportedLocales
 /// property.
 abstract class AppLocalizations {
-  AppLocalizations(String locale) : localeName = intl.Intl.canonicalizedLocale(locale.toString());
+  AppLocalizations(String locale)
+      : localeName = intl.Intl.canonicalizedLocale(locale.toString());
 
   final String localeName;
 
@@ -70,7 +71,8 @@ abstract class AppLocalizations {
     return Localizations.of<AppLocalizations>(context, AppLocalizations)!;
   }
 
-  static const LocalizationsDelegate<AppLocalizations> delegate = _AppLocalizationsDelegate();
+  static const LocalizationsDelegate<AppLocalizations> delegate =
+      _AppLocalizationsDelegate();
 
   /// A list of this localizations delegate along with the default localizations
   /// delegates.
@@ -82,7 +84,8 @@ abstract class AppLocalizations {
   /// Additional delegates can be added by appending to this list in
   /// MaterialApp. This list does not have to be used at all if a custom list
   /// of delegates is preferred or required.
-  static const List<LocalizationsDelegate<dynamic>> localizationsDelegates = <LocalizationsDelegate<dynamic>>[
+  static const List<LocalizationsDelegate<dynamic>> localizationsDelegates =
+      <LocalizationsDelegate<dynamic>>[
     delegate,
     GlobalMaterialLocalizations.delegate,
     GlobalCupertinoLocalizations.delegate,
@@ -124,6 +127,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Profile'**
   String get navProfile;
+
+  /// No description provided for @activeRideTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Active ride'**
+  String get activeRideTitle;
 
   /// No description provided for @homeHeroTitle.
   ///
@@ -395,6 +404,84 @@ abstract class AppLocalizations {
   /// **'Your profile has been updated.'**
   String get profileSavedMessage;
 
+  /// No description provided for @fullNameLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Full name'**
+  String get fullNameLabel;
+
+  /// No description provided for @emailLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Email'**
+  String get emailLabel;
+
+  /// No description provided for @bookingPreferencesTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Booking preferences'**
+  String get bookingPreferencesTitle;
+
+  /// No description provided for @bookingPreferencesSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Set defaults that pre-fill your booking form.'**
+  String get bookingPreferencesSubtitle;
+
+  /// No description provided for @defaultPickupHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Default pickup location'**
+  String get defaultPickupHint;
+
+  /// No description provided for @defaultDropoffHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Default drop-off location'**
+  String get defaultDropoffHint;
+
+  /// No description provided for @defaultPassengersLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Default passengers: '**
+  String get defaultPassengersLabel;
+
+  /// No description provided for @savePreferences.
+  ///
+  /// In en, this message translates to:
+  /// **'Save preferences'**
+  String get savePreferences;
+
+  /// No description provided for @preferencesSaved.
+  ///
+  /// In en, this message translates to:
+  /// **'Preferences saved'**
+  String get preferencesSaved;
+
+  /// No description provided for @preferencesSaveError.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not save preferences: {error}'**
+  String preferencesSaveError(Object error);
+
+  /// No description provided for @profileSaveError.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not save profile: {error}'**
+  String profileSaveError(Object error);
+
+  /// No description provided for @profileLoadError.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not load profile: {error}'**
+  String profileLoadError(Object error);
+
+  /// No description provided for @profileFieldsManagedNotice.
+  ///
+  /// In en, this message translates to:
+  /// **'Company details, cost center, rider notes, and saved passengers are not editable from the rider app yet.'**
+  String get profileFieldsManagedNotice;
+
   /// No description provided for @upcoming.
   ///
   /// In en, this message translates to:
@@ -545,6 +632,36 @@ abstract class AppLocalizations {
   /// **'Booking cancelled'**
   String get cancelConfirmed;
 
+  /// No description provided for @statusPendingPayment.
+  ///
+  /// In en, this message translates to:
+  /// **'Pending payment'**
+  String get statusPendingPayment;
+
+  /// No description provided for @statusArrivedShort.
+  ///
+  /// In en, this message translates to:
+  /// **'Arrived'**
+  String get statusArrivedShort;
+
+  /// No description provided for @statusInProgressShort.
+  ///
+  /// In en, this message translates to:
+  /// **'In progress'**
+  String get statusInProgressShort;
+
+  /// No description provided for @statusRescheduled.
+  ///
+  /// In en, this message translates to:
+  /// **'Rescheduled'**
+  String get statusRescheduled;
+
+  /// No description provided for @statusCreated.
+  ///
+  /// In en, this message translates to:
+  /// **'Created'**
+  String get statusCreated;
+
   /// No description provided for @paymentTitle.
   ///
   /// In en, this message translates to:
@@ -599,6 +716,30 @@ abstract class AppLocalizations {
   /// **'We couldn’t process the payment. Please try again later.'**
   String get paymentFailedMessage;
 
+  /// No description provided for @paymentBookingConfirmed.
+  ///
+  /// In en, this message translates to:
+  /// **'Payment successful! Booking confirmed.'**
+  String get paymentBookingConfirmed;
+
+  /// No description provided for @paymentFailedError.
+  ///
+  /// In en, this message translates to:
+  /// **'Payment failed: {error}'**
+  String paymentFailedError(Object error);
+
+  /// No description provided for @paymentPendingTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Payment pending'**
+  String get paymentPendingTitle;
+
+  /// No description provided for @paymentPendingMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'This booking will be automatically cancelled if payment is not received before the scheduled ride ({dateTime}).'**
+  String paymentPendingMessage(Object dateTime);
+
   /// No description provided for @goHome.
   ///
   /// In en, this message translates to:
@@ -641,6 +782,12 @@ abstract class AppLocalizations {
   /// **'Ahmed • Lexus ES • DXB 1234'**
   String get driverAssignedSubtitle;
 
+  /// No description provided for @driverNumber.
+  ///
+  /// In en, this message translates to:
+  /// **'Driver #{id}'**
+  String driverNumber(Object id);
+
   /// No description provided for @etaLabel.
   ///
   /// In en, this message translates to:
@@ -652,6 +799,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'{minutes}'**
   String etaValue(Object minutes);
+
+  /// No description provided for @trackRide.
+  ///
+  /// In en, this message translates to:
+  /// **'Track ride'**
+  String get trackRide;
 
   /// No description provided for @contactDriver.
   ///
@@ -743,6 +896,18 @@ abstract class AppLocalizations {
   /// **'Calling via masked number'**
   String get maskedCallHint;
 
+  /// No description provided for @maskedCallUnavailableTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Masked calling unavailable'**
+  String get maskedCallUnavailableTitle;
+
+  /// No description provided for @maskedCallUnavailableMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Masked calling is not available from the rider app yet.'**
+  String get maskedCallUnavailableMessage;
+
   /// No description provided for @notificationArriving.
   ///
   /// In en, this message translates to:
@@ -827,6 +992,24 @@ abstract class AppLocalizations {
   /// **'Thanks — our team will get back to you shortly.'**
   String get issueSubmittedMessage;
 
+  /// No description provided for @supportSubmissionUnavailableTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Support submission unavailable'**
+  String get supportSubmissionUnavailableTitle;
+
+  /// No description provided for @supportSubmissionUnavailableMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Issue submission is not available from the rider app yet. Please use the listed help topics or contact operations directly.'**
+  String get supportSubmissionUnavailableMessage;
+
+  /// No description provided for @dismissLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Dismiss'**
+  String get dismissLabel;
+
   /// No description provided for @issueDescriptionHint.
   ///
   /// In en, this message translates to:
@@ -844,6 +1027,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Flight tracking'**
   String get flightTrackingTitle;
+
+  /// No description provided for @flightNumberHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Flight number'**
+  String get flightNumberHint;
 
   /// No description provided for @flightStatusLabel.
   ///
@@ -868,6 +1057,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Your driver will wait at arrivals with your name sign.'**
   String get meetGreetBody;
+
+  /// No description provided for @flightSaveUnavailableMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Flight detail saving is not available in the rider app yet.'**
+  String get flightSaveUnavailableMessage;
 
   /// No description provided for @selectTime.
   ///
@@ -916,9 +1111,268 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Booking rescheduled successfully'**
   String get rescheduleSuccess;
+
+  /// No description provided for @authEmailLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Email'**
+  String get authEmailLabel;
+
+  /// No description provided for @authPasswordLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Password'**
+  String get authPasswordLabel;
+
+  /// No description provided for @authSignIn.
+  ///
+  /// In en, this message translates to:
+  /// **'Sign in'**
+  String get authSignIn;
+
+  /// No description provided for @authCreateAccount.
+  ///
+  /// In en, this message translates to:
+  /// **'Create account'**
+  String get authCreateAccount;
+
+  /// No description provided for @authFillTestCredentials.
+  ///
+  /// In en, this message translates to:
+  /// **'Tap to fill test credentials'**
+  String get authFillTestCredentials;
+
+  /// No description provided for @authMissingCredentialsSignIn.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter email and password.'**
+  String get authMissingCredentialsSignIn;
+
+  /// No description provided for @authMissingCredentialsCreate.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter email and password first.'**
+  String get authMissingCredentialsCreate;
+
+  /// No description provided for @authGenericError.
+  ///
+  /// In en, this message translates to:
+  /// **'Error: {error}'**
+  String authGenericError(Object error);
+
+  /// No description provided for @leaveBookingTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Leave booking?'**
+  String get leaveBookingTitle;
+
+  /// No description provided for @leaveBookingMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'You have unsaved booking details. Your progress will be saved as a draft so you can continue later.'**
+  String get leaveBookingMessage;
+
+  /// No description provided for @continueBooking.
+  ///
+  /// In en, this message translates to:
+  /// **'Continue booking'**
+  String get continueBooking;
+
+  /// No description provided for @menuLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Menu'**
+  String get menuLabel;
+
+  /// No description provided for @leaveLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Leave'**
+  String get leaveLabel;
+
+  /// No description provided for @signOut.
+  ///
+  /// In en, this message translates to:
+  /// **'Sign out'**
+  String get signOut;
+
+  /// No description provided for @guestLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Guest'**
+  String get guestLabel;
+
+  /// No description provided for @paymentCancelled.
+  ///
+  /// In en, this message translates to:
+  /// **'Payment cancelled.'**
+  String get paymentCancelled;
+
+  /// No description provided for @trackingErrorTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Something went wrong'**
+  String get trackingErrorTitle;
+
+  /// No description provided for @noTrackingAvailable.
+  ///
+  /// In en, this message translates to:
+  /// **'No tracking available'**
+  String get noTrackingAvailable;
+
+  /// No description provided for @trackingAvailableAfterAssignment.
+  ///
+  /// In en, this message translates to:
+  /// **'Tracking is available once a driver is assigned'**
+  String get trackingAvailableAfterAssignment;
+
+  /// No description provided for @trackingStatusAssigned.
+  ///
+  /// In en, this message translates to:
+  /// **'Driver assigned, waiting for pickup'**
+  String get trackingStatusAssigned;
+
+  /// No description provided for @trackingStatusEnRoute.
+  ///
+  /// In en, this message translates to:
+  /// **'Driver is on the way'**
+  String get trackingStatusEnRoute;
+
+  /// No description provided for @trackingStatusArrived.
+  ///
+  /// In en, this message translates to:
+  /// **'Driver has arrived at pickup'**
+  String get trackingStatusArrived;
+
+  /// No description provided for @trackingStatusInProgress.
+  ///
+  /// In en, this message translates to:
+  /// **'Ride in progress'**
+  String get trackingStatusInProgress;
+
+  /// No description provided for @trackingStepAssigned.
+  ///
+  /// In en, this message translates to:
+  /// **'Assigned'**
+  String get trackingStepAssigned;
+
+  /// No description provided for @trackingStepEnRoute.
+  ///
+  /// In en, this message translates to:
+  /// **'En Route'**
+  String get trackingStepEnRoute;
+
+  /// No description provided for @trackingStepArrived.
+  ///
+  /// In en, this message translates to:
+  /// **'Arrived'**
+  String get trackingStepArrived;
+
+  /// No description provided for @trackingStepInProgress.
+  ///
+  /// In en, this message translates to:
+  /// **'In Progress'**
+  String get trackingStepInProgress;
+
+  /// No description provided for @trackingFallbackDriver.
+  ///
+  /// In en, this message translates to:
+  /// **'Driver'**
+  String get trackingFallbackDriver;
+
+  /// No description provided for @pickupLocationHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Pickup location'**
+  String get pickupLocationHint;
+
+  /// No description provided for @dropoffLocationHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Drop-off location'**
+  String get dropoffLocationHint;
+
+  /// No description provided for @pickOnMapTooltip.
+  ///
+  /// In en, this message translates to:
+  /// **'Pick on map'**
+  String get pickOnMapTooltip;
+
+  /// No description provided for @pickPickupLocationTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Pick pickup location'**
+  String get pickPickupLocationTitle;
+
+  /// No description provided for @pickDropoffLocationTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Pick drop-off location'**
+  String get pickDropoffLocationTitle;
+
+  /// No description provided for @selectDateFirst.
+  ///
+  /// In en, this message translates to:
+  /// **'Select a date first'**
+  String get selectDateFirst;
+
+  /// No description provided for @notesForDriverHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Notes for driver (optional)'**
+  String get notesForDriverHint;
+
+  /// No description provided for @paymentMethodTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Payment method'**
+  String get paymentMethodTitle;
+
+  /// No description provided for @payByCard.
+  ///
+  /// In en, this message translates to:
+  /// **'Pay by card'**
+  String get payByCard;
+
+  /// No description provided for @payWithCash.
+  ///
+  /// In en, this message translates to:
+  /// **'Pay with cash'**
+  String get payWithCash;
+
+  /// No description provided for @cashPaymentHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Pay the driver directly at the end of the ride.'**
+  String get cashPaymentHint;
+
+  /// No description provided for @priceEstimateLoadingMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Price estimate is still loading, please wait.'**
+  String get priceEstimateLoadingMessage;
+
+  /// No description provided for @priceEstimateRetryMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not load price estimate, retrying.'**
+  String get priceEstimateRetryMessage;
+
+  /// No description provided for @bookingCompleteError.
+  ///
+  /// In en, this message translates to:
+  /// **'Unable to complete booking: {error}'**
+  String bookingCompleteError(Object error);
+
+  /// No description provided for @rebookLastRide.
+  ///
+  /// In en, this message translates to:
+  /// **'Re-book last ride'**
+  String get rebookLastRide;
 }
 
-class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {
+class _AppLocalizationsDelegate
+    extends LocalizationsDelegate<AppLocalizations> {
   const _AppLocalizationsDelegate();
 
   @override
@@ -927,25 +1381,25 @@ class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> 
   }
 
   @override
-  bool isSupported(Locale locale) => <String>['ar', 'en'].contains(locale.languageCode);
+  bool isSupported(Locale locale) =>
+      <String>['ar', 'en'].contains(locale.languageCode);
 
   @override
   bool shouldReload(_AppLocalizationsDelegate old) => false;
 }
 
 AppLocalizations lookupAppLocalizations(Locale locale) {
-
-
   // Lookup logic when only language code is specified.
   switch (locale.languageCode) {
-    case 'ar': return AppLocalizationsAr();
-    case 'en': return AppLocalizationsEn();
+    case 'ar':
+      return AppLocalizationsAr();
+    case 'en':
+      return AppLocalizationsEn();
   }
 
   throw FlutterError(
-    'AppLocalizations.delegate failed to load unsupported locale "$locale". This is likely '
-    'an issue with the localizations generation tool. Please file an issue '
-    'on GitHub with a reproducible sample app and the gen-l10n configuration '
-    'that was used.'
-  );
+      'AppLocalizations.delegate failed to load unsupported locale "$locale". This is likely '
+      'an issue with the localizations generation tool. Please file an issue '
+      'on GitHub with a reproducible sample app and the gen-l10n configuration '
+      'that was used.');
 }

@@ -21,6 +21,10 @@ class BookingResponseDto {
     this.updatedAt,
     this.driverId,
     this.paymentMethod,
+    this.pickupLatitude,
+    this.pickupLongitude,
+    this.dropoffLatitude,
+    this.dropoffLongitude,
   });
 
   final int? id;
@@ -37,6 +41,10 @@ class BookingResponseDto {
   final DateTime? updatedAt;
   final int? driverId;
   final String? paymentMethod;
+  final double? pickupLatitude;
+  final double? pickupLongitude;
+  final double? dropoffLatitude;
+  final double? dropoffLongitude;
 
   factory BookingResponseDto.fromJson(Map<String, dynamic> json) {
     return BookingResponseDto(
@@ -60,6 +68,10 @@ class BookingResponseDto {
           : null,
       driverId: (json['driverId'] as num?)?.toInt(),
       paymentMethod: json['paymentMethod'] as String?,
+      pickupLatitude: (json['pickupLatitude'] as num?)?.toDouble(),
+      pickupLongitude: (json['pickupLongitude'] as num?)?.toDouble(),
+      dropoffLatitude: (json['dropoffLatitude'] as num?)?.toDouble(),
+      dropoffLongitude: (json['dropoffLongitude'] as num?)?.toDouble(),
     );
   }
 }
@@ -77,6 +89,10 @@ class CreateBookingRequestDto {
     this.passengers,
     this.notes,
     this.paymentMethod,
+    this.pickupLatitude,
+    this.pickupLongitude,
+    this.dropoffLatitude,
+    this.dropoffLongitude,
   });
 
   final String serviceType;
@@ -86,6 +102,10 @@ class CreateBookingRequestDto {
   final int? passengers;
   final String? notes;
   final String? paymentMethod;
+  final double? pickupLatitude;
+  final double? pickupLongitude;
+  final double? dropoffLatitude;
+  final double? dropoffLongitude;
 
   Map<String, dynamic> toJson() => {
         'serviceType': serviceType,
@@ -95,6 +115,10 @@ class CreateBookingRequestDto {
         if (passengers != null) 'passengers': passengers,
         if (notes != null && notes!.isNotEmpty) 'notes': notes,
         if (paymentMethod != null) 'paymentMethod': paymentMethod,
+        if (pickupLatitude != null) 'pickupLatitude': pickupLatitude,
+        if (pickupLongitude != null) 'pickupLongitude': pickupLongitude,
+        if (dropoffLatitude != null) 'dropoffLatitude': dropoffLatitude,
+        if (dropoffLongitude != null) 'dropoffLongitude': dropoffLongitude,
       };
 }
 

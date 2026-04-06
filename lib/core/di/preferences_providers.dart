@@ -3,7 +3,9 @@ import 'package:dropzone_app/core/network/dio_client.dart';
 import 'package:dropzone_app/data/api/api_profile_service.dart';
 import 'package:dropzone_app/data/dto/preferences_dto.dart';
 import 'package:dropzone_app/domain/entities/user_preferences.dart';
+import 'package:dropzone_app/domain/entities/user_profile.dart';
 import 'package:dropzone_app/domain/entities/booking.dart';
+import 'package:dropzone_app/data/dto/profile_dto.dart';
 import 'package:dropzone_app/presentation/bookings/booking_providers.dart';
 
 // ── API Service ─────────────────────────────────────────────────────────────
@@ -11,6 +13,42 @@ import 'package:dropzone_app/presentation/bookings/booking_providers.dart';
 final profileApiServiceProvider = Provider<ApiProfileService>((ref) {
   return ApiProfileService(ref.read(dioProvider));
 });
+
+// ── User Profile ────────────────────────────────────────────────────────────
+
+final userProfileProvider =
+    AsyncNotifierProvider<UserProfileNotifier, UserProfile>(
+  UserProfileNotifier.new,
+);
+
+class UserProfileNotifier extends AsyncNotifier<UserProfile> {
+  @override
+  Future<UserProfile> build() async {
+    final api = ref.read(profileApiServiceProvider);
+    final dto = await api.getProfile();
+    return _fromProfileDto(dto);
+  }
+
+  Future<void> updateProfile(UserProfile profile) async {
+    final api = ref.read(profileApiServiceProvider);
+    final dto = await api.updateProfile(
+      UpdateProfileRequestDto(
+        displayName: profile.displayName,
+        corporateMode: profile.corporateMode,
+      ),
+    );
+    state = AsyncValue.data(_fromProfileDto(dto));
+  }
+
+  UserProfile _fromProfileDto(ProfileResponseDto dto) {
+    return UserProfile(
+      id: dto.id,
+      email: dto.email,
+      displayName: dto.displayName,
+      corporateMode: dto.corporateMode ?? false,
+    );
+  }
+}
 
 // ── User Preferences ────────────────────────────────────────────────────────
 

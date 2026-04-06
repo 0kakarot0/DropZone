@@ -22,6 +22,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get navProfile => 'Profile';
 
   @override
+  String get activeRideTitle => 'Active ride';
+
+  @override
   String get homeHeroTitle => 'Private Chauffeur, pre‑booked.';
 
   @override
@@ -232,6 +235,21 @@ class AppLocalizationsEn extends AppLocalizations {
   String get cancelConfirmed => 'Booking cancelled';
 
   @override
+  String get statusPendingPayment => 'Pending payment';
+
+  @override
+  String get statusArrivedShort => 'Arrived';
+
+  @override
+  String get statusInProgressShort => 'In progress';
+
+  @override
+  String get statusRescheduled => 'Rescheduled';
+
+  @override
+  String get statusCreated => 'Created';
+
+  @override
   String get paymentTitle => 'Payment';
 
   @override
@@ -265,6 +283,22 @@ class AppLocalizationsEn extends AppLocalizations {
   String get paymentFailedMessage => 'We couldn’t process the payment. Please try again later.';
 
   @override
+  String get paymentBookingConfirmed => 'Payment successful! Booking confirmed.';
+
+  @override
+  String paymentFailedError(Object error) {
+    return 'Payment failed: $error';
+  }
+
+  @override
+  String get paymentPendingTitle => 'Payment pending';
+
+  @override
+  String paymentPendingMessage(Object dateTime) {
+    return 'This booking will be automatically cancelled if payment is not received before the scheduled ride ($dateTime).';
+  }
+
+  @override
   String get goHome => 'Go to Home';
 
   @override
@@ -288,12 +322,20 @@ class AppLocalizationsEn extends AppLocalizations {
   String get driverAssignedSubtitle => 'Ahmed • Lexus ES • DXB 1234';
 
   @override
+  String driverNumber(Object id) {
+    return 'Driver #$id';
+  }
+
+  @override
   String get etaLabel => 'ETA';
 
   @override
   String etaValue(Object minutes) {
     return '$minutes';
   }
+
+  @override
+  String get trackRide => 'Track ride';
 
   @override
   String get contactDriver => 'Contact driver';
@@ -320,6 +362,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get saveFlightInfo => 'Save flight details';
 
   @override
+  String get flightSaveUnavailableMessage => 'Flight detail saving is not available in the rider app yet.';
+
+  @override
   String get contactDriverTitle => 'Contact driver';
 
   @override
@@ -339,6 +384,12 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get maskedCallHint => 'Calling via masked number';
+
+  @override
+  String get maskedCallUnavailableTitle => 'Masked calling unavailable';
+
+  @override
+  String get maskedCallUnavailableMessage => 'Masked calling is not available from the rider app yet.';
 
   @override
   String get notificationArriving => 'Driver arriving';
@@ -383,6 +434,15 @@ class AppLocalizationsEn extends AppLocalizations {
   String get issueSubmittedMessage => 'Thanks — our team will get back to you shortly.';
 
   @override
+  String get supportSubmissionUnavailableTitle => 'Support submission unavailable';
+
+  @override
+  String get supportSubmissionUnavailableMessage => 'Issue submission is not available from the rider app yet. Please use the listed help topics or contact operations directly.';
+
+  @override
+  String get dismissLabel => 'Dismiss';
+
+  @override
   String get issueDescriptionHint => 'Describe your issue';
 
   @override
@@ -390,6 +450,9 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get flightTrackingTitle => 'Flight tracking';
+
+  @override
+  String get flightNumberHint => 'Flight number';
 
   @override
   String get flightStatusLabel => 'Flight status';
@@ -426,4 +489,182 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get rescheduleSuccess => 'Booking rescheduled successfully';
+
+  @override
+  String get fullNameLabel => 'Full name';
+
+  @override
+  String get emailLabel => 'Email';
+
+  @override
+  String get bookingPreferencesTitle => 'Booking preferences';
+
+  @override
+  String get bookingPreferencesSubtitle => 'Set defaults that pre-fill your booking form.';
+
+  @override
+  String get defaultPickupHint => 'Default pickup location';
+
+  @override
+  String get defaultDropoffHint => 'Default drop-off location';
+
+  @override
+  String get defaultPassengersLabel => 'Default passengers: ';
+
+  @override
+  String get savePreferences => 'Save preferences';
+
+  @override
+  String get preferencesSaved => 'Preferences saved';
+
+  @override
+  String preferencesSaveError(Object error) {
+    return 'Could not save preferences: $error';
+  }
+
+  @override
+  String profileSaveError(Object error) {
+    return 'Could not save profile: $error';
+  }
+
+  @override
+  String profileLoadError(Object error) {
+    return 'Could not load profile: $error';
+  }
+
+  @override
+  String get profileFieldsManagedNotice => 'Company details, cost center, rider notes, and saved passengers are not editable from the rider app yet.';
+
+  @override
+  String get authEmailLabel => 'Email';
+
+  @override
+  String get authPasswordLabel => 'Password';
+
+  @override
+  String get authSignIn => 'Sign in';
+
+  @override
+  String get authCreateAccount => 'Create account';
+
+  @override
+  String get authFillTestCredentials => 'Tap to fill test credentials';
+
+  @override
+  String get authMissingCredentialsSignIn => 'Enter email and password.';
+
+  @override
+  String get authMissingCredentialsCreate => 'Enter email and password first.';
+
+  @override
+  String authGenericError(Object error) {
+    return 'Error: $error';
+  }
+
+  @override
+  String get leaveBookingTitle => 'Leave booking?';
+
+  @override
+  String get leaveBookingMessage => 'You have unsaved booking details. Your progress will be saved as a draft so you can continue later.';
+
+  @override
+  String get continueBooking => 'Continue booking';
+
+  @override
+  String get menuLabel => 'Menu';
+
+  @override
+  String get leaveLabel => 'Leave';
+
+  @override
+  String get signOut => 'Sign out';
+
+  @override
+  String get guestLabel => 'Guest';
+
+  @override
+  String get paymentCancelled => 'Payment cancelled.';
+
+  @override
+  String get trackingErrorTitle => 'Something went wrong';
+
+  @override
+  String get noTrackingAvailable => 'No tracking available';
+
+  @override
+  String get trackingAvailableAfterAssignment => 'Tracking is available once a driver is assigned';
+
+  @override
+  String get trackingStatusAssigned => 'Driver assigned, waiting for pickup';
+
+  @override
+  String get trackingStatusEnRoute => 'Driver is on the way';
+
+  @override
+  String get trackingStatusArrived => 'Driver has arrived at pickup';
+
+  @override
+  String get trackingStatusInProgress => 'Ride in progress';
+
+  @override
+  String get trackingStepAssigned => 'Assigned';
+
+  @override
+  String get trackingStepEnRoute => 'En Route';
+
+  @override
+  String get trackingStepArrived => 'Arrived';
+
+  @override
+  String get trackingStepInProgress => 'In Progress';
+
+  @override
+  String get trackingFallbackDriver => 'Driver';
+
+  @override
+  String get pickupLocationHint => 'Pickup location';
+
+  @override
+  String get dropoffLocationHint => 'Drop-off location';
+
+  @override
+  String get pickOnMapTooltip => 'Pick on map';
+
+  @override
+  String get pickPickupLocationTitle => 'Pick pickup location';
+
+  @override
+  String get pickDropoffLocationTitle => 'Pick drop-off location';
+
+  @override
+  String get selectDateFirst => 'Select a date first';
+
+  @override
+  String get notesForDriverHint => 'Notes for driver (optional)';
+
+  @override
+  String get paymentMethodTitle => 'Payment method';
+
+  @override
+  String get payByCard => 'Pay by card';
+
+  @override
+  String get payWithCash => 'Pay with cash';
+
+  @override
+  String get cashPaymentHint => 'Pay the driver directly at the end of the ride.';
+
+  @override
+  String get priceEstimateLoadingMessage => 'Price estimate is still loading, please wait.';
+
+  @override
+  String get priceEstimateRetryMessage => 'Could not load price estimate, retrying.';
+
+  @override
+  String bookingCompleteError(Object error) {
+    return 'Unable to complete booking: $error';
+  }
+
+  @override
+  String get rebookLastRide => 'Re-book last ride';
 }

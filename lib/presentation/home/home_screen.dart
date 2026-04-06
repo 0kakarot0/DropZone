@@ -106,16 +106,16 @@ class _ActiveRideCard extends StatelessWidget {
 
   final Booking booking;
 
-  String _statusLabel(BookingStatus status) {
+  String _statusLabel(AppLocalizations localizations, BookingStatus status) {
     switch (status) {
       case BookingStatus.assigned:
-        return 'Driver Assigned';
+        return localizations.statusDriverAssigned;
       case BookingStatus.driverEnRoute:
-        return 'Driver En Route';
+        return localizations.statusEnRoute;
       case BookingStatus.arrived:
-        return 'Driver Arrived';
+        return localizations.statusArrivedShort;
       case BookingStatus.inProgress:
-        return 'Ride In Progress';
+        return localizations.statusInProgressShort;
       default:
         return status.name;
     }
@@ -138,6 +138,7 @@ class _ActiveRideCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final localizations = AppLocalizations.of(context);
     final theme = Theme.of(context);
     final color = _statusColor(booking.status);
 
@@ -177,7 +178,7 @@ class _ActiveRideCard extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'Active Ride',
+                        localizations.activeRideTitle,
                         style: theme.textTheme.titleSmall?.copyWith(
                           fontWeight: FontWeight.bold,
                         ),
@@ -215,7 +216,7 @@ class _ActiveRideCard extends StatelessWidget {
                       ),
                       const SizedBox(width: 6),
                       Text(
-                        _statusLabel(booking.status),
+                        _statusLabel(localizations, booking.status),
                         style: theme.textTheme.labelSmall?.copyWith(
                           color: color,
                           fontWeight: FontWeight.w700,

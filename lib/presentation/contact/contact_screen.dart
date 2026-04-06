@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:dropzone_app/l10n/app_localizations.dart';
 import 'package:dropzone_app/presentation/widgets/primary_button.dart';
+import 'package:dropzone_app/presentation/widgets/result_popup.dart';
 
 class ContactScreen extends StatelessWidget {
   const ContactScreen({super.key});
@@ -32,9 +33,19 @@ class ContactScreen extends StatelessWidget {
           const SizedBox(height: 20),
           PrimaryButton(
             label: localizations.startMaskedCall,
-            onPressed: () {
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(content: Text(localizations.maskedCallHint)),
+            onPressed: () async {
+              await showDialog<void>(
+                context: context,
+                barrierDismissible: false,
+                builder: (dialogCtx) => ResultPopup(
+                  title: localizations.maskedCallUnavailableTitle,
+                  message: localizations.maskedCallUnavailableMessage,
+                  type: ResultType.error,
+                  buttonLabel: localizations.dismissLabel,
+                  onAction: () {
+                    Navigator.of(dialogCtx).pop();
+                  },
+                ),
               );
             },
           ),
