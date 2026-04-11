@@ -47,11 +47,11 @@ Many high-end passengers require reliable, luxurious, and trackable transport, e
 - **Current Status:** Implemented (features include API endpoints for create, list, cancel, reschedule, and price estimation).
 
 ### C. Driver Dispatch & Ride Management Module
-- **What it is:** The logic to find and assign drivers to pending bookings.
+- **What it is:** The logic to find and assign drivers to pending bookings, plus the dedicated driver-side mobile application.
 - **Who uses it:** Drivers and Backend System.
 - **What the system does:** Utilizes a `NearestDriverStrategy` or direct assignments to offer trips to available drivers.
-- **What the driver does:** Reviews ride details and Accepts or Rejects the trip. Once accepted, they can update the trip status (`Arrived`, `Started`, `Completed`).
-- **Current Status:** Implemented. Employs `DriverAppController` for ride acceptance and state mutation.
+- **What the driver does:** Signs in via the dedicated driver app (`driver_app/`), reviews ride details, accepts or rejects trips. Once accepted, they advance through the ride lifecycle: `Arrived` → `Started` → `Completed`.
+- **Current Status:** Implemented. Backend employs `DriverAppController` for ride acceptance and state mutation. A dedicated driver Flutter app is fully functional with Firebase auth, accept/reject with conflict handling, status progression state machine, auto-polling rides inbox, bottom navigation, and dark theme support.
 
 ### D. Trip Tracking Module
 - **What it is:** Real-time visibility of the driver's location.
@@ -93,6 +93,14 @@ Many high-end passengers require reliable, luxurious, and trackable transport, e
 - Complete Firebase-based authentication for both passengers and drivers securely verified per request.
 - Full RESTful API-driven booking flow (price estimates, creation, scheduling, canceling).
 - Driver dispatch interactions (nearest driver strategy, accepting/rejecting assignments, viewing assigned queues, providing lifecycle updates).
+- **Dedicated driver Flutter app** (`driver_app/`) with:
+  - Firebase email/password sign-in with ID token extraction.
+  - Ride inbox with auto-polling (30s), grouped views (Offered/Active/Completed).
+  - Accept/reject flow with 409 conflict handling and confirmation dialogs.
+  - Full ride status progression state machine (ASSIGNED → EN_ROUTE → ARRIVED → IN_PROGRESS → COMPLETED) with visual stepper.
+  - Bottom navigation shell (Home, Rides, Profile).
+  - Light and dark theme support with Material 3.
+  - Typed API exceptions and error interceptors matching rider app patterns.
 - High-fidelity Stripe integration reliably handling complex payment intents and webhook event listeners.
 - Live tracking endpoints broadcasting driver locations.
 - Arabic (RTL) and English text localization infrastructure.
