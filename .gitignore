@@ -50,3 +50,6 @@ generate_doc.py
 
 # Env files
 .env
+
+# iOS Xcode build output
+ios/build/
