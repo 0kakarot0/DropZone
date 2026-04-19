@@ -661,7 +661,7 @@ class _BookingFlowScreenState extends ConsumerState<BookingFlowScreen> {
                           Text(
                             '${lastBooking.pickup} → ${lastBooking.dropoff}',
                             style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                                  color: Theme.of(context).colorScheme.onPrimaryContainer.withOpacity(0.7),
+                                  color: Theme.of(context).colorScheme.onPrimaryContainer.withValues(alpha: 0.7),
                                 ),
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,

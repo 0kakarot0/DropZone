@@ -114,20 +114,8 @@ class _TripTrackingScreenState extends ConsumerState<TripTrackingScreen> {
     }
   }
 
-  IconData _statusIcon(String status) {
-    switch (status) {
-      case 'ASSIGNED':
-        return Icons.person_pin;
-      case 'DRIVER_EN_ROUTE':
-        return Icons.navigation;
-      case 'ARRIVED':
-        return Icons.place;
-      case 'IN_PROGRESS':
-        return Icons.directions_car;
-      default:
-        return Icons.info_outline;
-    }
-  }
+
+
 
   String _statusMessage(String status) {
     switch (status) {

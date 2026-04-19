@@ -134,7 +134,7 @@ class MainShell extends ConsumerWidget {
                   children: [
                     CircleAvatar(
                       radius: 30,
-                      backgroundColor: colorScheme.onPrimary.withOpacity(0.2),
+                      backgroundColor: colorScheme.onPrimary.withValues(alpha: 0.2),
                       child: Icon(Icons.person,
                           size: 34, color: colorScheme.onPrimary),
                     ),
@@ -151,7 +151,7 @@ class MainShell extends ConsumerWidget {
                       Text(
                         user!.email!,
                         style: TextStyle(
-                          color: colorScheme.onPrimary.withOpacity(0.8),
+                          color: colorScheme.onPrimary.withValues(alpha: 0.8),
                           fontSize: 13,
                         ),
                       ),
